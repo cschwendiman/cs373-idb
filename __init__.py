@@ -1,9 +1,14 @@
 from flask import Flask
+import json
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Splash Page"
+    data = json.load(open("parsed_aux.json"))
+    tweets = list(data.items())[0:10]
+    return render_template('index.html',
+                           place="Austin",
+                           posts=tweets)
 
 @app.route("/cities/")
 def cities():

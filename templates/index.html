@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>{{place}} tweet</title>
+  </head>
+  <body>
+      {% for post in posts %}
+      <div>
+        <p><h1>Tweet id: {{post[0]}}</h1>
+        <p>content:
+        <p>{{post[1].text}}
+      {% endfor %}
+  </body>
+</html>

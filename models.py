@@ -53,6 +53,6 @@ class City(db.model):
     id = db.Column(db.Integer, primary_key=True)
     city = db.column(db.String(80))
     state = db.column(db.String(80))
-    country = db.column(db.String(80)
+    country = db.column(db.String(80))
 
 

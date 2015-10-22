@@ -13,8 +13,8 @@ from flask import Flask, render_template, url_for, g, request, session, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 
 from models import *
-from __init__ import unittests
-unittests()
+#from __init__ import unittests
+#unittests()
 
 class testModels(TestCase):
 
@@ -33,41 +33,159 @@ class testModels(TestCase):
     #-------------
 
     def test_tweets_writability(self):
-        query = rep.query.all()
-        startSize = len(query)
+        tweets = Tweet.query.all()
+        startSize = len(tweets)
 
         db.session.add(Tweet(text = "This is a test tweet"))
         db.session.commit()
-        query = rep.query.all()
+        tweets = Tweet.query.all()
 
-        endSize = len(query)
+        endSize = len(tweets)
 
         self.assertEqual(startSize + 1, endSize)
 
-    # def test_tweets2(self):
+    def test_tweets_readability(self):
+        db.session.add(Tweet(text = "test"))
+        db.session.commit()
 
-    # def test_tweets3(self):
+        query = tweet.query.all()
+        found = False
+
+        for x in query:
+            if(x.text == "test"):
+                found = True
+
+        assert(found)
+
+    def test_tweets_attribute_readability(self):
+        db.session.add(Tweet(text = "test123", username = "test_user"))
+        db.session.commit()
+
+        query = db.session.query(tweet).filter(tweet.text == "test123").first()
+
+        assert (query is not None)
+        assert (query.username == "test_user")
+
+    def test_tweets_delete_ability(self):
+        db.session.add(Tweet(username = "deleteMe"))
+        db.session.commit()
+
+        query = db.session.query(tweet).filter(tweet.username == "deleteMe").first()
+
+        assert(query != None)
+
+        db.session.delete(query);
+        db.session.commit()
+
+        toRemove = db.session.query(tweet).filter(tweet.username == "delete").first()
+        assert(toRemove == None)
 
 
-    # #---------------
-    # # Hashtags_model
-    # #---------------
+    #---------------
+    # Hashtags_model
+    #---------------
 
-    # def test_hashtags1(self):
+    def test_hashtags_writability(self):
+        hashtags = Hashtag.query.all()
+        startSize = len(hashtags)
 
-    # def test_hashtags2(self):
+        db.session.add(Hashtag(text = "test"))
+        db.session.commit()
+        hashtags = Hashtag.query.all()
 
-    # def test_hashtags3(self):
+        endSize = len(hashtags)
 
-    # #----------------
-    # # Locations_model
-    # #----------------
+        self.assertEqual(startSize + 1, endSize)
+
+    def test_hashtags_readability(self):
+        db.session.add(Hashtag(text = "test"))
+        db.session.commit()
+
+        hashtags = Hashtag.query.all()
+        found = False
+
+        for x in hashtags:
+            if(x.text == "test"):
+                found = True
+
+        assert(found)
+
+    def test_hashtags_attribute_readability(self):
+        db.session.add(Hashtag(text = "test123", url = "www.foo.com"))
+        db.session.commit()
+
+        query = db.session.query(hashtag).filter(hashtag.text == "test123").first()
+
+        assert (query is not None)
+        assert (query.url == "www.foo.com")
+
+
+    def test_hashtags_delete_ability(self):
+        db.session.add(Hashtag(url = "www.deleteme.com"))
+        db.session.commit()
+
+        query = db.session.query(hashtag).filter(hashtag.url == "www.deleteme.com").first()
+
+        assert(query != None)
+
+        db.session.delete(query);
+        db.session.commit()
+
+        toRemove = db.session.query(hashtag).filter(hashtag.url == "www.deleteme.com").first()
+        assert(toRemove == None)
+
+    #----------------
+    # Locations_model
+    #----------------
     
-    # def test_locations1(self):
+    def test_locations_writability(self):
+        locations = Location.query.all()
+        startSize = len(locations)
 
-    # def test_locations2(self):
+        db.session.add(Location(city = "Austin"))
+        db.session.commit()
+        locations = Location.query.all()
 
-    # def test_locations3(self):
+        endSize = len(locations)
+
+        self.assertEqual(startSize + 1, endSize)
+
+    def test_locations_readability(self):
+        db.session.add(Location(city = "Austin"))
+        db.session.commit()
+
+        locations = Location.query.all()
+        found = False
+
+        for x in locations:
+            if(x.city == "Austin"):
+                found = True
+
+        assert(found)
+
+    def test_locations_attribute_readability(self):
+        db.session.add(Location(city = "Austin", state = "TX"))
+        db.session.commit()
+
+        query = db.session.query(location).filter(location.city == "Austin").first()
+
+        assert (query is not None)
+        assert (query.state == "TX")
+
+    def test_locations_delete_ability(self):
+        db.session.add(Location(city = "Austin"))
+        db.session.commit()
+
+        query = db.session.query(location).filter(location.city == "Austin").first()
+
+        assert(query != None)
+
+        db.session.delete(query);
+        db.session.commit()
+
+        query = db.session.query(location).filter(location.city == "Austin").first()
+        assert(toRemove == None)
+
 
 if __name__ == "__main__":
     main()

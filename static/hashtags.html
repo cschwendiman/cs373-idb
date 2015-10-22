@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr>
+        <td>ID</td>
+        <td>Username</td>
+        <td></td>
+    </tr>
+<tr ng-repeat="hashtag in $hashtags">
+    <td>{{hashtag.id}}</td>
+    <td>{{hashtag.name}}</td>
+    <td><a class="btn btn-default" href="/hashtag/{{hashtag.id}}">Details</a></td>
+</tr>
+</table>

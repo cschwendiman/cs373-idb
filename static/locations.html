@@ -1,0 +1,16 @@
+<table class="table table-striped">
+    <tr>
+        <td>ID</td>
+        <td>City</td>
+        <td>State</td>
+        <td>Country</td>
+        <td></td>
+    </tr>
+<tr ng-repeat="location in $locations">
+    <td>{{location.id}}</td>
+    <td>{{location.city}}</td>
+    <td>{{location.state}}</td>
+    <td>{{location.country}}</td>
+    <td><a class="btn btn-default" href="/location/{{location.id}}">Details</a></td>
+</tr>
+</table>

@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+  <dl class="dl-horizontal">
+      <dt>ID</dt>
+      <dd>{{hashtag.id}}</dd>
+      <dt>Name</dt>
+      <dd>{{hashtag.name}}</dd>
+      <dt>Locations</dt>
+      <dd>
+          <ul class="list-unstyled">
+              <li ng-repeat="location in hashtag.locations">
+                  <a href="/location/{{location}}">{{$locations[location].city}}, {{$locations[location].state}}</a>
+              </li>
+          </ul>
+      </dd>
+    </dl>
+  </div>
+</div>
+<h4>Recent Tweets with {{hashtag.name}}</h4>
+<div id="tweet-container"></div>

@@ -1,38 +1,19 @@
 from flask import Flask, render_template
 import json
-app = Flask(__name__)
 
-@app.route("/")
-def index():
-    data = json.load(open("parsed_aux.json"))
-    tweets = list(data.items())[0:10]
-    return render_template('index.html',
-                           place="Austin",
-                           posts=tweets)
+app = Flask(__name__, static_url_path='/static')
 
-@app.route("/cities/")
-def cities():
-    return "All Cities"
+"""
+@app.route("/api/")
+def api():
+    return "API"
+"""
 
-@app.route("/tweets/")
-def tweets():
-    return "All Tweets"
-
-@app.route("/hashtags/")
-def hastags():
-    return "All Hashtags"
-
-@app.route("/city/<city_name>")
-def city(city_name):
-    return "City %s" % city_name
-
-@app.route("/hashtag/<hashtag>")
-def hashtag(hashtag):
-    return "Hashtag %s" % hashtag
-
-@app.route("/tweet/<int:tweet_id>")
-def tweet(tweet_id):
-    return "Tweet with id %d" % tweet_id
+# Funnel all requests to angular
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return app.send_static_file('index.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

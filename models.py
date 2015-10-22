@@ -44,13 +44,13 @@ class Tweet(db.Model):
     text = db.Column(db.String(140))
     user = db.Column(db.String(80))
     url = db.Column(db.String(80), unique=True)
-	date_time = db.Column(db.DateTime)
+    date_time = db.Column(db.DateTime)
     # Check if float is ok
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
 	
-	location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
-	location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
+    location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
+    location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
     def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude):
         self.twitter_tweet_id = twitter_tweet_id

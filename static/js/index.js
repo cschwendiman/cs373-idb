@@ -9,32 +9,95 @@ var mapWrapper = {
         streetViewControl: false,
         rotateControl: false,
         center: {lat: 30.25, lng: -97.75},
-        zoom: 11
+        zoom: 10
     },
-    init: function() {
+    init: function () {
         if (this.map == null) {
             this.map = new google.maps.Map(document.getElementById('map'), this.options);
         }
     },
-    addHashtag: function(hashtag, loc) {
-        var link = '<a href="/hashtag/' + hashtag.id + '">' + hashtag.name + '</a>';
+    addHashtags: function (tweets) {
+        this.clearMarkers()
+        for (tweet_id in tweets) {
+            this.addHashtag(tweets[tweet_id]);
+        }
+        this.setBounds();
+    },
+    addHashtag: function (tweet) {
+        var links = "";
+        var i;
+        for (var i = 0; i < tweet.full_hashtags.length; i++) {
+            links += ' <a href="/hashtag/' + tweet.full_hashtags[i].id + '">' + tweet.full_hashtags[i].name + '</a>';
+        }
+        var infowindow = new google.maps.InfoWindow({
+            content: links
+        });
+        var marker = new google.maps.Marker({
+            position: {lat: tweet.latitude, lng: tweet.longitude},
+            map: this.map,
+            title: "Hashtags"
+        });
+        this.markers.push(marker);
+        marker.addListener('click', function () {
+            infowindow.open(this.map, marker);
+        });
+    },
+    addLocation: function (location, coords) {
+        var link = location.city + ', ' + location.state + ' <a href="/location/' + location.id + '">See more details</a>';
         var infowindow = new google.maps.InfoWindow({
             content: link
-          });
+        });
 
-          var marker = new google.maps.Marker({
-            position: {lat: 30.25, lng: -97.75},
+        var marker = new google.maps.Marker({
+            position: coords,
             map: this.map,
-            title: hashtag.name
-          });
+            title: location.name
+        });
         this.markers.push(marker);
-        infowindow.open(this.map, marker);
+        marker.addListener('click', function () {
+            infowindow.open(this.map, marker);
+        });
+        this.setBounds();
     },
-    clearMarkers: function() {
-        for (var i = 0; i < this.markers.length; i++ ) {
+    addTweets: function (tweets) {
+        this.clearMarkers()
+        var id;
+        for (id in tweets) {
+            this.addTweet(tweets[id]);
+        }
+        this.setBounds();
+    },
+    addTweet: function (tweet) {
+        var link = tweet.text + ' <a href="/tweet/' + tweet.id + '">See more details</a>';
+        var infowindow = new google.maps.InfoWindow({
+            content: link
+        });
+
+        var marker = new google.maps.Marker({
+            position: {lat: tweet.latitude, lng: tweet.longitude},
+            map: this.map,
+            title: tweet.name
+        });
+        this.markers.push(marker);
+        marker.addListener('click', function () {
+            infowindow.open(this.map, marker);
+        });
+    },
+    setBounds: function () {
+        var bounds = new google.maps.LatLngBounds();
+        for (i = 0; i < this.markers.length; i++) {
+            bounds.extend(this.markers[i].getPosition());
+        }
+        google.maps.event.addListener(map, 'bounds_changed', function () {
+            this.map.setCenter(bounds.getCenter());
+        });
+        this.map.fitBounds(bounds);
+    },
+    clearMarkers: function () {
+        for (var i = 0; i < this.markers.length; i++) {
             this.markers[i].setMap(null);
-          }
-          this.markers.length = 0;
+        }
+        this.markers.length = 0;
     }
 };
 
@@ -90,8 +153,8 @@ angular.module('tweetcity', ['ngRoute'])
                 username: "tinocrane68",
                 location: 2,
                 url: '',
-                longitude: 30.5149,
-                latitude: -97.6726,
+                latitude: 30.5149,
+                longitude: -97.6726,
                 hashtags: [2],
                 tweet_id: '655538544182718465'
             },
@@ -101,8 +164,8 @@ angular.module('tweetcity', ['ngRoute'])
                 username: "kiraklapper",
                 location: 1,
                 url: '',
-                longitude: 30.2641201,
-                latitude: -97.7426529,
+                latitude: 30.2641201,
+                longitude: -97.7426529,
                 hashtags: [1, 2],
                 tweet_id: '655477025608589312'
             },
@@ -112,8 +175,8 @@ angular.module('tweetcity', ['ngRoute'])
                 username: "fullspectrumice",
                 location: 1,
                 url: '',
-                longitude: 30.2831802,
-                latitude: -97.7455063,
+                latitude: 30.2831802,
+                longitude: -97.7455063,
                 hashtags: [1, 3],
                 tweet_id: '655558187005837312'
             },
@@ -123,15 +186,14 @@ angular.module('tweetcity', ['ngRoute'])
                 username: "austincityphoto",
                 location: 2,
                 url: '',
-                longitude: 30.4925,
-                latitude: -97.64027778,
+                latitude: 30.4925,
+                longitude: -97.64027778,
                 hashtags: [3],
                 tweet_id: '655532129380638720'
             }
         };
 
         mapWrapper.init();
-        mapWrapper.addHashtag($scope.$hashtags[1], true);
     })
 
     .controller('MainController', function ($scope, $routeParams) {
@@ -143,14 +205,22 @@ angular.module('tweetcity', ['ngRoute'])
     .controller('AboutController', function ($scope, $routeParams) {
         $scope.name = "AboutController";
         $scope.params = $routeParams;
-        $('#header-overlay').fadeIn("slow");
+        $('#jumbo-header').slideUp("slow");
     })
 
     .controller('HashtagsController', function ($scope, $routeParams) {
         $scope.name = "HashtagsController";
         $scope.params = $routeParams;
-                $('#header-overlay').fadeOut("slow");
-
+        var hashtags = $scope.$hashtags;
+        var tweets = $scope.$tweets;
+        for (id in tweets) {
+            tweets[id].full_hashtags = [];
+            for (var i = 0; i < tweets[id].hashtags.length; i++) {
+                tweets[id].full_hashtags.push(hashtags[tweets[id].hashtags[i]]);
+            }
+        }
+        mapWrapper.addHashtags(tweets);
+        $('#jumbo-header').slideDown("slow");
     })
 
     .controller('HashtagController', function ($scope, $routeParams) {
@@ -169,11 +239,23 @@ angular.module('tweetcity', ['ngRoute'])
                     {align: 'left'});
             }
         });
+        $('#jumbo-header').slideDown("slow");
+
     })
 
     .controller('LocationsController', function ($scope, $routeParams) {
         $scope.name = "LocationsController";
         $scope.params = $routeParams;
+        $('#jumbo-header').slideDown("slow");
+        mapWrapper.clearMarkers();
+        var gc = new google.maps.Geocoder();
+        for (i in $scope.$locations) {
+            var location = $scope.$locations[i];
+            var address = location.city + ", " + location.state + ", " + location.country;
+            gc.geocode({address: address}, function (r, s) {
+                mapWrapper.addLocation(location, r[0].geometry.location);
+            })
+        }
     })
 
     .controller('LocationController', function ($scope, $routeParams) {
@@ -192,11 +274,15 @@ angular.module('tweetcity', ['ngRoute'])
                     {align: 'left'});
             }
         });
+        $('#jumbo-header').slideDown("slow");
     })
 
     .controller('TweetsController', function ($scope, $routeParams) {
         $scope.name = "TweetsController";
         $scope.params = $routeParams;
+        mapWrapper.addTweets($scope.$tweets);
+        $('#jumbo-header').slideDown("slow");
+
     })
 
     .controller('TweetController', function ($scope, $routeParams) {
@@ -212,6 +298,7 @@ angular.module('tweetcity', ['ngRoute'])
                     {align: 'left'});
             });
         }
+        $('#jumbo-header').slideDown("slow");
     })
 
     .config(function ($routeProvider, $locationProvider) {

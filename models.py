@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 app = Flask(__name__)
@@ -9,52 +9,55 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '' #insert URI
 db = SQLAlchemy(app)
 
 """
-Tweets:
-    Text
-    Username
-    City ID
+Tweet:
+    text
+    user
     URL
-    Longitude
-    Latitude
+    longitude
+    latitude
 
-Hashtags:
-    Hashtag
+Hashtag:
+    text
     URL
 
 Location:
-    City
-    State
-    Country
+    city
+    state
+    country
 """
+
+hashtag_tweet_table = db.Table('hashtag_tweet',
+    db.Column('hashtag_id', db.Integer, db.ForeignKey('hashtag.id')),
+    db.Column('tweet_id', db.Integer, db.ForeignKey('tweet.d'))
+)
+
+hashtag_location_table = db.Table('hashtag_location',
+    db.Column('hashtag_id', db.Integer, db.ForeignKey('hashtag.id')),
+    db.Column('location_id', db.Integer, db.ForeignKey('location.id'))
+)
 
 class Tweet(db.Model):
     __tablename__ = 'tweet'
     id = db.Column(db.Integer, primary_key=True)
     # Check length of this field
     text = db.Column(db.String(140))
-    username = db.Column(db.String(80), unique=True)
+    user = db.Column(db.String(80), unique=True)
     url = db.Column(db.String(80), unique=True)
+	date_time = db.Column(db.DateTime)
     # Check if float is ok
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
+	
+	location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
+	location = relationship("Location", backref="tweets")
 
-    #city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
-    #city = db.relationship('City', backref=db.backref('tweets', lazy='dynamic'))
-    location = db.relationship("Location", uselist=False, backref="tweet") # one-to-one with city
-    location_id = Column(Integer, ForeignKey('location.id'))
-
-    hashtag = db.relationship("Hashtag") # one to many with Hashtag
-    hashtag_id = Column(Integer, ForeignKey('hashtag.id'))
-
-
-    def __init__(self, text, username, url, longitude, latitude, location, hashtag):
+    def __init__(self, text, user, url, date_time, longitude, latitude):
         self.text = text
-        self.username = username
+        self.user = user
         self.url = url
+        self.date_time = date_time
         self.longitude = longitude
         self.latitude = latitude
-        self.location = location
-        self.hashtag = hashtag
 
     def __repr__(self):
         return '<Tweet %d>' % self.id
@@ -65,17 +68,11 @@ class Hashtag(db.Model):
     hashtag = db.Column(db.String(140), unique=True)
     url = db.Column(db.String(80), unique=True)
 
-    tweet_id = Column(Integer, ForeignKey('tweet.id'))
-    tweet = db.relationship("Tweet") # one to many with tweet
+    tweets = relationship("Tweet", secondary=hashtag_tweet_table)
 
-    location_id = Column(Integer, ForeignKey('location.id'))
-    location = db.relationship("Location")
-
-    def __init__(self, text, url, tweet, location):
+    def __init__(self, text, url):
         self.text = text
         self.url = url
-        self.tweet = tweet
-        self.location = location
 
     def __repr__(self):
         return '<Hashtag %d>' % self.id
@@ -88,18 +85,12 @@ class Location(db.Model):
     state = db.Column(db.String(80))
     country = db.Column(db.String(80))
 
-    tweet_id = db.Column(Integer, ForeignKey('tweet.id'))
-    tweet = db.relationship("Tweet") # one to many with Tweet
-
-    hashtag_id = Column(Integer, ForeignKey('hashtag.id'))
-    hashtag = db.relationship("Hashtag") # one to many with Hashtag
+    hashtags = relationship("Hashtag", secondary=hashtag_location_table)
 
     def __init__(self, city, state, country, tweet, hashtag):
         self.city = city
         self.state = state
         self.country = country
-        self.tweet = tweet
-        self.hashtag = hashtag
 
     def __repr__(self):
         return '<City %d>' % self.id

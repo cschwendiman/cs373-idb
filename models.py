@@ -63,6 +63,20 @@ hashtag_location_table = db.Table('hashtag_location',
 )
 
 class Tweet(db.Model):
+    """
+    Tweet class.
+    Attributes: id, twitter_tweet_id, text, user, url, date_time, latitude, longitude, location_id.
+	
+    twitter_tweet_id is the id given by Twitter for a tweet. id is the id for the tweet in our database.
+    location_id is the id (foreign key) of the Location where the tweet was tweeted. 
+	
+    Tweet has a many-to-many relationship with Hashtag.
+    Also has a one-to-many relationship with Location (one Location to many Tweets).
+	
+    The relationship with Location includes a backref so that Locations have access to tweets
+    associated with them.
+    """
+	
     __tablename__ = 'tweet'
     id = db.Column(db.Integer, primary_key=True)
     # Check length of this field
@@ -74,8 +88,8 @@ class Tweet(db.Model):
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
 	
-	# foreign key for one-to-many relationship with Location.
-	# backref so locations can access tweets associated with them.
+    # foreign key for one-to-many relationship with Location.
+    # backref so locations can access tweets associated with them.
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
@@ -92,6 +106,13 @@ class Tweet(db.Model):
         return '<Tweet %d>' % self.id
 
 class Hashtag(db.Model):
+    """
+    Hashtag class.
+    Attributes: id, text, url.
+	
+    Hashtag has a many-to-many relationship with both Tweet and Location.
+    """
+	
     __tablename__ = 'hashtag'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(140), unique=True)
@@ -108,6 +129,14 @@ class Hashtag(db.Model):
 
 
 class Location(db.Model):
+    """
+    Location class.
+    Attributes: id, city, state, country.
+	
+    Location has a many-to-many relationship with Hashtag.
+    Also has a one-to-many relationship with Tweet (one Location to many Tweets).
+    """
+	
     __tablename__ = 'city'
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(80))

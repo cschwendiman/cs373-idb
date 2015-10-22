@@ -40,8 +40,9 @@ class Tweet(db.Model):
     __tablename__ = 'tweet'
     id = db.Column(db.Integer, primary_key=True)
     # Check length of this field
+    twitter_tweet_id = db.Column(db.String(50))
     text = db.Column(db.String(140))
-    user = db.Column(db.String(80), unique=True)
+    user = db.Column(db.String(80))
     url = db.Column(db.String(80), unique=True)
 	date_time = db.Column(db.DateTime)
     # Check if float is ok
@@ -49,9 +50,10 @@ class Tweet(db.Model):
     latitude = db.Column(db.Float)
 	
 	location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
-	location = relationship("Location", backref="tweets")
+	location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
-    def __init__(self, text, user, url, date_time, longitude, latitude):
+    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude):
+        self.twitter_tweet_id = twitter_tweet_id
         self.text = text
         self.user = user
         self.url = url
@@ -65,10 +67,10 @@ class Tweet(db.Model):
 class Hashtag(db.Model):
     __tablename__ = 'hashtag'
     id = db.Column(db.Integer, primary_key=True)
-    hashtag = db.Column(db.String(140), unique=True)
+    text = db.Column(db.String(140), unique=True)
     url = db.Column(db.String(80), unique=True)
 
-    tweets = relationship("Tweet", secondary=hashtag_tweet_table)
+    tweets = relationship("Tweet", secondary=hashtag_tweet_table, backref="hashtag")
 
     def __init__(self, text, url):
         self.text = text
@@ -85,7 +87,7 @@ class Location(db.Model):
     state = db.Column(db.String(80))
     country = db.Column(db.String(80))
 
-    hashtags = relationship("Hashtag", secondary=hashtag_location_table)
+    hashtags = relationship("Hashtag", secondary=hashtag_location_table, backref="city")
 
     def __init__(self, city, state, country, tweet, hashtag):
         self.city = city

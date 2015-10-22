@@ -40,20 +40,20 @@ class Tweet(db.Model):
 
     #city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     #city = db.relationship('City', backref=db.backref('tweets', lazy='dynamic'))
-    city = db.relationship("City", uselist=False, backref="tweet") # one-to-one with city
-    city_id = Column(Integer, ForeignKey('city.id'))
+    location = db.relationship("Location", uselist=False, backref="tweet") # one-to-one with city
+    location_id = Column(Integer, ForeignKey('location.id'))
 
     hashtag = db.relationship("Hashtag") # one to many with Hashtag
     hashtag_id = Column(Integer, ForeignKey('hashtag.id'))
 
 
-    def __init__(self, text, username, url, longitude, latitude, city, hashtag):
+    def __init__(self, text, username, url, longitude, latitude, location, hashtag):
         self.text = text
         self.username = username
         self.url = url
         self.longitude = longitude
         self.latitude = latitude
-        self.city = city
+        self.location = location
         self.hashtag = hashtag
 
     def __repr__(self):
@@ -68,20 +68,20 @@ class Hashtag(db.Model):
     tweet_id = Column(Integer, ForeignKey('tweet.id'))
     tweet = db.relationship("Tweet") # one to many with tweet
 
-    city_id = Column(Integer, ForeignKey('city.id'))
-    city = db.relationship("City")
+    location_id = Column(Integer, ForeignKey('location.id'))
+    location = db.relationship("Location")
 
-    def __init__(self, hashtag, url, tweet, city):
-        self.hashtag = hashtag
+    def __init__(self, text, url, tweet, location):
+        self.text = text
         self.url = url
         self.tweet = tweet
-        self.city = city
+        self.location = location
 
     def __repr__(self):
         return '<Hashtag %d>' % self.id
 
 
-class City(db.Model):
+class Location(db.Model):
     __tablename__ = 'city'
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(80))

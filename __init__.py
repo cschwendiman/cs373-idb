@@ -1,34 +1,29 @@
-from flask import Flask, render_template
-import json
+from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    data = json.load(open("parsed_aux.json"))
-    tweets = list(data.items())[0:10]
-    return render_template('index.html',
-                           place="Austin",
-                           posts=tweets)
+    return "Splash Page"
 
-@app.route("/cities/")
-def cities():
-    return "All Cities"
+@app.route("/locations/")
+def locations():
+    return "All Locations"
 
 @app.route("/tweets/")
 def tweets():
     return "All Tweets"
 
 @app.route("/hashtags/")
-def hastags():
+def hashtags():
     return "All Hashtags"
 
-@app.route("/city/<city_name>")
-def city(city_name):
-    return "City %s" % city_name
+@app.route("/location/<city_name>")
+def location(city):
+    return "Location %s" % city
 
-@app.route("/hashtag/<hashtag>")
-def hashtag(hashtag):
-    return "Hashtag %s" % hashtag
+@app.route("/hashtag/<hashtag_name>")
+def hashtag(text):
+    return "Hashtag %s" % text
 
 @app.route("/tweet/<int:tweet_id>")
 def tweet(tweet_id):

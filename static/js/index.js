@@ -1,5 +1,42 @@
-console.log("load");
+var mapWrapper = {
+    map: null,
+    ele: "map",
+    markers: [],
+    options: {
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        center: {lat: 30.25, lng: -97.75},
+        zoom: 11
+    },
+    init: function() {
+        if (this.map == null) {
+            this.map = new google.maps.Map(document.getElementById('map'), this.options);
+        }
+    },
+    addHashtag: function(hashtag, loc) {
+        var link = '<a href="/hashtag/' + hashtag.id + '">' + hashtag.name + '</a>';
+        var infowindow = new google.maps.InfoWindow({
+            content: link
+          });
 
+          var marker = new google.maps.Marker({
+            position: {lat: 30.25, lng: -97.75},
+            map: this.map,
+            title: hashtag.name
+          });
+        this.markers.push(marker);
+        infowindow.open(this.map, marker);
+    },
+    clearMarkers: function() {
+        for (var i = 0; i < this.markers.length; i++ ) {
+            this.markers[i].setMap(null);
+          }
+          this.markers.length = 0;
+    }
+};
 
 angular.module('tweetcity', ['ngRoute'])
 
@@ -91,22 +128,29 @@ angular.module('tweetcity', ['ngRoute'])
                 hashtags: [3],
                 tweet_id: '655532129380638720'
             }
-        }
+        };
+
+        mapWrapper.init();
+        mapWrapper.addHashtag($scope.$hashtags[1], true);
     })
 
     .controller('MainController', function ($scope, $routeParams) {
         $scope.name = "MainController";
         $scope.params = $routeParams;
+
     })
 
     .controller('AboutController', function ($scope, $routeParams) {
         $scope.name = "AboutController";
         $scope.params = $routeParams;
+        $('#header-overlay').fadeIn("slow");
     })
 
     .controller('HashtagsController', function ($scope, $routeParams) {
         $scope.name = "HashtagsController";
         $scope.params = $routeParams;
+                $('#header-overlay').fadeOut("slow");
+
     })
 
     .controller('HashtagController', function ($scope, $routeParams) {
@@ -114,10 +158,10 @@ angular.module('tweetcity', ['ngRoute'])
         $scope.params = $routeParams;
         var hashtag = $scope.$hashtags[$routeParams.id];
         $scope.hashtag = hashtag;
-        var tweet_ids = hashtag.tweets.map(function(id){
+        var tweet_ids = hashtag.tweets.map(function (id) {
             return $scope.$tweets[id].tweet_id
         });
-        twttr.ready(function(){
+        twttr.ready(function () {
             for (var i = 0; i < tweet_ids.length; i++) {
                 twttr.widgets.createTweet(
                     tweet_ids[i],
@@ -137,10 +181,10 @@ angular.module('tweetcity', ['ngRoute'])
         $scope.params = $routeParams;
         var location = $scope.$locations[$routeParams.id];
         $scope.location = location;
-        var tweet_ids = location.tweets.map(function(id){
+        var tweet_ids = location.tweets.map(function (id) {
             return $scope.$tweets[id].tweet_id
         });
-        twttr.ready(function(){
+        twttr.ready(function () {
             for (var i = 0; i < tweet_ids.length; i++) {
                 twttr.widgets.createTweet(
                     tweet_ids[i],
@@ -160,12 +204,14 @@ angular.module('tweetcity', ['ngRoute'])
         $scope.params = $routeParams;
         var tweet = $scope.$tweets[$routeParams.id];
         $scope.tweet = tweet;
-        twttr.ready(function(){
-            twttr.widgets.createTweet(
-                tweet.tweet_id,
-                document.getElementById('tweet-container'),
-                {align: 'left'});
-        });
+        if (tweet) {
+            twttr.ready(function () {
+                twttr.widgets.createTweet(
+                    tweet.tweet_id,
+                    document.getElementById('tweet-container'),
+                    {align: 'left'});
+            });
+        }
     })
 
     .config(function ($routeProvider, $locationProvider) {
@@ -178,7 +224,7 @@ angular.module('tweetcity', ['ngRoute'])
             .when('/about', {
                 title: "About",
                 templateUrl: '/static/about.html',
-                controller: 'TweetController'
+                controller: 'AboutController'
             })
             .when('/hashtags', {
                 title: "Hashtags",
@@ -210,13 +256,13 @@ angular.module('tweetcity', ['ngRoute'])
                 templateUrl: '/static/tweet.html',
                 controller: 'TweetController'
             })
-            .otherwise({ redirectTo: '/' });
+            .otherwise({redirectTo: '/'});
         $locationProvider.html5Mode(true);
     })
 
-.run(['$rootScope', function($rootScope) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.title = current.$$route.title;
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+            $rootScope.title = current.$$route.title;
 
-    });
-}]);
+        });
+    }]);

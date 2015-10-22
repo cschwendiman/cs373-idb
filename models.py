@@ -9,28 +9,54 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '' #insert URI
 db = SQLAlchemy(app)
 
 """
+-------
+Classes
+-------
+
 Tweet:
+    twitter_tweet_id
     text
     user
-    URL
+    url
+    date_time
     longitude
     latitude
 
 Hashtag:
     text
-    URL
+    url
 
 Location:
     city
     state
     country
+	
+---------------
+Relationships
+between classes
+---------------
+
+Tweet - Hashtag : many-to-many
+Location - Hashtag : many-to-many
+Location - Tweet : one-to-many (one location to many tweets)
+	
+--------------------------
+Association tables for
+many-to-many relationships
+--------------------------
+
+hashtag_tweet_table
+hashtag_location_table
+
 """
 
+# Association table for many-to-many relationship between Hashtag and Tweet
 hashtag_tweet_table = db.Table('hashtag_tweet',
     db.Column('hashtag_id', db.Integer, db.ForeignKey('hashtag.id')),
     db.Column('tweet_id', db.Integer, db.ForeignKey('tweet.d'))
 )
 
+# Association table for many-to-many relationship between Hashtag and Location
 hashtag_location_table = db.Table('hashtag_location',
     db.Column('hashtag_id', db.Integer, db.ForeignKey('hashtag.id')),
     db.Column('location_id', db.Integer, db.ForeignKey('location.id'))
@@ -45,10 +71,11 @@ class Tweet(db.Model):
     user = db.Column(db.String(80))
     url = db.Column(db.String(80), unique=True)
     date_time = db.Column(db.DateTime)
-    # Check if float is ok
     longitude = db.Column(db.Float)
     latitude = db.Column(db.Float)
 	
+	# foreign key for one-to-many relationship with Location.
+	# backref so locations can access tweets associated with them.
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 

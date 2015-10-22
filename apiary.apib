@@ -1,0 +1,136 @@
+FORMAT: 1A
+HOST: http://tweetcity.me/
+
+# TweetCity
+
+TweetCity is an API which allows you to view basic information about Tweets, Hashtags, and Locations. .
+
+# Group Tweets
+
+## Tweets  [/tweets]
+
+### List All Tweets [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "text": "Body of tweet here",
+                "user": "username",
+                "date_time" : 1896451564,
+                "twitter_tweet_id": 5648946516,
+                "url": "https://twitter.com/username/status/656050848800247808",
+                "hashtags: [
+                    1,
+                    2
+                ]
+                "longitude" : "30.25",
+                "latitude" : "-97.7500"
+            },
+            {
+                "id": 2,
+                "text": "example2",
+                "user": "username2",
+                "date_time" : 45646564,
+                "twitter_tweet_id": 879786516,
+                "url": "https://twitter.com/username/status/8798765451897879",
+                "hashtags: [
+                    3,
+                    4
+                ]
+                "longitude" : "30.25"
+                "latitude" : "-97.7500"
+                
+            }
+        ]
+
+## Tweet [/tweet/{tweet_id}]
+
+### Get a Tweet [GET]
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "text": "Body of tweet here",
+                "user": "username",
+                "date_time" : 454461564,
+                "twitter_tweet_id": 5648946516,
+                "url": "https://twitter.com/username/status/656050848800247808",
+                "hashtags: [
+                    1,
+                    2
+                ]
+                "longitude" : "30.25",
+                "latitude" : "-97.7500"
+            }
+
+#Group Hashtags
+## Hashtags [/hashtags]
+
+### List All Hashtags [GET]
+
++ Response 200 (application/json)
+        
+        [
+            {
+                "id": 1,
+                "text": "Jobs",
+                "url": "https://twitter.com/hashtag/Jobs?src=hash&lang=en"
+            },
+            {
+                "id": 2,
+                "text": "Hiring",
+                "url": "https://twitter.com/hashtag/Hiring?src=hash&lang=en"
+            }
+        ]
+
+## Hashtag [/hashtag/{hashtag_id}]
+
+### Get a Hashtag [GET]
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "text": "Jobs",
+                "url": "https://twitter.com/hashtag/Jobs?src=hash&lang=en"
+            }
+            
+#Group Locations
+## Locations [/locations]
+
+### List All Locations [GET]
+
++ Response 200 (application/json)
+        
+        [
+            {
+                "id": 1,
+                "city": "Austin",
+                "state": "Texas",
+                "country: "United States"
+            },
+            {
+                "id": 2,
+                "city": "San Francisco",
+                "state": "California",
+                "country: "United States"
+            }
+        ]
+
+## Location [/location/{location_id}]
+
+### Get a Location [GET]
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "city": "Austin",
+                "state": "Texas",
+                "country: "United States"
+            }
+            
+

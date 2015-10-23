@@ -1,0 +1,286 @@
+commit 5d9df466dc9ccb58548e769f1f48da243f7d5333
+Merge: e376465 efdf081
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:30:52 2015 -0500
+
+    More changes to about.html
+
+commit e376465bcea1d1eb2ec8cd5124378e7330f0adc4
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:27:31 2015 -0500
+
+    More changes to about.html
+
+commit efdf081a34fafb55a8fe57802096f71adc7a8482
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 21:27:07 2015 -0500
+
+    added a link to the Tweet Scraper
+
+commit 7349883b71fdec4e66c3fbf20e4aa8cdb9854e57
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 21:11:49 2015 -0500
+
+    added the data scraper code
+
+commit 4aa0b4f4af969ab9bbe8e7619f8e260a605c7933
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:05:45 2015 -0500
+
+    Made a few more small changes to about.html
+
+commit 0d05320cb5b63c1ffe958ce84f74291b3473b3d1
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 20:51:29 2015 -0500
+
+    Added links and statistics to about.html
+
+commit 16b7a67f0dc7a4bcde9547b997a815c95a3b8939
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:59:56 2015 -0500
+
+    fix issue where map was zooming out all the way
+
+commit b1740442116a15759679eecf19812d8c809cfb6d
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:47:30 2015 -0500
+
+    fix spacing on html files, add links to tweets from hashtags and locations
+
+commit cc6b422e92a30bc973f3792654a6201541de4353
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:43:44 2015 -0500
+
+    make images square
+
+commit ba94e538324f556a3840388dfa9a7c82c636c7ab
+Merge: 031c462 abaf076
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:37:40 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 031c4623cce00a7e3ca3c64e52172a45c3659e79
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:37:24 2015 -0500
+
+    fill in splash page
+
+commit abaf076f56bc28de3ec59ad3f0acf7149e983529
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 19:09:30 2015 -0500
+
+    clean up the repo
+
+commit 5301369860d86f2ba9a1ba1a7b821176443a2f36
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 19:07:24 2015 -0500
+
+    generate models.html in pydoc using python2.7
+
+commit 02b2dc2f278d5caa5a3cdc55054473939a0407e7
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 18:51:50 2015 -0500
+
+    ADDED GOOGLE MAPS YAAAAAAAAY
+
+commit e463254c5084596a6bc5d81104770a49b9d415dc
+Merge: 5cde495 ef2487a
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 17:31:27 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 5cde495309aa90da7d375a2ae9f1b4ca9b0ba3df
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 17:30:57 2015 -0500
+
+    Made some modifications to models.py implementation.
+
+commit ef2487a177fe20db72446fa25d0620a74841714a
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 16:47:21 2015 -0500
+
+    adding the apiray doc file
+
+commit 5d65079eba90643c36b45780dc12988a4ee4cd59
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 16:10:07 2015 -0500
+
+    Added docstrings to models.py
+
+commit 7e17db867db9fb936b5c3017899904107c377cbe
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 15:54:24 2015 -0500
+
+    Added more documentation/comments to models.py
+
+commit a26bad1d7b20c7703c28901897da593c4f0dd6f4
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 14:32:06 2015 -0500
+
+    Added about me information for Kevin.
+
+commit 92e614820fdc2526629b8edd23c3da67e7c1d12a
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:57:20 2015 -0500
+
+    Fixed some indentation issues.
+
+commit e5470bc02f55f429544d195874597333b16de9f4
+Merge: 566423d 3ccdd05
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:55:34 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 566423dd67a6e24784756f6c21ae56552f595bee
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:55:04 2015 -0500
+
+    Made a tiny change.
+
+commit 2718a0fc51fec76cfb72fc6f1506644c338e483e
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:54:11 2015 -0500
+
+    Made small changes to data model.
+
+commit 3ccdd05c3488b66d47739204fcb297ba7b72eb93
+Author: masteret <masteret@users.noreply.github.com>
+Date:   Thu Oct 22 13:45:21 2015 -0500
+
+    Update about.html
+
+commit 443d76faf8701ccd88e1b084e7826cbfefc18a72
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 12:56:22 2015 -0500
+
+    accidentally didn't commit changes that fix bio <dls>
+
+commit ad2d0fe090d922f15a13355962a883895e989855
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 12:47:40 2015 -0500
+
+    Removed extraneous files that were accidentally still there.
+
+commit 4cd954a63ddc0bd096cad77cba56a292f4619a4d
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 12:45:23 2015 -0500
+
+    Made changes to UML and models.py. Added association table to models.py for many-to-many relationships, among a few other things.
+
+commit 574b81179f3e16c6216af9e0256e793da8f17565
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:15:50 2015 -0500
+
+    including Nick's last name
+
+commit ac07d3df6f84f54dfd1de3077e3b060de8c1b1ab
+Author: masteret <masteret@users.noreply.github.com>
+Date:   Thu Oct 22 12:09:35 2015 -0500
+
+    added Ka Hei's responsibilities
+
+commit 689e41b11a2071a60e3399bb58992c727a506a68
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:07:45 2015 -0500
+
+    fixing about me html
+
+commit f918e0ccd123f54e1c9f5c448021b25f4efb8375
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:05:20 2015 -0500
+
+    Adding Nick's about me
+
+commit 9a10bbd9be1d143fea529ad6fd3d3b52ef122c13
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 09:47:39 2015 -0500
+
+    fixes #20 add specificity for about page <dl>s
+
+commit 1ff69ae22973f6baf9176900d7e50b8cc64002ee
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 01:04:51 2015 -0500
+
+    add Ka Hei, Fahad, and Cassie to the about page
+
+commit cdc01a2d170e7da088d58c12825dcfbfde0b3f38
+Merge: 3baa2c6 10fda9c
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 00:20:22 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+    
+    Conflicts:
+    	__init__.py
+    	templates/index.html
+
+commit 3baa2c6c9901fe77ff5328c0caffd0374ab23cb4
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 00:18:49 2015 -0500
+
+    transition all pages to angular
+
+commit 10fda9c039485f14253464513af7776ea7cd5177
+Author: masteret <masteret9432@gmail.com>
+Date:   Thu Oct 22 00:09:41 2015 -0500
+
+    static data they say...removing my flask template code
+
+commit e8938f93b2a5fd9df13203a3f633c3d00790aa85
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 20:43:42 2015 -0500
+
+    added all the test cases -- renamed City to Location
+
+commit 4f1f709ced6ae2fdfdb21d09274a6a592dfad298
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:31:47 2015 -0500
+
+    fix import issue with Flask
+
+commit 009e10475ade0a0bad27ff10bdcf748e9b506946
+Merge: 3a92d7c c972aa8
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:11:22 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 3a92d7c3578b2563f8b779e71b1b6df2fbe1425a
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:11:06 2015 -0500
+
+    add Ka Hei's template
+
+commit c972aa80a184afecd35c5a7e20acb983cfa688a9
+Merge: 01282da f7f9500
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 14:06:28 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 01282daf1d7e3aee4d71a50954208c96e111e6cd
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 14:04:53 2015 -0500
+
+    added the relationships and constructors for all models -- also defined the db object
+
+commit f7f9500b94b2cd4f5a44f7ab828bf7ecc4430435
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Oct 21 12:41:05 2015 -0500
+
+    adding uml
+
+commit 84d1bab77d0ecc14cf8fae3b23050954584dba70
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Tue Oct 20 23:54:40 2015 -0500
+
+    added tests.py and a missing parenthesis in models.py
+
+commit 62b221cb1955d7ab0be8414bc4b399974a860c8d
+Author: Cassie <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 04:08:26 2015 +0000
+
+    Initial commit

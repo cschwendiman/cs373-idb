@@ -19,3 +19,7 @@ body {
 .bio dd + dt {
     margin-top: 10px;
 }
+
+.panel-body {
+    padding-bottom: 0;
+}

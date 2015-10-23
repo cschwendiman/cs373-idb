@@ -17,7 +17,7 @@ var mapWrapper = {
         }
     },
     addHashtags: function (tweets) {
-        this.clearMarkers()
+        this.clearMarkers();
         for (tweet_id in tweets) {
             this.addHashtag(tweets[tweet_id]);
         }
@@ -199,7 +199,15 @@ angular.module('tweetcity', ['ngRoute'])
     .controller('MainController', function ($scope, $routeParams) {
         $scope.name = "MainController";
         $scope.params = $routeParams;
-
+        $('#jumbo-header').slideDown("slow");
+        twttr.ready(function () {
+            for (i in $scope.$tweets) {
+                twttr.widgets.createTweet(
+                    $scope.$tweets[i].tweet_id,
+                    document.getElementById('recent-tweets'),
+                    {align: 'left'});
+            }
+        });
     })
 
     .controller('AboutController', function ($scope, $routeParams) {

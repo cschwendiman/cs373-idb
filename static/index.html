@@ -69,21 +69,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
+<script>window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
+    t._e = [];
+    t.ready = function (f) {
+        t._e.push(f);
+    };
 
-  return t;
+    return t;
 }(document, "script", "twitter-wjs"));</script>
 <script src="/static/js/index.js"></script>
 </body>

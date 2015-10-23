@@ -25,7 +25,6 @@ var mapWrapper = {
     },
     addHashtag: function (tweet) {
         var links = "";
-        var i;
         for (var i = 0; i < tweet.full_hashtags.length; i++) {
             links += ' <a href="/hashtag/' + tweet.full_hashtags[i].id + '">' + tweet.full_hashtags[i].name + '</a>';
         }
@@ -60,7 +59,7 @@ var mapWrapper = {
         this.setBounds();
     },
     addTweets: function (tweets) {
-        this.clearMarkers()
+        this.clearMarkers();
         var id;
         for (id in tweets) {
             this.addTweet(tweets[id]);
@@ -98,6 +97,7 @@ var mapWrapper = {
             this.markers[i].setMap(null);
         }
         this.markers.length = 0;
+        this.map.setCenter({lat: 30.25, lng: -97.75});
     }
 };
 
@@ -199,7 +199,6 @@ angular.module('tweetcity', ['ngRoute'])
     .controller('MainController', function ($scope, $routeParams) {
         $scope.name = "MainController";
         $scope.params = $routeParams;
-        $('#jumbo-header').slideDown("slow");
         twttr.ready(function () {
             for (i in $scope.$tweets) {
                 twttr.widgets.createTweet(
@@ -208,6 +207,8 @@ angular.module('tweetcity', ['ngRoute'])
                     {align: 'left'});
             }
         });
+        $('#jumbo-header').slideDown("slow");
+        mapWrapper.clearMarkers();
     })
 
     .controller('AboutController', function ($scope, $routeParams) {
@@ -227,8 +228,8 @@ angular.module('tweetcity', ['ngRoute'])
                 tweets[id].full_hashtags.push(hashtags[tweets[id].hashtags[i]]);
             }
         }
-        mapWrapper.addHashtags(tweets);
         $('#jumbo-header').slideDown("slow");
+        mapWrapper.addHashtags(tweets);
     })
 
     .controller('HashtagController', function ($scope, $routeParams) {
@@ -288,9 +289,8 @@ angular.module('tweetcity', ['ngRoute'])
     .controller('TweetsController', function ($scope, $routeParams) {
         $scope.name = "TweetsController";
         $scope.params = $routeParams;
-        mapWrapper.addTweets($scope.$tweets);
         $('#jumbo-header').slideDown("slow");
-
+        mapWrapper.addTweets($scope.$tweets);
     })
 
     .controller('TweetController', function ($scope, $routeParams) {

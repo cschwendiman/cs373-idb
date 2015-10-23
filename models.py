@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey
+from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
@@ -131,10 +131,3 @@ class Location(Base):
 
     def __repr__(self):
         return '<City %d>' % self.id
-
-
-
-engine = create_engine('mysql:///data.db')
-
-Base.metadata.create_all(engine)
-

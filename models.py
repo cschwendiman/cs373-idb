@@ -88,12 +88,12 @@ class Tweet(db.Model):
     location_id = Column(Integer, ForeignKey('city.id'))
     location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
-    def __init__(self, id, twitter_tweet_id, text, user, url, longitude, latitude, location_id):
-        self.id = id
+    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude, location_id):
         self.twitter_tweet_id = twitter_tweet_id
         self.text = text
         self.user = user
         self.url = url
+        self.date_time = date_time
         self.longitude = longitude
         self.latitude = latitude
         self.location_id = location_id
@@ -116,6 +116,10 @@ class Hashtag(db.Model):
 
     tweets = relationship("Tweet", secondary=hashtag_tweet_table, backref="hashtag")
 
+    def __init__(self, text, url):
+        self.text = text
+        self.url = url
+
     def __repr__(self):
         return '<Hashtag %d>' % self.id
 
@@ -136,6 +140,12 @@ class Location(db.Model):
     country = Column(String(80))
 
     hashtags = relationship("Hashtag", secondary=hashtag_location_table, backref="city")
+
+    def __init__(self, city, state, country):
+        self.city = city
+        self.state = state
+        self.country = country
+
 
     def __repr__(self):
         return '<City %d>' % self.id

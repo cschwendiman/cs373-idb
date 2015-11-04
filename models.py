@@ -2,6 +2,7 @@ from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, Stri
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
+from __init__ import db
 
 Base = declarative_base()
 

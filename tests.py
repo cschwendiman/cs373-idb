@@ -1,7 +1,6 @@
 from unittest import main, TestCase
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker 
-from sqlalchemy_searchable import search
 
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy

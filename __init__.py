@@ -1,16 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 import json
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 if os.environ.get('DATABASE_URL') is None:
     app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///' + os.path.join(basedir, 'idb.db') +
                                '?check_same_thread=False')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+# app.debug = True
 
 """
 @app.route("/api/")

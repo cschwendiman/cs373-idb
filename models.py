@@ -1,10 +1,7 @@
 from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, String
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy import create_engine
 from __init__ import db
 
-Base = declarative_base()
 
 """
 -------
@@ -49,23 +46,23 @@ hashtag_location_table
 """
 
 # Association table for many-to-many relationship between Hashtag and Tweet
-hashtag_tweet_table = Table('hashtag_tweet', Base.metadata,
+hashtag_tweet_table = Table('hashtag_tweet', db.Model.metadata,
     Column('hashtag_id', Integer, ForeignKey('hashtag.id')),
-    Column('tweet_id', Integer, ForeignKey('tweet.d'))
+    Column('tweet_id', Integer, ForeignKey('tweet.id'))
 )
 
 # Association table for many-to-many relationship between Hashtag and Location
-hashtag_location_table = Table('hashtag_location', Base.metadata,
+hashtag_location_table = Table('hashtag_location', db.Model.metadata,
     Column('hashtag_id', Integer, ForeignKey('hashtag.id')),
-    Column('location_id', Integer, ForeignKey('location.id'))
+    Column('location_id', Integer, ForeignKey('city.id'))
 )
 
-class Tweet(Base):
+class Tweet(db.Model):
     """
     Tweet class.
     Attributes: id, twitter_tweet_id, text, user, url, date_time, latitude, longitude, location_id.
 	
-    twitter_tweet_id is the id given by Twitter for a tweet. id is the id for the tweet in our database.
+    twitter_tweet_id is the id given by Twitter for a tweet. id is the id for the tweet in our datadb.Model.
     location_id is the id (foreign key) of the Location where the tweet was tweeted. 
 	
     Tweet has a many-to-many relationship with Hashtag.
@@ -88,13 +85,13 @@ class Tweet(Base):
 	
     # foreign key for one-to-many relationship with Location.
     # backref so locations can access tweets associated with them.
-    location_id = Column(Integer, ForeignKey('location.id'))
+    location_id = Column(Integer, ForeignKey('city.id'))
     location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
     def __repr__(self):
         return '<Tweet %d>' % self.id
 
-class Hashtag(Base):
+class Hashtag(db.Model):
     """
     Hashtag class.
     Attributes: id, text, url.
@@ -113,7 +110,7 @@ class Hashtag(Base):
         return '<Hashtag %d>' % self.id
 
 
-class Location(Base):
+class Location(db.Model):
     """
     Location class.
     Attributes: id, city, state, country.
@@ -132,3 +129,5 @@ class Location(Base):
 
     def __repr__(self):
         return '<City %d>' % self.id
+
+db.create_all()

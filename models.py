@@ -88,6 +88,16 @@ class Tweet(db.Model):
     location_id = Column(Integer, ForeignKey('city.id'))
     location = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
+    def __init__(self, id, twitter_tweet_id, text, user, url, longitude, latitude, location_id):
+        self.id = id
+        self.twitter_tweet_id = twitter_tweet_id
+        self.text = text
+        self.user = user
+        self.url = url
+        self.longitude = longitude
+        self.latitude = latitude
+        self.location_id = location_id
+
     def __repr__(self):
         return '<Tweet %d>' % self.id
 

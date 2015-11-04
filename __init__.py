@@ -12,6 +12,7 @@ if os.environ.get('DATABASE_URL') is None:
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+
 # app.debug = True
 
 """

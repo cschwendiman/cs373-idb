@@ -1,4 +1,7 @@
 from unittest import main, TestCase
+import time
+from time import mktime
+from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker 
 
@@ -35,8 +38,7 @@ class testModels(TestCase):
         tweets = Tweet.query.all()
         startSize = len(tweets)
 
-        #db.session.add(Tweet(twitter_tweet_id = "123", text = "test", user = "testUser", url = "https://twitter.com/testUser/status/661196539696513024", date_time = , longitude, latitude, location_id))
-        db.session.add(Tweet(text = "test"))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
         db.session.commit()
         tweets = Tweet.query.all()
 
@@ -45,10 +47,10 @@ class testModels(TestCase):
         self.assertEqual(startSize + 1, endSize)
 
     def test_tweets_readability(self):
-        db.session.add(Tweet(text = "test"))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
         db.session.commit()
 
-        query = tweet.query.all()
+        query = Tweet.query.all()
         found = False
 
         for x in query:
@@ -58,26 +60,33 @@ class testModels(TestCase):
         assert(found)
 
     def test_tweets_attribute_readability(self):
-        db.session.add(Tweet(text = "test123", username = "test_user"))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
         db.session.commit()
 
-        query = db.session.query(tweet).filter(tweet.text == "test123").first()
+        query = db.session.query(Tweet).first()
 
         assert (query is not None)
-        assert (query.username == "test_user")
+        assert (query.twitter_tweet_id == "123")
+        assert (query.text == "test")
+        assert (query.user == "testUser")
+        assert (query.url == "https://twitter.com/testUser/status/661196539696513024")
+        assert (query.date_time == datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015"))))
+        assert (query.longitude == 30.30)
+        assert (query.latitude == -127.27)
+        assert (query.location_id == 5)
 
     def test_tweets_delete_ability(self):
-        db.session.add(Tweet(username = "deleteMe"))
+        db.session.add(Tweet("123", "test", "deleteMe", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
         db.session.commit()
 
-        query = db.session.query(tweet).filter(tweet.username == "deleteMe").first()
+        query = db.session.query(Tweet).filter(Tweet.user == "deleteMe").first()
 
         assert(query != None)
 
-        db.session.delete(query);
+        db.session.delete(query)
         db.session.commit()
 
-        toRemove = db.session.query(tweet).filter(tweet.username == "delete").first()
+        toRemove = db.session.query(Tweet).filter(Tweet.user == "deleteMe").first()
         assert(toRemove == None)
 
 
@@ -186,7 +195,6 @@ class testModels(TestCase):
 
         toRemove = db.session.query(Location).filter(Location.city == "Austin").first()
         assert(toRemove == None)
-
 
 if __name__ == "__main__":
     main()

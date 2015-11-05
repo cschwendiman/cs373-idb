@@ -1,17 +1,12 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from models import Tweet, Hashtag, Location
+from models import Tweet, Hashtag, Location, db
 
 import time
 from time import mktime
 from datetime import datetime
 import json
 from sqlalchemy import exists
-
-app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
-db = SQLAlchemy(app)
 
 # db.session.query(Tweet).delete()
 # db.session.query(Hashtag).delete()

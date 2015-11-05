@@ -1,7 +1,9 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 import json
 import os
+from models import Tweet, Hashtag, Location
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
@@ -21,9 +23,11 @@ def tweets():
 
 @app.route("/api/tweet/<int:id>/")
 def tweet(id):
-    tweets = json.load(open("static/json/tweets.json"))
-    tweet = tweets["tweets"][str(id)]
-    return json.dumps(tweet, ensure_ascii=False)
+    data = db.session.query(Tweet).filter_by(id=id).first()
+    data = data.__dict__
+    del data['_sa_instance_state']
+    data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+    return json.dumps(data, ensure_ascii=False)
 
 @app.route("/api/hashtags/")
 def hashtags():
@@ -31,9 +35,10 @@ def hashtags():
 
 @app.route("/api/hashtag/<int:id>/")
 def hashtag(id):
-    hashtags = json.load(open("static/json/hashtags.json"))
-    hashtag = hashtags["hashtags"][str(id)]
-    return json.dumps(hashtag, ensure_ascii=False)
+    data = db.session.query(Hashtag).filter_by(id=id).first()
+    data = data.__dict__
+    del data['_sa_instance_state']
+    return json.dumps(data, ensure_ascii=False)
 
 @app.route("/api/locations/")
 def locations():
@@ -41,10 +46,10 @@ def locations():
 
 @app.route("/api/location/<int:id>/")
 def location(id):
-    print("am i here?")
-    locations = json.load(open("static/json/locations.json"))
-    location = locations["locations"][str(id)]
-    return json.dumps(location, ensure_ascii=False)
+    data = db.session.query(Location).filter_by(id=id).first()
+    data = data.__dict__
+    del data['_sa_instance_state']
+    return json.dumps(data, ensure_ascii=False)
 
 
 # Funnel all other requests to angular

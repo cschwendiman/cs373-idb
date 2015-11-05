@@ -1,7 +1,6 @@
+from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship, backref
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
 
 """
 -------
@@ -45,10 +44,7 @@ hashtag_location_table
 
 """
 
-app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 # Association table for many-to-many relationship between Hashtag and Tweet
 hashtag_tweet_table = Table('hashtag_tweet', db.Model.metadata,

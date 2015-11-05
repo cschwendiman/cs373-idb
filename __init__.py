@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.debug = True
 if os.environ.get('DATABASE_URL') is None:
     app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///' + os.path.join(basedir, 'idb.db') +
                                '?check_same_thread=False')
@@ -20,8 +21,8 @@ def tweets():
 
 @app.route("/api/tweet/<int:id>/")
 def tweet(id):
-    tweets = json.load(open("json/tweets.json"))
-    tweet = tweets[str(id)]
+    tweets = json.load(open("static/json/tweets.json"))
+    tweet = tweets["tweets"][str(id)]
     return json.dumps(tweet, ensure_ascii=False)
 
 @app.route("/api/hashtags/")
@@ -30,9 +31,9 @@ def hashtags():
 
 @app.route("/api/hashtag/<int:id>/")
 def hashtag(id):
-    tweets = json.load(open("json/hashtag.json"))
-    tweet = tweets[str(id)]
-    return json.dumps(tweet, ensure_ascii=False)
+    hashtags = json.load(open("static/json/hashtags.json"))
+    hashtag = hashtags["hashtags"][str(id)]
+    return json.dumps(hashtag, ensure_ascii=False)
 
 @app.route("/api/locations/")
 def locations():
@@ -40,9 +41,10 @@ def locations():
 
 @app.route("/api/location/<int:id>/")
 def location(id):
-    tweets = json.load(open("json/location.json"))
-    tweet = tweets[str(id)]
-    return json.dumps(tweet, ensure_ascii=False)
+    print("am i here?")
+    locations = json.load(open("static/json/locations.json"))
+    location = locations["locations"][str(id)]
+    return json.dumps(location, ensure_ascii=False)
 
 
 # Funnel all other requests to angular

@@ -3,7 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 import json
 import os
-from models import Tweet, Hashtag, Location
+from models import Tweet, Hashtag, Location, db
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
@@ -14,7 +14,8 @@ if os.environ.get('DATABASE_URL') is None:
                                '?check_same_thread=False')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
+
+db.init_app(app)
 
 # API Requests
 @app.route("/api/tweets/")

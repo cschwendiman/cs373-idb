@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 db.session.query(Tweet).delete()
 db.session.query(Hashtag).delete()
 db.session.query(Location).delete()
-db.session.commit()
+# db.session.commit()
 
 db.configure_mappers()
 db.create_all()

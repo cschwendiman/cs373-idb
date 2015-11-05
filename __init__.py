@@ -39,10 +39,13 @@ def tweet(id):
 
 @app.route("/api/hashtagsByTweet/<int:id>/")
 def hashtagsByTweet(id):
-    data = db.session.query(Tweet).filter_by(id=id).first()
-    print(data.__dict__)
-    data = data.__dict__
-    return json.dumps(data["hashtags"], ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    raw_data = db.session.query(Tweet).filter_by(id=id).first().hashtags
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/")
 def hashtags():

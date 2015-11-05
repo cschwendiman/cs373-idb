@@ -14,6 +14,7 @@ if os.environ.get('DATABASE_URL') is None:
                                '?check_same_thread=False')
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
 db = SQLAlchemy(app)
 
 # API Requests
@@ -35,6 +36,13 @@ def tweet(id):
     del data['_sa_instance_state']
     data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/hashtagsByTweet/<int:id>/")
+def hashtagsByTweet(id):
+    data = db.session.query(Tweet).filter_by(id=id).first()
+    print(data.__dict__)
+    data = data.__dict__
+    return json.dumps(data["hashtags"], ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/")
 def hashtags():

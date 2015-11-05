@@ -13,10 +13,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
 db = SQLAlchemy(app)
 
-db.session.query(Tweet).delete()
-db.session.query(Hashtag).delete()
-db.session.query(Location).delete()
-# db.session.commit()
+# db.session.query(Tweet).delete()
+# db.session.query(Hashtag).delete()
+# db.session.query(Location).delete()
 
 db.configure_mappers()
 db.create_all()

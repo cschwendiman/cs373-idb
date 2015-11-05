@@ -64,6 +64,28 @@ def hashtag(id):
     del data['_sa_instance_state']
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
+@app.route("/api/locationsByHashtag/<int:id>/")
+def locationsByHashtag(id):
+    raw_data = db.session.query(Hashtag).filter_by(id=id).first().cities
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/tweetsByCity/<int:id>/")
+def tweetsByCity(id):
+    raw_data = db.session.query(Location).filter_by(id=id).first().tweets
+    json_dict = {}
+    print(raw_data)
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
 @app.route("/api/locations/")
 def locations():
     raw_data = db.session.query(Location).all()

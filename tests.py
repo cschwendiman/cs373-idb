@@ -73,7 +73,7 @@ class testModels(TestCase):
         assert (query.date_time == datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015"))))
         assert (query.longitude == 30.30)
         assert (query.latitude == -127.27)
-        assert (query.location_id == 5)
+        assert (query.city_id == 5)
 
     def test_tweets_delete_ability(self):
         db.session.add(Tweet("123", "test", "deleteMe", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
@@ -195,6 +195,78 @@ class testModels(TestCase):
 
         toRemove = db.session.query(Location).filter(Location.city == "Austin").first()
         assert(toRemove == None)
+
+    #--------------------
+    # hashtag_tweet_table
+    #--------------------
+
+    def test_hashtag_tweet_writability(self):
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
+        new_hashtag = Hashtag(text = "test", url = "www.foo.com")
+
+        # new_location = Location(city = "Austin", state = "TX", country = "USA")
+        # new_location.hashtags.append(new_hashtag)
+        new_hashtag.tweets.append(new_tweet)
+        # new_tweet.location = new_location
+
+        db.session.add(new_hashtag)
+        # db.session.add(new_location)
+        #db.session.add(new_tweet)
+        db.session.commit()
+
+        assert (db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtags[0] == new_hashtag)
+        #assert(len (db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtag[0]) == 1)
+        # assert(len(db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first()) == 1)
+        # assert(len(hashtag_tweet_table.query().all()) == startSize + 1)
+
+    # def test_hashtag_tweet_readability(self):
+    #     new_tweet = Tweet(text="This is a test.")
+    #     new_hashtag = Hashtag(text="thisisatest")
+    #     new_hashtag.tweets.append(new_tweet)
+    #
+    #     hashtag_tweets = hashtag_tweet_table.query().all()
+    #     found = False
+    #
+    #     for x in hashtag_tweets:
+    #         if(x.tweet_id == new_tweet.id and x.hashtag_id == new_hashtag.id):
+    #             found = True
+    #
+    #     assert(found)
+    #
+    # def test_hashtag_tweet_delete_ability(self):
+    #     pass
+    #
+    # # ----------------------
+    # # hashtag_location_table
+    # # ----------------------
+    #
+    # def test_hashtag_location_writability(self):
+    #     hashtag_locations = hashtag_location_table.query().all()
+    #     startSize = len(hashtag_locations)
+    #
+    #     new_hashtag = Hashtag(test="thisisanothertest")
+    #     new_location = Location(city="Dallas", state="TX")
+    #     new_location.hashtags.append(new_hashtag)
+    #
+    #     assert(len(new_location.hashtags) == 1)
+    #     assert(len(hashtag_location_table.query().all()) == startSize + 1)
+    #
+    # def test_hashtag_location_readability(self):
+    #     new_hashtag = Hashtag(test="thisisanothertest")
+    #     new_location = Location(city="Dallas", state="TX")
+    #     new_location.hashtags.append(new_hashtag)
+    #
+    #     hashtag_locations = hashtag_location_table.query().all()
+    #     found = False
+    #
+    #     for x in hashtag_locations:
+    #         if(x.hashtag_id == new_hashtag.id and x.city_id == new_location.id):
+    #             found = True
+    #
+    #     assert(found)
+    #
+    # def test_hashtag_location_delete_ability(self):
+    #     pass
 
 if __name__ == "__main__":
     main()

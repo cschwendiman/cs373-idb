@@ -1,6 +1,4 @@
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 import json
 import os
 from models import Tweet, Hashtag, Location, db
@@ -36,6 +34,16 @@ def tweet(id):
     del data['_sa_instance_state']
     data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/hashtagsByTweet/<int:id>/")
+def hashtagsByTweet(id):
+    raw_data = db.session.query(Tweet).filter_by(id=id).first().hashtags
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/")
 def hashtags():

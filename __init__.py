@@ -20,7 +20,9 @@ def tweets():
 
 @app.route("/api/tweet/<int:id>/")
 def tweet(id):
-    return ""
+    tweets = json.load(open("json/tweets.json"))
+    tweet = tweets[str(id)]
+    return json.dumps(tweet, ensure_ascii=False)
 
 @app.route("/api/hashtags/")
 def hashtags():
@@ -28,7 +30,9 @@ def hashtags():
 
 @app.route("/api/hashtag/<int:id>/")
 def hashtag(id):
-    return ""
+    tweets = json.load(open("json/hashtag.json"))
+    tweet = tweets[str(id)]
+    return json.dumps(tweet, ensure_ascii=False)
 
 @app.route("/api/locations/")
 def locations():
@@ -36,7 +40,9 @@ def locations():
 
 @app.route("/api/location/<int:id>/")
 def location(id):
-    return ""
+    tweets = json.load(open("json/location.json"))
+    tweet = tweets[str(id)]
+    return json.dumps(tweet, ensure_ascii=False)
 
 
 # Funnel all other requests to angular

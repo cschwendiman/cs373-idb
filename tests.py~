@@ -196,5 +196,13 @@ class testModels(TestCase):
         toRemove = db.session.query(Location).filter(Location.city == "Austin").first()
         assert(toRemove == None)
 
+    # ----------------------
+    # hashtag_location_table
+    # ----------------------
+
+    def test_hashtag_location_writability(self):
+        new_hashtag = Hashtag(text="thisisatest")
+        new_location = Location(city="Austin", state="TX")
+
 if __name__ == "__main__":
     main()

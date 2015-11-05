@@ -90,10 +90,10 @@ class Tweet(db.Model):
 	
     # foreign key for one-to-many relationship with Location.
     # backref so locations can access tweets associated with them.
-    city_id = Column(Integer, ForeignKey('city.id'))
+    location_id = Column(Integer, ForeignKey('city.id'))
     city = relationship("Location", backref=backref("tweets", lazy='dynamic'))
 
-    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude, city_id):
+    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude, location_id):
         self.twitter_tweet_id = twitter_tweet_id
         self.text = text
         self.user = user
@@ -101,7 +101,7 @@ class Tweet(db.Model):
         self.date_time = date_time
         self.longitude = longitude
         self.latitude = latitude
-        self.city_id = city_id
+        self.location_id = location_id
 
     def __repr__(self):
         return '<Tweet %d>' % self.id

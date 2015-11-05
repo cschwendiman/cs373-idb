@@ -3,17 +3,17 @@ HOST: http://tweetcity.me/
 
 # TweetCity
 
-TweetCity is an API which allows you to view basic information about Tweets, Hashtags, and Locations. .
+TweetCity is an API which allows you to view basic information about Tweets, Hashtags, and Locations.
 
 # Group Tweets
 
-## Tweets  [/tweets]
+## Tweets  [/api/tweets/]
 
 ### List All Tweets [GET]
 
 + Response 200 (application/json)
 
-        [
+        {
             {
                 "id": 1,
                 "text": "Body of tweet here",
@@ -43,7 +43,7 @@ TweetCity is an API which allows you to view basic information about Tweets, Has
                 "latitude" : "-97.7500"
                 
             }
-        ]
+        }
 
 ## Tweet [/tweet/{tweet_id}]
 

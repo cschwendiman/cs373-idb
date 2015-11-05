@@ -1,25 +1,16 @@
 angular.module('api', [])
     .factory('Tweet', function($resource){
-        /*
         return $resource('/api/tweet/:id', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/tweets' }
+            query: {method: 'GET', params: {}, isArray: false, url: '/api/tweets' }
         });
-        */
-        return $resource('/static/json/tweets.json');
     })
     .factory('Hashtag', function($resource) {
-        /*
         return $resource('/api/hashtag/:id', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/hashtags' }
+            query: {method: 'GET', params: {}, isArray: false, url: '/api/hashtags' }
         });
-        */
-        return $resource('/static/json/hashtags.json');
     })
     .factory('Location', function($resource) {
-        /*
         return $resource('/api/location/:id', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/locations' }
+            query: {method: 'GET', params: {}, isArray: false, url: '/api/locations' }
         });
-        */
-        return $resource('/static/json/locations.json');
     });

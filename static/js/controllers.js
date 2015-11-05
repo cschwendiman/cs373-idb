@@ -1,14 +1,12 @@
 angular.module('controllers', [])
     .controller('IndexController', function ($scope, Tweet, Hashtag, Location) {
-        //$scope.$routeParams = $routeParams;
-        //$scope.$routeParams.title = "";
-        Tweet.get(function(data) {
+        Tweet.query(function(data) {
             $scope.$tweets = data.tweets;
         });
-        Hashtag.get(function(data) {
+        Hashtag.query(function(data) {
             $scope.$hashtags = data.hashtags;
         });
-        Location.get(function(data) {
+        Location.query(function(data) {
             $scope.$locations = data.locations;
         });
         mapWrapper.init();

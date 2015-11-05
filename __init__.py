@@ -19,7 +19,14 @@ db = SQLAlchemy(app)
 # API Requests
 @app.route("/api/tweets/")
 def tweets():
-    return app.send_static_file('json/tweets.json')
+    raw_data = db.session.query(Location).all()
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False)
 
 @app.route("/api/tweet/<int:id>/")
 def tweet(id):
@@ -31,7 +38,13 @@ def tweet(id):
 
 @app.route("/api/hashtags/")
 def hashtags():
-    return app.send_static_file('json/hashtags.json')
+    raw_data = db.session.query(Hashtag).all()
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False)
 
 @app.route("/api/hashtag/<int:id>/")
 def hashtag(id):
@@ -42,7 +55,13 @@ def hashtag(id):
 
 @app.route("/api/locations/")
 def locations():
-    return app.send_static_file('json/locations.json')
+    raw_data = db.session.query(Location).all()
+    json_dict = {}
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_dict[data["id"]] = data
+    return json.dumps(json_dict, ensure_ascii=False)
 
 @app.route("/api/location/<int:id>/")
 def location(id):
@@ -50,7 +69,6 @@ def location(id):
     data = data.__dict__
     del data['_sa_instance_state']
     return json.dumps(data, ensure_ascii=False)
-
 
 # Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})

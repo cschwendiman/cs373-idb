@@ -1,0 +1,58 @@
+{
+  "tweets": {
+    "1": {
+      "id": 1,
+      "text": "#Beautiful #Texas #sunset. #ontheroadagain @ Round Rock, Texas https://t.co/Q3gYPffqGz",
+      "username": "tinocrane68",
+      "location": 2,
+      "url": "",
+      "latitude": 30.5149,
+      "longitude": -97.6726,
+      "hashtags": [
+        2
+      ],
+      "tweet_id": "655538544182718465"
+    },
+    "2": {
+      "id": 2,
+      "text": "can't stop eating #queso I need to leave #austin #texas follow my adventures in #snapchat \u2600\ufe0f\ud83c\udf35\ud83d\udc62\ud83d\udc52 @ The\u2026 https://t.co/g1RROokrMd",
+      "username": "kiraklapper",
+      "location": 1,
+      "url": "",
+      "latitude": 30.2641201,
+      "longitude": -97.7426529,
+      "hashtags": [
+        1,
+        2
+      ],
+      "tweet_id": "655477025608589312"
+    },
+    "3": {
+      "id": 3,
+      "text": "Seafood #icesculpture display with #monogram for s lovely #wedding on this gorgeous #austin night\u2026 https://t.co/dTBuwz75FR",
+      "username": "fullspectrumice",
+      "location": 1,
+      "url": "",
+      "latitude": 30.2831802,
+      "longitude": -97.7455063,
+      "hashtags": [
+        1,
+        3
+      ],
+      "tweet_id": "655558187005837312"
+    },
+    "4": {
+      "id": 4,
+      "text": "From #wedding receptions to #homecoming dances we do it all! Set up at the beautiful Inn at Wild Rose\u2026 https://t.co/HOsbJEh2Gl",
+      "username": "austincityphoto",
+      "location": 2,
+      "url": "",
+      "latitude": 30.4925,
+      "longitude": -97.64027778,
+      "hashtags": [
+        3
+      ],
+      "tweet_id": "655532129380638720"
+    }
+  }
+}

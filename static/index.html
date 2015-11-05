@@ -22,6 +22,9 @@
     <!--<link href="jumbotron.css" rel="stylesheet">-->
 
     <link href="/static/css/index.css" rel="stylesheet">
+    <link rel="icon"
+      type="image/png"
+      href="/static/fav.png">
 </head>
 
 <body ng-controller="IndexController">
@@ -63,11 +66,13 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/static/js/jquery.tablesorter.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>window.twttr = (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],
@@ -85,6 +90,9 @@
 
     return t;
 }(document, "script", "twitter-wjs"));</script>
+<script src="/static/js/googlemaps.js"></script>
 <script src="/static/js/index.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/controllers.js"></script>
 </body>
 </html>

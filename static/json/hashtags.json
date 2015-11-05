@@ -1,0 +1,40 @@
+{
+  "hashtags": {
+    "1": {
+      "id": 1,
+      "name": "#austin",
+      "locations": [
+        1,
+        2
+      ],
+      "tweets": [
+        2,
+        3
+      ]
+    },
+    "2": {
+      "id": 2,
+      "name": "#texas",
+      "locations": [
+        1,
+        2
+      ],
+      "tweets": [
+        1,
+        2
+      ]
+    },
+    "3": {
+      "id": 3,
+      "name": "#wedding",
+      "locations": [
+        1,
+        2
+      ],
+      "tweets": [
+        3,
+        4
+      ]
+    }
+  }
+}

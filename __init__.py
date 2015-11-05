@@ -13,15 +13,33 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
-# app.debug = True
+# API Requests
+@app.route("/api/tweets/")
+def tweets():
+    return app.send_static_file('json/tweets.json')
 
-"""
-@app.route("/api/")
-def api():
-    return "API"
-"""
+@app.route("/api/tweet/<int:id>/")
+def tweet(id):
+    return ""
 
-# Funnel all requests to angular
+@app.route("/api/hashtags/")
+def hashtags():
+    return app.send_static_file('json/hashtags.json')
+
+@app.route("/api/hashtag/<int:id>/")
+def hashtag(id):
+    return ""
+
+@app.route("/api/locations/")
+def locations():
+    return app.send_static_file('json/locations.json')
+
+@app.route("/api/location/<int:id>/")
+def location(id):
+    return ""
+
+
+# Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):

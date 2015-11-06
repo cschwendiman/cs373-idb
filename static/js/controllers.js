@@ -5,19 +5,21 @@ angular.module('controllers', [])
     .controller('MainController', function ($scope, Tweet, Hashtag, Location) {
         twttr.ready(function () {
             Tweet.query(function(data) {
-                $scope.$tweets = data.tweets;
-                for (i in $scope.$tweets) {
+                data.length = 6;
+                $scope.$tweets = data;
+                for (var i = 0; i < data.length; i++) {
                 twttr.widgets.createTweet(
-                    $scope.$tweets[i].tweet_id,
+                    $scope.$tweets[i].twitter_tweet_id,
                     document.getElementById('recent-tweets'),
                     {align: 'left'});
             }
             });
             Hashtag.query(function(data) {
-                $scope.$hashtags = data.hashtags;
+                data.length = 10;
+                $scope.$hashtags = data;
             });
             Location.query(function(data) {
-                $scope.$locations = data.locations;
+                $scope.$locations = data;
             });
         });
         $('#jumbo-header').slideDown("slow");
@@ -28,22 +30,30 @@ angular.module('controllers', [])
     })
     .controller('TweetsController', function($scope, Tweet) {
         Tweet.query(function(data) {
-            $scope.$tweets = data.tweets;
-                mapWrapper.addTweets($scope.$tweets);
+            data.length = 20;
+            $scope.$tweets = data;
+            console.log(data);
+            mapWrapper.addTweets($scope.$tweets);
         });
         $('#jumbo-header').slideDown("slow");
     })
-    .controller('TweetController', function ($scope, $routeParams, Tweet) {
+    .controller('TweetController', function ($scope, $routeParams, Tweet, Location) {
         Tweet.get({id: $routeParams.id}, function(data) {
             $scope.$tweet = data;
             if (data) {
-            twttr.ready(function () {
-                twttr.widgets.createTweet(
-                    tweet.twitter_tweet_id,
-                    document.getElementById('tweet-container'),
-                    {align: 'left'});
-            });
-        }
+                twttr.ready(function () {
+                    twttr.widgets.createTweet(
+                        data.twitter_tweet_id,
+                        document.getElementById('tweet-container'),
+                        {align: 'left'});
+                });
+                Location.get({id: data.city_id}, function(city) {
+                    $scope.$tweet.location = city;
+                });
+                Tweet.hashtags({id: data.id}, function(hashtags) {
+                    $scope.$tweet.hashtags = hashtags;
+                });
+            }
         });
         $('#jumbo-header').slideDown("slow");
     })

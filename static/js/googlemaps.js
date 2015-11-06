@@ -60,13 +60,13 @@ var mapWrapper = {
     },
     addTweets: function (tweets) {
         this.clearMarkers();
-        var id;
-        for (id in tweets) {
-            this.addTweet(tweets[id]);
+        for (var i = 0; i < tweets.length; i++) {
+            this.addTweet(tweets[i]);
         }
         this.setBounds();
     },
     addTweet: function (tweet) {
+        console.log(tweet);
         var link = tweet.text + ' <a href="/tweet/' + tweet.id + '">See more details</a>';
         var infowindow = new google.maps.InfoWindow({
             content: link
@@ -75,7 +75,7 @@ var mapWrapper = {
         var marker = new google.maps.Marker({
             position: {lat: tweet.latitude, lng: tweet.longitude},
             map: this.map,
-            title: tweet.name
+            title: "Tweet " + tweet.id
         });
         this.markers.push(marker);
         marker.addListener('click', function () {

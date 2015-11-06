@@ -11,7 +11,7 @@
     <tbody>
     <tr ng-repeat="tweet in $tweets">
         <td>{{tweet.id}}</td>
-        <td>@{{tweet.username}}</td>
+        <td>@{{tweet.user}}</td>
         <td>{{tweet.text}}</td>
         <td>{{tweet.longitude}}, {{tweet.latitude}}</td>
         <td><a class="btn btn-default" href="/tweet/{{tweet.id}}">Details</a></td>

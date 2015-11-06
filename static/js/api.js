@@ -6,20 +6,20 @@ angular.module('api', [])
     .factory('Tweet', function($resource){
         return $resource('/api/tweet/:id/', {}, {
             query: {method: 'GET', params: {}, isArray: true, url: '/api/tweets/'},
-            hashtags: {method: 'GET', isArray:true, url: '/api/hashtagsByTweet/:id/'}
+            hashtags: {method: 'GET', isArray:true, url: '/api/tweet/:id/hashtags/'}
         });
     })
     .factory('Hashtag', function($resource) {
         return $resource('/api/hashtag/:id/', {}, {
             query: {method: 'GET', params: {}, isArray: true, url: '/api/hashtags/'},
-            tweets: {method: 'GET', isArray:true, url: '/api/tweetsByHashtag/:id/'},
-            locations: {method: 'GET', isArray:true, url: '/api/locationsByHashtag/:id/'}
+            tweets: {method: 'GET', isArray:true, url: '/api/hashtag/:id/tweets/'},
+            locations: {method: 'GET', isArray:true, url: '/api/hashtag/:id/cities/'}
         });
     })
     .factory('Location', function($resource) {
         return $resource('/api/location/:id/', {}, {
             query: {method: 'GET', params: {}, isArray: true, url: '/api/locations/'},
-            tweets: {method: 'GET', isArray:true, url: '/api/tweetsByCity/:id/'},
-            hashtags: {method: 'GET', isArray:true, url: '/api/hashtagsByCity/:id/'}
+            tweets: {method: 'GET', isArray:true, url: '/api/location/:id/tweets/'},
+            hashtags: {method: 'GET', isArray:true, url: '/api/location/:id/hashtags/'}
         });
     });

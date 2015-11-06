@@ -1,0 +1,691 @@
+commit 033fd383ed3a05e05730a01d98c868e918f63f6b
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 21:52:15 2015 -0600
+
+    nvm
+
+commit f7f5b15576bfc3c621cd09beb15d257ffc356247
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 21:50:48 2015 -0600
+
+    solving server problem
+
+commit e924294cffbbdf5b21c3d96aee3a322b49ab4d0e
+Merge: 954405e 5558a3c
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 21:43:49 2015 -0600
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 954405e51ff93ca2104b87bdb23e1207b643eac7
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 21:43:33 2015 -0600
+
+    fix up more templates
+
+commit 5558a3c874935da94c393e00d6bf714a2af48d24
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 21:33:58 2015 -0600
+
+    delete tmp
+
+commit cab237cc3044c41d4fccc152614d3329472cd34d
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Nov 5 21:32:36 2015 -0600
+
+    pushing this sh*t -- added coverage3 to our test cases
+
+commit 6a6d8a44428622b15677968c82ca512b1d9cc819
+Merge: 8f50b75 a359be0
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 21:23:32 2015 -0600
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 8f50b755b21b99c88ea4095137c005410216c8f3
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 21:23:17 2015 -0600
+
+    update templates using new db schema
+
+commit a359be0491b740bea065d7df273960387809c768
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 21:14:09 2015 -0600
+
+    stop following .db and __pycache you git stalker
+
+commit d3db2e075c26e87d8d762cf7ef0e8452162ac2bc
+Merge: aebafcc 21dab13
+Author: masteret <masteret@users.noreply.github.com>
+Date:   Thu Nov 5 21:04:11 2015 -0600
+
+    Merge pull request #44 from tweetcity/test
+    
+    Test
+
+commit 21dab133d065d4f63f439bbccaafb1120c6c7a1d
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 21:02:29 2015 -0600
+
+    yo
+
+commit 338dd0a6d93223204bca730322bcd7be932064c1
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 20:49:35 2015 -0600
+
+    aboard again
+
+commit 0ceb7bffbff38f1ca7ced6391d35afd8ab5439a5
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 20:24:41 2015 -0600
+
+    abandon ship
+
+commit b17b7b6633d559a10e95658766b9248893d1cf86
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 20:11:29 2015 -0600
+
+    create a new branch
+
+commit aebafcc2f31e5d5f4fd58e9bbd12c23018b97247
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 19:56:19 2015 -0600
+
+    edit tests.py to stop tearing down the real database
+
+commit f99a546136fd3f67e6f5fd7339e607bc2c020a98
+Author: Kevin Roesner <kroesner@cs.utexas.edu>
+Date:   Thu Nov 5 19:38:47 2015 -0600
+
+    Added working unit tests for relationships in the database.
+
+commit 4092ed80607b970692219eedecad8b8af813b7d7
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Nov 5 19:18:46 2015 -0600
+
+    added more tests -- Kevin go ahead and add yours now
+
+commit c14603fcf862d9e13f18d51ca8e4d5a73553e64e
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 19:13:48 2015 -0600
+
+    resolved conflict
+
+commit 91763249a2c311d234a2895277ea7c712ab88171
+Author: Kevin Roesner <kroesner@cs.utexas.edu>
+Date:   Thu Nov 5 17:27:57 2015 -0600
+
+    Added working unit tests for hashtag/location many-to-many relationship.
+
+commit 9247c547ca49aa180616a3a8f4df29146a382cc1
+Merge: 1636dad 75f069b
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 17:20:27 2015 -0600
+
+    conflict!
+
+commit 1636dadeacbc173644c104382fadb275e8dc042e
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 17:18:50 2015 -0600
+
+    every api calls work except the tweetsbylocation little ****
+
+commit 75f069beb03ad037d03e0d8d3c82db1dbca77e9a
+Merge: 3064275 2c62ac9
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 16:58:14 2015 -0600
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+    
+    Conflicts:
+    	__pycache__/models.cpython-34.pyc
+
+commit 306427591e748125ef2f861033082d3c5ebf4c0e
+Merge: 9291279 29058c1
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 16:55:56 2015 -0600
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+    
+    Conflicts:
+    	__init__.py
+    	__pycache__/models.cpython-34.pyc
+
+commit 2c62ac91cf01a05a6cc960118f766d11fb2e53e9
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Nov 5 16:55:09 2015 -0600
+
+    fixed broken unit tests
+
+commit 92912790cd01dd31d4d035a54e1195b81bbdfdb2
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 16:54:28 2015 -0600
+
+    fix no module models error
+
+commit 29058c160878ab2d752e4bea5193217c97ad2dc9
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 16:50:29 2015 -0600
+
+    resolved conflict
+
+commit a04a2705f417a5e1be5b1d02eeac025a75a582b9
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 16:49:58 2015 -0600
+
+    resolving conflict
+
+commit efc83ef2a4c3684bfaf72c3811a0ef4ceaa2b838
+Author: Kevin Roesner <kroesner@cs.utexas.edu>
+Date:   Thu Nov 5 16:48:51 2015 -0600
+
+    small change
+
+commit 5b92bb05c102dc0618894592cb9fc953421e2400
+Author: Kevin Roesner <kroesner@cs.utexas.edu>
+Date:   Thu Nov 5 16:47:47 2015 -0600
+
+    Made some changes to model.py, such as slightly modifying the name of association lists to be more consistent (specified by the backrefs).
+
+commit efaee2b73974dbf27bd6a294dedf1866100a8b75
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 15:54:55 2015 -0600
+
+    try to hardcode database address
+
+commit 81ebdf434f91b4cbd7562900fc81ee8570dc6e12
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 12:31:29 2015 -0600
+
+    typo in tweets api call
+
+commit 3abff9c85cf4f9647863b0b0659ef9c471eeb0b8
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 12:16:12 2015 -0600
+
+    API now fully communicate with db file
+
+commit 3c34217228dc40ea8fa4d1ddc82718a2115a91b8
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 12:09:37 2015 -0600
+
+    fixed api call getById to use database!
+
+commit 7004974e0efbc3991f4d15b133f5ad99bcaf6f60
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 11:24:07 2015 -0600
+
+    fixed getByID api calls
+
+commit 193a4e3d0672e43edc94ae8c0dc9714ad7c093f8
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Nov 5 11:15:05 2015 -0600
+
+    implement API search by id
+
+commit b6461f1a0dc3912af3c3b45397d37eed93136aa8
+Merge: 0febb65 d54b533
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 09:29:16 2015 -0600
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 0febb65d804a778f88321d5b49dce7ac0fc6e8bf
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Nov 5 09:29:04 2015 -0600
+
+    add architecture diagram for wiki
+
+commit d54b53309e41e95cec70b8e71821402dd3a84d79
+Author: masteret <masteret9432@gmail.com>
+Date:   Thu Nov 5 01:41:47 2015 -0600
+
+    that does it, let's delete the db file everytime before regenerating tables
+
+commit ae6116599d509a3832dfcfc5f92ca0fcbf236949
+Author: masteret <masteret9432@gmail.com>
+Date:   Thu Nov 5 01:23:00 2015 -0600
+
+    enable the code to tear down everything first before adding stuff
+
+commit a01e3081eb77d391ea4438e9d9025751dd1a8034
+Author: masteret <masteret9432@gmail.com>
+Date:   Thu Nov 5 01:14:33 2015 -0600
+
+    finally got a working script to push data
+
+commit 5b3f88b1e8e5a6513e23fe0369a7862a2b02d433
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Nov 4 22:14:38 2015 -0600
+
+    add favicon
+    
+    best I could do, sorry :/
+
+commit df03b67d3320ec7e0dd0335713c49fbf335b4569
+Merge: f965e4e d090bfc
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Nov 4 20:57:38 2015 -0600
+
+    Merge branch 'cassie'
+    
+    Conflicts:
+    	__init__.py
+
+commit d090bfca6c6e7aceb7ef271aa2b7e125a9355795
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Nov 4 20:56:18 2015 -0600
+
+    add api definition to flask, currently serving static json
+
+commit f965e4e89809a674f2948b5355ceb7467d4280a1
+Author: masteret <kaheichan@utexas.edu>
+Date:   Wed Nov 4 20:31:54 2015 -0600
+
+    add check to hashtag
+
+commit bc7a65e66bff0ceebc5bf7060bc9881185563706
+Author: masteret <kaheichan@utexas.edu>
+Date:   Wed Nov 4 20:23:56 2015 -0600
+
+    Revert "redesign add_record.py"
+    
+    This reverts commit 3e8f676a9d0b77a89ea38b69a490f9df8f92f8d6.
+
+commit 3e8f676a9d0b77a89ea38b69a490f9df8f92f8d6
+Author: masteret <kaheichan@utexas.edu>
+Date:   Wed Nov 4 20:22:53 2015 -0600
+
+    redesign add_record.py
+
+commit 3fb44d979af1e2828f00e5ceed024573373b91da
+Author: kchan2 <ka.chan@us.fujitsu.com>
+Date:   Wed Nov 4 19:28:10 2015 -0600
+
+    still working on add_record
+
+commit c56e92a3b0011a6a3f57e706b8527d231a582a75
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Nov 4 19:09:00 2015 -0600
+
+    separate index.js
+
+commit dc131cdf098f669acfe41d623e71c7498a259de7
+Author: kchan2 <ka.chan@us.fujitsu.com>
+Date:   Wed Nov 4 18:53:57 2015 -0600
+
+    removed idb.db
+
+commit b673b439996338525ebdb52c04e4ba92d43e55bf
+Merge: cfd4c86 263d418
+Author: kchan2 <ka.chan@us.fujitsu.com>
+Date:   Wed Nov 4 18:53:02 2015 -0600
+
+    removed idb.db
+
+commit cfd4c8687e0cdfad65a62f62ec8773fc43292a84
+Author: kchan2 <ka.chan@us.fujitsu.com>
+Date:   Wed Nov 4 18:52:13 2015 -0600
+
+    removed the db file
+
+commit 263d4184311eec2af7bd442788dfe31c0509af37
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Nov 4 18:36:18 2015 -0600
+
+    passing all test cases -- about to work on Kevin's association table test cases now
+
+commit cb3a644393491ada0e68ab6d05d3ca4bff85ef75
+Author: kchan2 <ka.chan@us.fujitsu.com>
+Date:   Wed Nov 4 18:11:02 2015 -0600
+
+    modify add_record for datetime object
+
+commit 81bf1b9d0e0efeb344d2508122bdf444ab77afb5
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Nov 4 17:32:37 2015 -0600
+
+    8 out of 12 unit tests passing - updated models.py and added init methods
+
+commit adf8c0de864bd87c853a38a801cbcc8a32f784f3
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Wed Nov 4 17:14:39 2015 -0600
+
+    Began adding unit tests for the association tables.
+
+commit 629c521151682927ab71cae0ac6dbc14fadea1e7
+Author: masteret <masteret9432@gmail.com>
+Date:   Wed Nov 4 00:33:24 2015 -0600
+
+    add code for flask-sqlalchemy to add record to database
+
+commit 0a79f27dcb72fcfbb54f58cde4f4cf8793a12d3b
+Author: masteret <masteret9432@gmail.com>
+Date:   Tue Nov 3 23:45:03 2015 -0600
+
+    correct table name in models.py, ensure flask and sqlalchemy is working correctly
+
+commit a385a6d64a4ebfccb54889ce0acada9b66dd3c99
+Author: Cassie <cassie.schwendiman@gmail.com>
+Date:   Tue Nov 3 21:16:49 2015 -0600
+
+    add local sqlite config
+
+commit ea03652ce2cb3e2a3daf222510c020755b601f31
+Merge: d8ab2df be0c9fc
+Author: Cassie <cassie.schwendiman@gmail.com>
+Date:   Tue Nov 3 21:03:12 2015 -0600
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit d8ab2dfade05d13d8af51392f46d26a53c960144
+Author: Cassie <cassie.schwendiman@gmail.com>
+Date:   Tue Nov 3 21:02:14 2015 -0600
+
+    fix model imports - hopefully integrated with mysql now
+    O
+
+commit be0c9fcda4c00b16f50c1cc8a00fe41d38ec9d39
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Oct 22 21:57:47 2015 -0500
+
+    updated the makefile
+
+commit 56502f3e2f1a54dda27550c55350e7d2210810dd
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Oct 22 21:56:09 2015 -0500
+
+    added makefile
+
+commit 9843f85da2ff5a8f34822f276755b5a9beee14e5
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Thu Oct 22 21:50:20 2015 -0500
+
+    added IDB1.log
+
+commit 5d9df466dc9ccb58548e769f1f48da243f7d5333
+Merge: e376465 efdf081
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:30:52 2015 -0500
+
+    More changes to about.html
+
+commit e376465bcea1d1eb2ec8cd5124378e7330f0adc4
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:27:31 2015 -0500
+
+    More changes to about.html
+
+commit efdf081a34fafb55a8fe57802096f71adc7a8482
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 21:27:07 2015 -0500
+
+    added a link to the Tweet Scraper
+
+commit 7349883b71fdec4e66c3fbf20e4aa8cdb9854e57
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 21:11:49 2015 -0500
+
+    added the data scraper code
+
+commit 4aa0b4f4af969ab9bbe8e7619f8e260a605c7933
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 21:05:45 2015 -0500
+
+    Made a few more small changes to about.html
+
+commit 0d05320cb5b63c1ffe958ce84f74291b3473b3d1
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 20:51:29 2015 -0500
+
+    Added links and statistics to about.html
+
+commit 16b7a67f0dc7a4bcde9547b997a815c95a3b8939
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:59:56 2015 -0500
+
+    fix issue where map was zooming out all the way
+
+commit b1740442116a15759679eecf19812d8c809cfb6d
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:47:30 2015 -0500
+
+    fix spacing on html files, add links to tweets from hashtags and locations
+
+commit cc6b422e92a30bc973f3792654a6201541de4353
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:43:44 2015 -0500
+
+    make images square
+
+commit ba94e538324f556a3840388dfa9a7c82c636c7ab
+Merge: 031c462 abaf076
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:37:40 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 031c4623cce00a7e3ca3c64e52172a45c3659e79
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 19:37:24 2015 -0500
+
+    fill in splash page
+
+commit abaf076f56bc28de3ec59ad3f0acf7149e983529
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 19:09:30 2015 -0500
+
+    clean up the repo
+
+commit 5301369860d86f2ba9a1ba1a7b821176443a2f36
+Author: masteret <kaheichan@utexas.edu>
+Date:   Thu Oct 22 19:07:24 2015 -0500
+
+    generate models.html in pydoc using python2.7
+
+commit 02b2dc2f278d5caa5a3cdc55054473939a0407e7
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 18:51:50 2015 -0500
+
+    ADDED GOOGLE MAPS YAAAAAAAAY
+
+commit e463254c5084596a6bc5d81104770a49b9d415dc
+Merge: 5cde495 ef2487a
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 17:31:27 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 5cde495309aa90da7d375a2ae9f1b4ca9b0ba3df
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 17:30:57 2015 -0500
+
+    Made some modifications to models.py implementation.
+
+commit ef2487a177fe20db72446fa25d0620a74841714a
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 16:47:21 2015 -0500
+
+    adding the apiray doc file
+
+commit 5d65079eba90643c36b45780dc12988a4ee4cd59
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 16:10:07 2015 -0500
+
+    Added docstrings to models.py
+
+commit 7e17db867db9fb936b5c3017899904107c377cbe
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 15:54:24 2015 -0500
+
+    Added more documentation/comments to models.py
+
+commit a26bad1d7b20c7703c28901897da593c4f0dd6f4
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 14:32:06 2015 -0500
+
+    Added about me information for Kevin.
+
+commit 92e614820fdc2526629b8edd23c3da67e7c1d12a
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:57:20 2015 -0500
+
+    Fixed some indentation issues.
+
+commit e5470bc02f55f429544d195874597333b16de9f4
+Merge: 566423d 3ccdd05
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:55:34 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 566423dd67a6e24784756f6c21ae56552f595bee
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:55:04 2015 -0500
+
+    Made a tiny change.
+
+commit 2718a0fc51fec76cfb72fc6f1506644c338e483e
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 13:54:11 2015 -0500
+
+    Made small changes to data model.
+
+commit 3ccdd05c3488b66d47739204fcb297ba7b72eb93
+Author: masteret <masteret@users.noreply.github.com>
+Date:   Thu Oct 22 13:45:21 2015 -0500
+
+    Update about.html
+
+commit 443d76faf8701ccd88e1b084e7826cbfefc18a72
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 12:56:22 2015 -0500
+
+    accidentally didn't commit changes that fix bio <dls>
+
+commit ad2d0fe090d922f15a13355962a883895e989855
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 12:47:40 2015 -0500
+
+    Removed extraneous files that were accidentally still there.
+
+commit 4cd954a63ddc0bd096cad77cba56a292f4619a4d
+Author: Kevin Roesner <roesnerk@gmail.com>
+Date:   Thu Oct 22 12:45:23 2015 -0500
+
+    Made changes to UML and models.py. Added association table to models.py for many-to-many relationships, among a few other things.
+
+commit 574b81179f3e16c6216af9e0256e793da8f17565
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:15:50 2015 -0500
+
+    including Nick's last name
+
+commit ac07d3df6f84f54dfd1de3077e3b060de8c1b1ab
+Author: masteret <masteret@users.noreply.github.com>
+Date:   Thu Oct 22 12:09:35 2015 -0500
+
+    added Ka Hei's responsibilities
+
+commit 689e41b11a2071a60e3399bb58992c727a506a68
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:07:45 2015 -0500
+
+    fixing about me html
+
+commit f918e0ccd123f54e1c9f5c448021b25f4efb8375
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Thu Oct 22 12:05:20 2015 -0500
+
+    Adding Nick's about me
+
+commit 9a10bbd9be1d143fea529ad6fd3d3b52ef122c13
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 09:47:39 2015 -0500
+
+    fixes #20 add specificity for about page <dl>s
+
+commit 1ff69ae22973f6baf9176900d7e50b8cc64002ee
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 01:04:51 2015 -0500
+
+    add Ka Hei, Fahad, and Cassie to the about page
+
+commit cdc01a2d170e7da088d58c12825dcfbfde0b3f38
+Merge: 3baa2c6 10fda9c
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 00:20:22 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+    
+    Conflicts:
+    	__init__.py
+    	templates/index.html
+
+commit 3baa2c6c9901fe77ff5328c0caffd0374ab23cb4
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Thu Oct 22 00:18:49 2015 -0500
+
+    transition all pages to angular
+
+commit 10fda9c039485f14253464513af7776ea7cd5177
+Author: masteret <masteret9432@gmail.com>
+Date:   Thu Oct 22 00:09:41 2015 -0500
+
+    static data they say...removing my flask template code
+
+commit e8938f93b2a5fd9df13203a3f633c3d00790aa85
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 20:43:42 2015 -0500
+
+    added all the test cases -- renamed City to Location
+
+commit 4f1f709ced6ae2fdfdb21d09274a6a592dfad298
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:31:47 2015 -0500
+
+    fix import issue with Flask
+
+commit 009e10475ade0a0bad27ff10bdcf748e9b506946
+Merge: 3a92d7c c972aa8
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:11:22 2015 -0500
+
+    Merge branch 'master' of github.com:tweetcity/cs373-idb
+
+commit 3a92d7c3578b2563f8b779e71b1b6df2fbe1425a
+Author: Cassie Schwendiman <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 15:11:06 2015 -0500
+
+    add Ka Hei's template
+
+commit c972aa80a184afecd35c5a7e20acb983cfa688a9
+Merge: 01282da f7f9500
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 14:06:28 2015 -0500
+
+    Merge branch 'master' of https://github.com/tweetcity/cs373-idb
+
+commit 01282daf1d7e3aee4d71a50954208c96e111e6cd
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Wed Oct 21 14:04:53 2015 -0500
+
+    added the relationships and constructors for all models -- also defined the db object
+
+commit f7f9500b94b2cd4f5a44f7ab828bf7ecc4430435
+Author: nksprzak <nksprzak@gmail.com>
+Date:   Wed Oct 21 12:41:05 2015 -0500
+
+    adding uml
+
+commit 84d1bab77d0ecc14cf8fae3b23050954584dba70
+Author: Fahad Khokhar <fkhokhar@utexas.edu>
+Date:   Tue Oct 20 23:54:40 2015 -0500
+
+    added tests.py and a missing parenthesis in models.py
+
+commit 62b221cb1955d7ab0be8414bc4b399974a860c8d
+Author: Cassie <cassie.schwendiman@gmail.com>
+Date:   Wed Oct 21 04:08:26 2015 +0000
+
+    Initial commit

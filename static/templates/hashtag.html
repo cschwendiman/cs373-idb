@@ -2,23 +2,23 @@
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>ID</dt>
-            <dd>{{hashtag.id}}</dd>
-            <dt>Name</dt>
-            <dd>{{hashtag.name}}</dd>
+            <dd>{{$hashtag.id}}</dd>
+            <dt>Text</dt>
+            <dd>#{{$hashtag.text}}</dd>
             <dt>Locations</dt>
             <dd>
                 <ul class="list-unstyled">
-                    <li ng-repeat="location in hashtag.locations">
-                        <a href="/location/{{location}}">{{$locations[location].city}},
-                            {{$locations[location].state}}</a>
+                    <li ng-repeat="location in $hashtag.locations">
+                        <a href="/location/{{location.id}}">{{location.city}},
+                            {{location.state}}</a>
                     </li>
                 </ul>
             </dd>
             <dt>Tweets</dt>
             <dd>
                 <ul class="list-unstyled">
-                    <li ng-repeat="tweet in hashtag.tweets">
-                        <a href="/tweet/{{tweet}}">{{$tweets[tweet].text}}</a>
+                    <li ng-repeat="tweet in $hashtag.tweets">
+                        <a href="/tweet/{{tweet.id}}">{{tweet.text}}</a>
                     </li>
                 </ul>
             </dd>

@@ -45,14 +45,7 @@ hashtag_location_table
 
 """
 
-app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
-app.config['SQLALCHEMY_BINDS'] = {
-    'turtle': 'sqlite:///idb.db',
-    'rabbit': 'sqlite:///test_idb.db'
-}
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 # Association table for many-to-many relationship between Hashtag and Tweet
 hashtag_tweet_table = Table('hashtag_tweet', db.Model.metadata,

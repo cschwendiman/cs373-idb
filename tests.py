@@ -22,7 +22,7 @@ class testModels(TestCase):
 
     #setup the database
     def setUp(self):
-        app = Flask(__name__, static_url_path='/static')
+        app = Flask("tests", static_url_path='/static')
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_idb.db'
         db.init_app(app)
@@ -224,6 +224,12 @@ class testModels(TestCase):
         assert(db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets[0] == new_tweet)
         assert(len(db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets) == numTweets + 1)
 
+        tweets = Tweet.query.all()
+        hashtags = Hashtag.query.all()
+
+        assert(len(tweets) == numTweets + 1)
+        assert(len(hashtags) == numHashtags + 1)
+
     def test_hashtag_tweet_readability(self):
         new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
         new_hashtag = Hashtag(text = "test", url = "www.foo.com")
@@ -246,9 +252,19 @@ class testModels(TestCase):
 
         tweet_hashtags = db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtags
 
+        hashtags = Hashtag.query.all()
+        tweets = Tweet.query.all()
+
         for x in tweet_hashtags:
             if(x.id == new_hashtag.id):
                 found = True
+                assert(hashtags[0].text == "test")
+                assert(hashtags[0].url == "www.foo.com")
+                assert(tweets[0].text == "test")
+                assert(tweets[0].user == "testUser")
+                assert(tweets[0].url == "https://twitter.com/testUser/status/661196539696513024")
+                assert(tweets[0].longitude == 30.30)
+                assert(tweets[0].latitude == -127.27)
 
         assert(found)
 

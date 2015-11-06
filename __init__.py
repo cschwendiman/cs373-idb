@@ -14,6 +14,7 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 db.init_app(app)
+db.app = app
 
 # API Requests
 @app.route("/api/tweets/")

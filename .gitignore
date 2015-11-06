@@ -1,3 +1,5 @@
 .idea/*
 venv/*
 idb.db
+test_idb.db
+__pycache__/*

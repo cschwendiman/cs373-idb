@@ -25,7 +25,7 @@ Location:
     city
     state
     country
-	
+    
 ---------------
 Relationships
 between classes
@@ -34,7 +34,7 @@ between classes
 Tweet - Hashtag : many-to-many
 Location - Hashtag : many-to-many
 Location - Tweet : one-to-many (one location to many tweets)
-	
+    
 --------------------------
 Association tables for
 many-to-many relationships
@@ -45,10 +45,7 @@ hashtag_location_table
 
 """
 
-app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 # Association table for many-to-many relationship between Hashtag and Tweet
 hashtag_tweet_table = Table('hashtag_tweet', db.Model.metadata,
@@ -66,17 +63,17 @@ class Tweet(db.Model):
     """
     Tweet class.
     Attributes: id, twitter_tweet_id, text, user, url, date_time, latitude, longitude, location_id.
-	
+    
     twitter_tweet_id is the id given by Twitter for a tweet. id is the id for the tweet in our datadb.Model.
     location_id is the id (foreign key) of the Location where the tweet was tweeted. 
-	
+    
     Tweet has a many-to-many relationship with Hashtag.
     Also has a one-to-many relationship with Location (one Location to many Tweets).
-	
+    
     The relationship with Location includes a backref so that Locations have access to tweets
     associated with them.
     """
-	
+    
     __tablename__ = 'tweet'
     id = Column(Integer, primary_key=True)
     # Check length of this field
@@ -87,7 +84,7 @@ class Tweet(db.Model):
     date_time = Column(DateTime)
     longitude = Column(Float)
     latitude = Column(Float)
-	
+    
     # foreign key for one-to-many relationship with Location.
     # backref so locations can access tweets associated with them.
     city_id = Column(Integer, ForeignKey('city.id'))
@@ -110,10 +107,10 @@ class Hashtag(db.Model):
     """
     Hashtag class.
     Attributes: id, text, url.
-	
+    
     Hashtag has a many-to-many relationship with both Tweet and Location.
     """
-	
+    
     __tablename__ = 'hashtag'
     id = Column(Integer, primary_key=True)
     text = Column(String(140), unique=True)
@@ -133,11 +130,11 @@ class Location(db.Model):
     """
     Location class.
     Attributes: id, city, state, country.
-	
+    
     Location has a many-to-many relationship with Hashtag.
     Also has a one-to-many relationship with Tweet (one Location to many Tweets).
     """
-	
+    
     __tablename__ = 'city'
     id = Column(Integer, primary_key=True)
     city = Column(String(80))

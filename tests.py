@@ -22,8 +22,12 @@ class testModels(TestCase):
 
     #setup the database
     def setUp(self):
+        app = Flask(__name__, static_url_path='/static')
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_idb.db'
+        db.init_app(app)
+        db.app = app
         db.configure_mappers()
-
         db.create_all()
 
     def tearDown(self):

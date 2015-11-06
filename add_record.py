@@ -12,6 +12,11 @@ from sqlalchemy import exists
 # db.session.query(Hashtag).delete()
 # db.session.query(Location).delete()
 
+app = Flask(__name__, static_url_path='/static')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
+db.init_app(app)
+db.app = app
 db.configure_mappers()
 db.create_all()
 

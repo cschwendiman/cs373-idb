@@ -18,21 +18,21 @@ var mapWrapper = {
     },
     addHashtags: function (tweets) {
         this.clearMarkers();
-        for (tweet_id in tweets) {
-            this.addHashtag(tweets[tweet_id]);
+        for (var i in tweets) {
+            this.addHashtag(tweets[i]);
         }
         this.setBounds();
     },
     addHashtag: function (tweet) {
         var links = "";
-        for (var i = 0; i < tweet.full_hashtags.length; i++) {
-            links += ' <a href="/hashtag/' + tweet.full_hashtags[i].id + '">' + tweet.full_hashtags[i].name + '</a>';
+        for (var i = 0; i < tweet.hashtags.length; i++) {
+            links += ' <a href="/hashtag/' + tweet.hashtags[i].id + '">#' + tweet.hashtags[i].text + '</a>';
         }
         var infowindow = new google.maps.InfoWindow({
             content: links
         });
         var marker = new google.maps.Marker({
-            position: {lat: tweet.latitude, lng: tweet.longitude},
+            position: {lat: tweet.longitude, lng: tweet.latitude},
             map: this.map,
             title: "Hashtags"
         });
@@ -60,20 +60,21 @@ var mapWrapper = {
     },
     addTweets: function (tweets) {
         this.clearMarkers();
+        console.log("hi");
+        console.log(tweets);
         for (var i = 0; i < tweets.length; i++) {
             this.addTweet(tweets[i]);
         }
         this.setBounds();
     },
     addTweet: function (tweet) {
-        console.log(tweet);
         var link = tweet.text + ' <a href="/tweet/' + tweet.id + '">See more details</a>';
         var infowindow = new google.maps.InfoWindow({
             content: link
         });
 
         var marker = new google.maps.Marker({
-            position: {lat: tweet.latitude, lng: tweet.longitude},
+            position: {lat: tweet.longitude, lng: tweet.latitude},
             map: this.map,
             title: "Tweet " + tweet.id
         });

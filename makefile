@@ -2,7 +2,7 @@ FILES :=                     \
     .gitignore               \
     makefile                 \
     apiary.apib              \
-    IDB1.log                 \
+    IDB2.log                 \
     models.py                \
     model.html               \
     tests.py                 \
@@ -31,3 +31,17 @@ clean:
 	rm -f  .coverage
 	rm -f  *.pyc
 	rm -rf __pycache__
+	rm -f *.tmp
+
+test: tweetcity-test.tmp
+
+model.html: models.py
+	pydoc -w models
+
+IDB2.log:
+	git log > IDB2.log
+
+tweetcity-test.tmp: tests.py
+	coverage3 run    --branch tests.py >  tweetcity-test.tmp 2>&1
+	coverage3 report -m                      >> tweetcity-test.tmp
+	cat tweetcity-test.tmp

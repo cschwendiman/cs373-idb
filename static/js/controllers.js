@@ -29,6 +29,9 @@ angular.module('controllers', [])
         $('#jumbo-header').slideDown("slow");
     })
     .controller('TweetController', function ($scope, tweet, hashtags, Location) {
+        mapWrapper.clearMarkers();
+        mapWrapper.addTweet(tweet);
+        mapWrapper.setBounds();
         $scope.$tweet = tweet;
         twttr.ready(function () {
             twttr.widgets.createTweet(
@@ -68,8 +71,6 @@ angular.module('controllers', [])
             promises.push(future_tweets.$promise);
         }
         $q.all(promises).then(function() {
-            console.log("promises");
-            console.log(tweets);
             mapWrapper.addHashtags(tweets);
         })
         $('#jumbo-header').slideDown("slow");

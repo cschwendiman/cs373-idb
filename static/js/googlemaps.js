@@ -60,8 +60,6 @@ var mapWrapper = {
     },
     addTweets: function (tweets) {
         this.clearMarkers();
-        console.log("hi");
-        console.log(tweets);
         for (var i = 0; i < tweets.length; i++) {
             this.addTweet(tweets[i]);
         }

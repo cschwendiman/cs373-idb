@@ -20,8 +20,8 @@ db.create_all()
 # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#building-a-many-to-many-relationship
 
 cities = [Location("Austin", "Texas", "United States"), Location("San Francisco", "California", "United States"), Location("New York City", "New York", "United States")]
-for city in cities:
-    db.session.add(city)
+for index in range(len(cities)):
+    db.session.add(cities[index])
 
 hashed = []
 
@@ -30,7 +30,7 @@ for index, path in enumerate(["../cs373-tweetCity/new_AUX.json", "../cs373-tweet
     for tweet_id, info in tweets.items():
         data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
         datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
-        info["geo"]["coordinates"][0], info["geo"]["coordinates"][1], info["location_id"])
+        info["geo"]["coordinates"][0], info["geo"]["coordinates"][1], index+1)
         data.location = cities[index]
         db.session.add(data)
         cur_tweet = data    

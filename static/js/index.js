@@ -24,7 +24,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers'])
                     hashtags: function (Hashtag) {return Hashtag.query().$promise;}
                 }
             })
-            .when('/hashtag/:id', {
+            .when('/hashtags/:id', {
                 title: "Hashtag",
                 templateUrl: '/static/templates/hashtag.html',
                 controller: 'HashtagController',
@@ -42,7 +42,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers'])
                     locations: function (Location) {return Location.query().$promise;}
                 }
             })
-            .when('/location/:id', {
+            .when('/locations/:id', {
                 title: "Location",
                 templateUrl: '/static/templates/location.html',
                 controller: 'LocationController',
@@ -60,7 +60,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers'])
                     tweets: function (Tweet) {return Tweet.query().$promise;}
                 }
             })
-            .when('/tweet/:id', {
+            .when('/tweets/:id', {
                 title: "Tweet",
                 templateUrl: '/static/templates/tweet.html',
                 controller: 'TweetController',

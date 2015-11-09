@@ -9,7 +9,7 @@
             <dd>
                 <ul class="list-unstyled">
                     <li ng-repeat="location in $hashtag.locations">
-                        <a href="/location/{{location.id}}">{{location.city}},
+                        <a href="/locations/{{location.id}}">{{location.city}},
                             {{location.state}}</a>
                     </li>
                 </ul>
@@ -18,7 +18,7 @@
             <dd>
                 <ul class="list-unstyled">
                     <li ng-repeat="tweet in $hashtag.tweets">
-                        <a href="/tweet/{{tweet.id}}">{{tweet.text}}</a>
+                        <a href="/tweets/{{tweet.id}}">{{tweet.text}}</a>
                     </li>
                 </ul>
             </dd>

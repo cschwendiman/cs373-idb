@@ -28,7 +28,7 @@ def tweets():
         json_data.append(data)
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route("/api/tweet/<int:id>/")
+@app.route("/api/tweets/<int:id>/")
 def tweet(id):
     data = db.session.query(Tweet).filter_by(id=id).first()
     data = data.__dict__
@@ -36,7 +36,7 @@ def tweet(id):
     data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route("/api/tweet/<int:id>/<string:resource>/")
+@app.route("/api/tweets/<int:id>/<string:resource>/")
 def tweet_subresources(id, resource):
     tweet = db.session.query(Tweet).filter_by(id=id).first()
     raw_data = getattr(tweet, resource)
@@ -57,14 +57,14 @@ def hashtags():
         json_data.append(data)
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route("/api/hashtag/<int:id>/")
+@app.route("/api/hashtags/<int:id>/")
 def hashtag(id):
     data = db.session.query(Hashtag).filter_by(id=id).first()
     data = data.__dict__
     del data['_sa_instance_state']
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route("/api/hashtag/<int:id>/<string:resource>/")
+@app.route("/api/hashtags/<int:id>/<string:resource>/")
 def hashtag_subresources(id, resource):
     hashtag = db.session.query(Hashtag).filter_by(id=id).first()
     raw_data = getattr(hashtag, resource)
@@ -87,7 +87,7 @@ def locations():
         json_data.append(data)
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route("/api/location/<int:id>/")
+@app.route("/api/locations/<int:id>/")
 def location(id):
     data = db.session.query(Location).filter_by(id=id).first()
     data = data.__dict__
@@ -95,7 +95,7 @@ def location(id):
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 
-@app.route("/api/location/<int:id>/<string:resource>/")
+@app.route("/api/locations/<int:id>/<string:resource>/")
 def location_subresources(id, resource):
     location = db.session.query(Location).filter_by(id=id).first()
     raw_data = getattr(location, resource)

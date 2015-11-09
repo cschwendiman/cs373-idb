@@ -26,7 +26,7 @@ var mapWrapper = {
     addHashtag: function (tweet) {
         var links = "";
         for (var i = 0; i < tweet.hashtags.length; i++) {
-            links += ' <a href="/hashtag/' + tweet.hashtags[i].id + '">#' + tweet.hashtags[i].text + '</a>';
+            links += ' <a href="/hashtags/' + tweet.hashtags[i].id + '">#' + tweet.hashtags[i].text + '</a>';
         }
         var infowindow = new google.maps.InfoWindow({
             content: links
@@ -42,7 +42,7 @@ var mapWrapper = {
         });
     },
     addLocation: function (location, coords) {
-        var link = location.city + ', ' + location.state + ' <a href="/location/' + location.id + '">See more details</a>';
+        var link = location.city + ', ' + location.state + ' <a href="/locations/' + location.id + '">See more details</a>';
         var infowindow = new google.maps.InfoWindow({
             content: link
         });
@@ -66,7 +66,7 @@ var mapWrapper = {
         this.setBounds();
     },
     addTweet: function (tweet) {
-        var link = tweet.text + ' <a href="/tweet/' + tweet.id + '">See more details</a>';
+        var link = tweet.text + ' <a href="/tweets/' + tweet.id + '">See more details</a>';
         var infowindow = new google.maps.InfoWindow({
             content: link
         });

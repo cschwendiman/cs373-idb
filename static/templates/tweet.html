@@ -10,13 +10,13 @@
             <dt>Coordinates</dt>
             <dd>{{$tweet.longitude}}, {{$tweet.latitude}}</dd>
             <dt>Location</dt>
-            <dd><a href="/location/$tweet.location.id}}">{{$tweet.location.city}},
+            <dd><a href="/locations/$tweet.location.id}}">{{$tweet.location.city}},
                 {{$tweet.location.state}}</a></dd>
             <dt>Hashtags</dt>
             <dd>
                 <ul class="list-unstyled">
                     <li ng-repeat="hashtag in $tweet.hashtags">
-                        <a href="/hashtag/{{hashtag.id}}">#{{hashtag.text}}</a>
+                        <a href="/hashtags/{{hashtag.id}}">#{{hashtag.text}}</a>
                     </li>
                 </ul>
             </dd>

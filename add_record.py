@@ -35,7 +35,7 @@ for index, path in enumerate(["../cs373-tweetCity/new_AUX.json", "../cs373-tweet
     for tweet_id, info in tweets.items():
         data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
         datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
-        info["geo"]["coordinates"][0], info["geo"]["coordinates"][1], index+1)
+        info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], index+1)
         data.location = cities[index]
         db.session.add(data)
         cur_tweet = data    

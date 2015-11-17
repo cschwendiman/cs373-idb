@@ -28,24 +28,26 @@ cities = [Location("Austin", "Texas", "United States"), Location("San Francisco"
 for index in range(len(cities)):
     db.session.add(cities[index])
 
-hashed = []
+hashed = {}
 
 for index, path in enumerate(["../cs373-tweetCity/new_AUX.json", "../cs373-tweetCity/new_SF.json", "../cs373-tweetCity/new_NYC.json"]):
     tweets = json.load(open(path))
     for tweet_id, info in tweets.items():
         data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
         datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
-        info["geo"]["coordinates"][0], info["geo"]["coordinates"][1], index+1)
+        info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], index+1)
         data.location = cities[index]
         db.session.add(data)
         cur_tweet = data    
 
         for hashy in info["hashtags"]:
             if hashy not in hashed:
-                hashed.append(hashy)
                 data = Hashtag(hashy, "https://twitter.com/hashtag/"+hashy)
-                data.tweets.append(cur_tweet)
-                db.session.add(data)
+                hashed[hashy] = data
                 cities[index].hashtags.append(data)
+            else:
+                data = hashed[hashy]
+            data.tweets.append(cur_tweet)
+            db.session.add(data)
 
 db.session.commit()

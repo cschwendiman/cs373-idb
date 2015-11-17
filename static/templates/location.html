@@ -13,7 +13,7 @@
             <dd>
                 <ul class="list-unstyled">
                     <li ng-repeat="hashtag in $location.hashtags">
-                        <a href="/hashtag/{{hashtag.id}}">#{{hashtag.text}}</a>
+                        <a href="/hashtags/{{hashtag.id}}">#{{hashtag.text}}</a>
                     </li>
                 </ul>
             </dd>
@@ -21,7 +21,7 @@
             <dd>
                 <ul class="list-unstyled">
                     <li ng-repeat="tweet in $location.tweets">
-                        <a href="/tweet/{{tweet.id}}">{{tweet.text}}</a>
+                        <a href="/tweets/{{tweet.id}}">{{tweet.text}}</a>
                     </li>
                 </ul>
             </dd>

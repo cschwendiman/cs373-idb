@@ -75,6 +75,8 @@ class Tweet(db.Model):
     """
     
     __tablename__ = 'tweet'
+    __searchable__ = ['text']
+
     id = Column(Integer, primary_key=True)
     # Check length of this field
     twitter_tweet_id = Column(String(50))
@@ -112,6 +114,8 @@ class Hashtag(db.Model):
     """
     
     __tablename__ = 'hashtag'
+    __searchable__ = ['text']
+
     id = Column(Integer, primary_key=True)
     text = Column(String(140), unique=True)
     url = Column(String(80), unique=True)
@@ -136,6 +140,7 @@ class Location(db.Model):
     """
     
     __tablename__ = 'city'
+    __searchable__ = ['city']
     id = Column(Integer, primary_key=True)
     city = Column(String(80))
     state = Column(String(80))

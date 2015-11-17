@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+import flask.ext.whooshalchemy
 from models import Tweet, Hashtag, Location, db
 
 import time

@@ -50,6 +50,8 @@ for index, path in enumerate(["../cs373-tweetCity/new_AUX.json", "../cs373-tweet
                 cities[index].hashtags.append(data)
             else:
                 data = hashed[hashy]
+                if data not in cities[index].hashtags:
+                    cities[index].hashtags.append(data)
             data.tweets.append(cur_tweet)
             db.session.add(data)
 

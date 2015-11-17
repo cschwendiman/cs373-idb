@@ -23,7 +23,7 @@ db.app = app
 @app.route("/api/tweets/")
 @app.route("/api/tweets/pages/<int:page>/")
 def tweets(page=1):
-    raw_data = Tweet.query.paginate(page, 20, False).items
+    raw_data = Tweet.query.paginate(page, 50, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__
@@ -54,7 +54,7 @@ def tweet_subresources(id, resource):
 @app.route("/api/hashtags/")
 @app.route("/api/hashtags/pages/<int:page>/")
 def hashtags(page=1):
-    raw_data = Hashtag.query.paginate(page, 20, False).items
+    raw_data = Hashtag.query.paginate(page, 50, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__
@@ -106,7 +106,7 @@ def hashtag_subresources(id, resource):
 @app.route("/api/locations/")
 @app.route("/api/locations/pages/<int:page>/")
 def locations(page=1):
-    raw_data = Location.query.paginate(page, 20, False).items
+    raw_data = Location.query.paginate(page, 50, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__

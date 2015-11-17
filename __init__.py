@@ -21,8 +21,9 @@ db.app = app
 
 # API Requests
 @app.route("/api/tweets/")
-def tweets():
-    raw_data = db.session.query(Tweet).all()
+@app.route("/api/tweets/pages/<int:page>/")
+def tweets(page=1):
+    raw_data = Tweet.query.paginate(page, 20, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__
@@ -51,8 +52,9 @@ def tweet_subresources(id, resource):
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/")
-def hashtags():
-    raw_data = db.session.query(Hashtag).all()
+@app.route("/api/hashtags/pages/<int:page>/")
+def hashtags(page=1):
+    raw_data = Hashtag.query.paginate(page, 20, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__
@@ -102,8 +104,9 @@ def hashtag_subresources(id, resource):
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/locations/")
-def locations():
-    raw_data = db.session.query(Location).all()
+@app.route("/api/locations/pages/<int:page>/")
+def locations(page=1):
+    raw_data = Location.query.paginate(page, 20, False).items
     json_data = []
     for data in raw_data:
         data = data.__dict__

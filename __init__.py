@@ -14,6 +14,8 @@ if os.environ.get('DATABASE_URL') is None:
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
+app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///' + os.path.join(basedir, 'idb.db') +
+                               '?check_same_thread=False')
 whooshalchemy.whoosh_index(app, Tweet)
 whooshalchemy.whoosh_index(app, Hashtag)
 db.init_app(app)

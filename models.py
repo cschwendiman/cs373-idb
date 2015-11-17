@@ -140,7 +140,6 @@ class Location(db.Model):
     """
     
     __tablename__ = 'city'
-    __searchable__ = ['city']
     id = Column(Integer, primary_key=True)
     city = Column(String(80))
     state = Column(String(80))

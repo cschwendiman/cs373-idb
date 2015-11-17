@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-import flask.ext.whooshalchemy
+import flask.ext.whooshalchemy as whooshalchemy
 from models import Tweet, Hashtag, Location, db
 
 import time
@@ -17,6 +17,8 @@ app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
 db.init_app(app)
+whooshalchemy.whoosh_index(app, Tweet)
+whooshalchemy.whoosh_index(app, Hashtag)
 db.app = app
 db.configure_mappers()
 db.create_all()

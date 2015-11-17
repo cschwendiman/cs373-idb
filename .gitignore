@@ -3,3 +3,4 @@ venv/*
 idb.db
 test_idb.db
 __pycache__/*
+whoosh_index/*

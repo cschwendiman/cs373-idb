@@ -2,6 +2,7 @@ from flask import Flask
 import json
 import os
 from models import Tweet, Hashtag, Location, db
+import flask.ext.whooshalchemy as whooshalchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
@@ -13,6 +14,8 @@ if os.environ.get('DATABASE_URL') is None:
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
+whooshalchemy.whoosh_index(app, Tweet)
+whooshalchemy.whoosh_index(app, Hashtag)
 db.init_app(app)
 db.app = app
 
@@ -63,6 +66,27 @@ def hashtag(id):
     data = data.__dict__
     del data['_sa_instance_state']
     return json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/tweets/search/<string:search_query>/")
+def search_tweet(search_query):
+    raw_data = Tweet.query.whoosh_search(search_query, or_=True)
+    json_data = []
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+        json_data.append(data)
+    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/hashtags/search/<string:search_query>/")
+def search_hashtag(search_query):
+    raw_data = Hashtag.query.whoosh_search(search_query, or_=True)
+    json_data = []
+    for data in raw_data:
+        data = data.__dict__
+        del data['_sa_instance_state']
+        json_data.append(data)
+    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/<int:id>/<string:resource>/")
 def hashtag_subresources(id, resource):

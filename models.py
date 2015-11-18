@@ -155,3 +155,15 @@ class Location(db.Model):
 
     def __repr__(self):
         return '<City %d>' % self.id
+
+
+def raw_data_to_json(*raw_data_sets):
+    json_data = []
+    for raw_data in raw_data_sets:
+        for data in raw_data:
+            data = data.__dict__
+            del data['_sa_instance_state']
+            if ('date_time' in data):
+                data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+            json_data.append(data)
+    return json_data

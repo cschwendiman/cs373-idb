@@ -74,7 +74,6 @@ class Tweet(db.Model):
     """
     
     __tablename__ = 'tweet'
-    __searchable__ = ['text']
 
     id = Column(Integer, primary_key=True)
     # Check length of this field
@@ -119,7 +118,6 @@ class Hashtag(db.Model):
     """
     
     __tablename__ = 'hashtag'
-    __searchable__ = ['text']
 
     id = Column(Integer, primary_key=True)
     text = Column(String(140), unique=True)

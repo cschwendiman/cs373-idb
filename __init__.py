@@ -97,6 +97,15 @@ def location_subresources(id, resource):
     json_data = raw_to_json(raw_data)
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
+@app.route("/api/search/<string:search_query>/")
+def search(search_query):
+    search_query_strings = search_query.split("&")
+    json_data = {
+        "tweets" : raw_to_json(Tweet.search(search_query_strings)),
+        "hashtags" : raw_to_json(Hashtag.search(search_query_strings))
+    }
+    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
 # Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

@@ -2,7 +2,6 @@ from flask import Flask
 import json
 import os
 from models import Tweet, Hashtag, Location, db
-from sqlalchemy import or_
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
@@ -43,14 +42,8 @@ def tweet_subresources(id, resource):
 
 @app.route("/api/tweets/search/<string:search_query>/")
 def search_tweets(search_query):
-    search_query_split = search_query.split("&")
-    and_queries = (Tweet.text.like("%{:s}%".format(query)) for query in search_query_split)
-    or_queries = (Tweet.text.like("%{:s}%".format(query)) for query in search_query_split)
-    and_raw_data = Tweet.query.filter(*and_queries)
-    or_raw_data = Tweet.query.filter(or_(*or_queries))
-    json_data = raw_to_json(and_raw_data, or_raw_data)
-    result = [json_data]
-    return json.dumps(result, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    json_data = raw_to_json(Tweet.search(search_query.split("&")))
+    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/hashtags/")
 @app.route("/api/hashtags/pages/<int:page>/")
@@ -75,14 +68,8 @@ def hashtag_subresources(id, resource):
 
 @app.route("/api/hashtags/search/<string:search_query>/")
 def search_hashtags(search_query):
-    search_query_split = search_query.split("&")
-    and_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in search_query_split)
-    or_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in search_query_split)
-    and_raw_data = Hashtag.query.filter(*and_queries)
-    or_raw_data = Hashtag.query.filter(or_(*or_queries))
-    json_data = raw_to_json(and_raw_data, or_raw_data)
-    result = [json_data]
-    return json.dumps(result, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    json_data = raw_to_json(Hashtag.search(search_query.split("&")))
+    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 @app.route("/api/locations/")
 @app.route("/api/locations/pages/<int:page>/")

@@ -1,6 +1,5 @@
-from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, String
+from sqlalchemy import Table, Column, Integer, Float, DateTime, ForeignKey, String, or_
 from sqlalchemy.orm import relationship, backref
 
 """
@@ -104,7 +103,13 @@ class Tweet(db.Model):
 
     def __repr__(self):
         return '<Tweet %d>' % self.id
-        
+
+    @staticmethod
+    def search(query_strings):
+        and_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
+        or_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
+        return Tweet.query.filter(*and_queries).union(Tweet.query.filter(or_(*or_queries)))
+
 class Hashtag(db.Model):
     """
     Hashtag class.
@@ -128,6 +133,12 @@ class Hashtag(db.Model):
 
     def __repr__(self):
         return '<Hashtag %d>' % self.id
+
+    @staticmethod
+    def search(query_strings):
+        and_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in query_strings)
+        or_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in query_strings)
+        return Hashtag.query.filter(*and_queries).union(Hashtag.query.filter(or_(*or_queries)))
 
 
 class Location(db.Model):

@@ -535,11 +535,33 @@ class testModels(TestCase):
         data = requests.get("http://tweetcity.me/api/tweets/5")
         assert(data.status_code == 200)
         data = data.json()
-        assert(len(data) > 0)
+        assert(len(data) == 9)
         assert(data["city_id"] == 1)
         assert(data["date_time"] == "2015-11-02 21:58:54")
         assert(data["id"] == 5)
         assert(data["text"] == "See our latest #CedarPark, TX #job and click to apply: Branch Service Leader (Cedar Park) - https://t.co/aOzw2o6kSK #regions #regionsbank")
+
+    def test_hashtags_api_1(self):
+        data = requests.get("http://tweetcity.me/api/hashtags")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) > 0)
+        assert(data[0]["id"] == 1)
+        assert(data[0]["text"] == "Austin")
+        assert(data[0]["url"] == "https://twitter.com/hashtag/Austin")
+
+        assert(data[4]["id"] == 5)
+        assert(data[4]["text"] == "Hiring")
+        assert(data[4]["url"] == "https://twitter.com/hashtag/Hiring")
+
+    def test_hashtags_api_2(self):
+        data = requests.get("http://tweetcity.me/api/hashtags/5")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) == 3)
+        assert(data["id"] == 5)
+        assert(data["text"] == "Hiring")
+        assert(data["url"] == "https://twitter.com/hashtag/Hiring")
 
 if __name__ == "__main__":
     main()

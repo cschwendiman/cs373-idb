@@ -14,6 +14,8 @@ import threading
 from flask import Flask, render_template, url_for, g, request, session, redirect, abort, flash
 from flask.ext.sqlalchemy import SQLAlchemy
 
+import requests
+
 from models import *
 #from __init__ import unittests
 #unittests()
@@ -509,6 +511,35 @@ class testModels(TestCase):
 
         locations = list(db.session.query(Location))
         assert(len(locations) == 0)
+
+    # ---------
+    # API Tests
+    # ---------
+
+    def test_tweet_api_1(self):
+        data = requests.get("http://tweetcity.me/api/tweets")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) > 0)
+        assert(data[0]["city_id"] == 1)
+        assert(data[0]["date_time"] == "2015-11-02 18:59:53")
+        assert(data[0]["id"] == 1)
+        assert(data[0]["text"] == "Want to work in #Austin, TX? View our latest opening: https://t.co/sibbQPMdP8 #Banking #Job #Jobs #Hiring")
+
+        assert(data[4]["city_id"] == 1)
+        assert(data[4]["date_time"] == "2015-11-02 21:58:54")
+        assert(data[4]["id"] == 5)
+        assert(data[4]["text"] == "See our latest #CedarPark, TX #job and click to apply: Branch Service Leader (Cedar Park) - https://t.co/aOzw2o6kSK #regions #regionsbank")
+
+    def test_tweet_api_2(self):
+        data = requests.get("http://tweetcity.me/api/tweets/5")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) > 0)
+        assert(data["city_id"] == 1)
+        assert(data["date_time"] == "2015-11-02 21:58:54")
+        assert(data["id"] == 5)
+        assert(data["text"] == "See our latest #CedarPark, TX #job and click to apply: Branch Service Leader (Cedar Park) - https://t.co/aOzw2o6kSK #regions #regionsbank")
 
 if __name__ == "__main__":
     main()

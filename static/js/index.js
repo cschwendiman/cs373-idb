@@ -1,4 +1,4 @@
-angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers'])
+angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'directives'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

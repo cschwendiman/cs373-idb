@@ -1,20 +1,26 @@
-<table class="table table-striped" id="tweets-table">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Text</th>
-        <th>Coordinates</th>
-        <th>Details</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="tweet in $tweets">
-        <td>{{tweet.id}}</td>
-        <td>@{{tweet.user}}</td>
-        <td>{{tweet.text}}</td>
-        <td>{{tweet.longitude}}, {{tweet.latitude}}</td>
-        <td><a class="btn btn-default" href="/tweets/{{tweet.id}}">Details</a></td>
-    </tr>
-    </tbody>
-</table>
+<div class="btn-group" role="group" aria-label="Display Settings">
+    <button type="button" class="btn btn-lg btn-default active" show-table="off">Map</button>
+    <button type="button" class="btn btn-lg btn-default" show-table="on">Table</button>
+</div>
+<div class="panel panel-default" id="content" ng-show="tableOn">
+    <table class="table table-striped" id="tweets-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Text</th>
+            <th>Coordinates</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tweet in $tweets">
+            <td>{{tweet.id}}</td>
+            <td>@{{tweet.user}}</td>
+            <td>{{tweet.text}}</td>
+            <td>{{tweet.longitude}}, {{tweet.latitude}}</td>
+            <td><a class="btn btn-default" href="/tweets/{{tweet.id}}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

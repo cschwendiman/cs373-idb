@@ -16,17 +16,14 @@ angular.module('controllers', [])
             $scope.$hashtags = hashtags;
             $scope.$locations = locations;
         });
-        $('#jumbo-header').slideDown("slow");
         mapWrapper.clearMarkers();
     })
     .controller('AboutController', function () {
-        $('#jumbo-header').slideUp("slow");
     })
     .controller('TweetsController', function($scope, tweets) {
         tweets.length = 30;
         $scope.$tweets = tweets;
         mapWrapper.addTweets(tweets);
-        $('#jumbo-header').slideDown("slow");
     })
     .controller('TweetController', function ($scope, tweet, hashtags, Location) {
         mapWrapper.clearMarkers();
@@ -45,7 +42,6 @@ angular.module('controllers', [])
         });
 
         $scope.$tweet.hashtags = hashtags;
-        $('#jumbo-header').slideDown("slow");
     })
     .controller('HashtagsController', function($scope, $q, hashtags, Hashtag) {
         hashtags.length = 40;
@@ -73,7 +69,6 @@ angular.module('controllers', [])
         $q.all(promises).then(function() {
             mapWrapper.addHashtags(tweets);
         })
-        $('#jumbo-header').slideDown("slow");
     })
     .controller('HashtagController', function ($scope, hashtag, tweets, locations) {
         $scope.$hashtag = hashtag;
@@ -93,7 +88,6 @@ angular.module('controllers', [])
         });
 
         $scope.$hashtag.locations = locations;
-        $('#jumbo-header').slideDown("slow");
 
     })
     .controller('LocationsController', function($scope, locations) {
@@ -108,7 +102,6 @@ angular.module('controllers', [])
                 });
             })(locations[i]);
         }
-        $('#jumbo-header').slideDown("slow");
 
     })
     .controller('LocationController', function ($scope, location, hashtags, tweets) {
@@ -133,5 +126,4 @@ angular.module('controllers', [])
 
         hashtags.length = 10;
         $scope.$location.hashtags = hashtags;
-        $('#jumbo-header').slideDown("slow");
     });

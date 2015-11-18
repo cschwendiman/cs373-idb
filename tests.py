@@ -563,5 +563,35 @@ class testModels(TestCase):
         assert(data["text"] == "Hiring")
         assert(data["url"] == "https://twitter.com/hashtag/Hiring")
 
+    def test_locations_api_1(self):
+        data = requests.get("http://tweetcity.me/api/locations")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) == 3)
+        assert(data[0]["id"] == 1)
+        assert(data[0]["city"] == "Austin")
+        assert(data[0]["state"] == "Texas")
+        assert(data[0]["country"] == "United States")
+
+        assert(data[1]["id"] == 2)
+        assert(data[1]["city"] == "San Francisco")
+        assert(data[1]["state"] == "California")
+        assert(data[1]["country"] == "United States")
+
+        assert(data[2]["id"] == 3)
+        assert(data[2]["city"] == "New York City")
+        assert(data[2]["state"] == "New York")
+        assert(data[2]["country"] == "United States")
+
+    def test_locations_api_2(self):
+        data = requests.get("http://tweetcity.me/api/locations/2")
+        assert(data.status_code == 200)
+        data = data.json()
+        assert(len(data) == 4)
+        assert(data["id"] == 2)
+        assert(data["city"] == "San Francisco")
+        assert(data["state"] == "California")
+        assert(data["country"] == "United States")
+
 if __name__ == "__main__":
     main()

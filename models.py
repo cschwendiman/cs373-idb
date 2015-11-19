@@ -88,10 +88,10 @@ class Tweet(db.Model):
 
     # foreign key for one-to-many relationship with Location.
     # backref so locations can access tweets associated with them.
-    city_id = Column(Integer, ForeignKey('city.id'))
-    city = relationship("Location", backref=backref("tweets", lazy='dynamic'))
+    location_id = Column(Integer)
+    city_id = Column(Integer, ForeignKey("city.id"))
 
-    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude, city_id):
+    def __init__(self, twitter_tweet_id, text, user, url, date_time, longitude, latitude, location_id):
         self.twitter_tweet_id = twitter_tweet_id
         self.text = text
         self.user = user
@@ -99,7 +99,7 @@ class Tweet(db.Model):
         self.date_time = date_time
         self.longitude = longitude
         self.latitude = latitude
-        self.city_id = city_id
+        self.location_id = location_id
 
     def __repr__(self):
         return '<Tweet %d>' % self.id
@@ -108,7 +108,7 @@ class Tweet(db.Model):
     def search(query_strings):
         and_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
         or_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
-        return Tweet.query.filter(*and_queries).union(Tweet.query.filter(or_(*or_queries)))
+        return [Tweet.query.filter(*and_queries), Tweet.query.filter(or_(*or_queries))]
 
 
 class Hashtag(db.Model):
@@ -138,7 +138,7 @@ class Hashtag(db.Model):
     def search(query_strings):
         and_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in query_strings)
         or_queries = (Hashtag.text.like("%{:s}%".format(query)) for query in query_strings)
-        return Hashtag.query.filter(*and_queries).union(Hashtag.query.filter(or_(*or_queries)))
+        return [Hashtag.query.filter(*and_queries), Hashtag.query.filter(or_(*or_queries))]
 
 
 class Location(db.Model):
@@ -157,6 +157,7 @@ class Location(db.Model):
     country = Column(String(80))
 
     hashtags = relationship("Hashtag", secondary=hashtag_location_table, backref="cities")
+    tweets = relationship("Tweet", backref="city")
 
     def __init__(self, city, state, country):
         self.city = city

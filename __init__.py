@@ -2,6 +2,7 @@ from flask import Flask
 import json
 import os
 from models import Tweet, Hashtag, Location, db
+from flask import jsonify
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__, static_url_path='/static')
@@ -44,6 +45,18 @@ def tweet_subresources(id, resource):
 def search_tweets(search_query):
     json_data = raw_to_json(Tweet.search(search_query.split("&")))
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+@app.route("/api/anime/search/<string:search_query>/")
+def search_anime_tweet(search_query):
+    import requests
+    anime_json = requests.get("http://animedb.me/search/"+search_query).json()["searchResults"]
+    result = {}
+    for anime in anime_json:
+        if anime["and/or"] == "and" and all([x.lower() in anime["title"].lower() for x in search_query.lower().split()]):
+            json_data = raw_to_json(Tweet.search(search_query.split())[:1])
+            result[anime["title"]] = json_data
+
+    return jsonify(result)
 
 @app.route("/api/hashtags/")
 @app.route("/api/hashtags/pages/<int:page>/")

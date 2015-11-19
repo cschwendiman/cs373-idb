@@ -34,7 +34,6 @@ db.create_all()
 
 hashed = {}
 cities = {}
-index = 1
 
 json_list = []
 for stuff in os.listdir("../cs373-tweetCity/"):
@@ -46,11 +45,6 @@ for path in json_list:
 
     for tweet_id, info in tweets.items():
         if Tweet.query.filter_by(twitter_tweet_id=tweet_id).first() is None:
-            data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
-            datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
-            info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], index)
-            index = index+1
-
             info["place"] = re.sub('[\s+]', '', info["place"])
             locale = info["place"].split(",")
             city = ""
@@ -62,7 +56,12 @@ for path in json_list:
             if city not in cities:
                 cities[city] = Location(city, state, "United States")
                 db.session.add(cities[city])
-            data.location = cities[city]
+
+            data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
+            datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
+            info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], info["location_id"])
+
+            cities[city].tweets.append(data)
             db.session.add(data)
             cur_tweet = data    
 

@@ -52,11 +52,16 @@ for path in json_list:
             index = index+1
 
             info["place"] = re.sub('[\s+]', '', info["place"])
-            city, state = info["place"].split(",")
-            cities[city] = Location(city, state, "United States")
-            if Location.query.filter_by(city=city).first() is None:
+            locale = info["place"].split(",")
+            city = ""
+            state = ""
+            if len(locale) == 2:
+                city, state = locale[0], locale[1]
+            else:
+                city, state = locale[0], locale[0]
+            if city not in cities:
+                cities[city] = Location(city, state, "United States")
                 db.session.add(cities[city])
-
             data.location = cities[city]
             db.session.add(data)
             cur_tweet = data    
@@ -67,6 +72,6 @@ for path in json_list:
                     hashed[hashy] = data
                     db.session.add(data)
                 if hashed[hashy] not in cities[city].hashtags:
-                    cities[city].hashtags.append(data)
+                    cities[city].hashtags.append(hashed[hashy])
                 hashed[hashy].tweets.append(cur_tweet)
 db.session.commit()

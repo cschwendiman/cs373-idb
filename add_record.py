@@ -34,27 +34,29 @@ db.create_all()
 
 hashed = {}
 cities = {}
+index = 1
 
 json_list = []
 for stuff in os.listdir("../cs373-tweetCity/"):
-    if stuff.endswith(".json"):
+    if stuff.endswith(".json") and stuff.startswith("new"):
         json_list.append("../cs373-tweetCity/"+stuff)
 
-for index, path in enumerate(json_list):
+for path in json_list:
     tweets = json.load(open(path))
+
     for tweet_id, info in tweets.items():
-        if Tweet.query.filter_by(twitter_tweet_id=tweet_id).first() is None and info["geo"] is not None:
+        if Tweet.query.filter_by(twitter_tweet_id=tweet_id).first() is None:
             data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
             datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
-            info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], index+1)
-            city, state = info["place"].split(",")
-            pattern = re.compile('[\W_]+')
-            city = pattern.sub(city, string.ascii_letters)
-            state = pattern.sub(state, string.ascii_letters)
+            info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], index)
+            index = index+1
 
+            info["place"] = re.sub('[\s+]', '', info["place"])
+            city, state = info["place"].split(",")
             cities[city] = Location(city, state, "United States")
             if Location.query.filter_by(city=city).first() is None:
                 db.session.add(cities[city])
+
             data.location = cities[city]
             db.session.add(data)
             cur_tweet = data    
@@ -63,12 +65,8 @@ for index, path in enumerate(json_list):
                 if hashy not in hashed:
                     data = Hashtag(hashy, "https://twitter.com/hashtag/"+hashy)
                     hashed[hashy] = data
-                    cities[city].hashtags.append(data)
                     db.session.add(data)
-                else:
-                    data = hashed[hashy]
-                    if data not in cities[city].hashtags:
-                        cities[city].hashtags.append(data)
-                data.tweets.append(cur_tweet)
-                
+                if hashed[hashy] not in cities[city].hashtags:
+                    cities[city].hashtags.append(data)
+                hashed[hashy].tweets.append(cur_tweet)
 db.session.commit()

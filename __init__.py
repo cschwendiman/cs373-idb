@@ -112,15 +112,16 @@ def search(search_query):
 def index(path):
     return app.send_static_file('index.html')
 
-def raw_to_json(*raw_data_sets):
+def raw_to_json(*raw_query):
     json_data = []
-    for raw_data in raw_data_sets:
-        for data in raw_data:
-            data = data.__dict__
-            del data['_sa_instance_state']
-            if ('date_time' in data):
-                data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
-            json_data.append(data)
+    for raw_data_sets in raw_query:
+        for raw_data in raw_data_sets:
+            for data in raw_data:
+                data = data.__dict__
+                del data['_sa_instance_state']
+                if ('date_time' in data):
+                    data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+                json_data.append(data)
     return json_data
 
 if __name__ == "__main__":

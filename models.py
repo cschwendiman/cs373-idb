@@ -107,7 +107,7 @@ class Tweet(db.Model):
     def search(query_strings):
         and_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
         or_queries = (Tweet.text.like("%{:s}%".format(query)) for query in query_strings)
-        return Tweet.query.filter(*and_queries).union(Tweet.query.filter(or_(*or_queries)))
+        return (Tweet.query.filter(*and_queries), Tweet.query.filter(or_(*or_queries)))
 
 class Hashtag(db.Model):
     """

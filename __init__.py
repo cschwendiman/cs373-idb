@@ -137,13 +137,17 @@ def run_unit_tests():
     from datetime import datetime
     import subprocess
     bashCommand = "coverage3 run --branch " + os.path.join(basedir, 'tests.py')
-    s = subprocess.Popen(bashCommand.split(), \
-      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
+    s = subprocess.Popen(bashCommand.split(), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    out = ""
+    for line in s.stdout:
+        out += line.decode("utf-8")
+
     bashCommand = "coverage3 report -m"
-    s += subprocess.Popen(bashCommand.split(), \
-      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
-    output = s.decode("utf-8")
-    return ("You ran the tests on: " + datetime.now().strftime("%I:%M%p on %B %d, %Y") + " GMT\n" + output)
+    s = subprocess.Popen(bashCommand.split(), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    for line in s.stdout:
+        out += line.decode("utf-8")
+
+    return ("You ran the tests on: " + datetime.now().strftime("%I:%M%p on %B %d, %Y") + " GMT\n" + out)
 
 # Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})

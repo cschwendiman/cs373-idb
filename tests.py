@@ -2,25 +2,11 @@ from unittest import main, TestCase
 import time
 from time import mktime
 from datetime import datetime
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask import request
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, Float, LargeBinary, Boolean
-
-import threading
-from flask import Flask, render_template, url_for, g, request, session, redirect, abort, flash
-from flask.ext.sqlalchemy import SQLAlchemy
 
 import requests
 
 from models import *
-
-
-# from __init__ import unittests
-# unittests()
 
 class testModels(TestCase):
     # setup the database

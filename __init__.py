@@ -121,14 +121,20 @@ def search(search_query):
 @app.route('/unit-tests/')
 def run_unit_tests():
     from datetime import datetime
-    import subprocess
-    bashCommand = "coverage3 run --branch tests.py"
-    s = subprocess.Popen(bashCommand.split(), \
-      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
-    bashCommand = "coverage report -m"
-    s += subprocess.Popen(bashCommand.split(), \
-      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
-    output = s.decode("utf-8")
+    from coverage import Coverage
+    from io import StringIO
+    import unittest
+    from tests import testModels
+
+    w = StringIO()
+    cov = Coverage()
+    cov.start()
+    runner = unittest.TextTestRunner(stream=w)
+    runner.run(unittest.makeSuite(testModels))
+    cov.stop()
+    cov.report(file=w)
+    output = w.getvalue()
+    
     return ("You ran the tests on: " + datetime.now().strftime("%I:%M%p on %B %d, %Y") + " GMT\n" + output)
 
 # Funnel all other requests to angular

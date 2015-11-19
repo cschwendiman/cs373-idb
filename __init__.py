@@ -44,9 +44,9 @@ def tweet_subresources(id, resource):
 @app.route("/api/tweets/search/<string:search_query>/")
 def search_tweets(search_query):
     result = {}
-    json_data = raw_to_json(Tweet.search(search_query.split())[0])
+    json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[0])
     result[search_query] = json_data
-    json_data = raw_to_json(Tweet.search(search_query.split())[1])
+    json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[1])
     result[search_query+"_or"] = json_data
     return jsonify(result)
 
@@ -56,12 +56,11 @@ def search_anime_tweet(search_query):
     anime_json = requests.get("http://animedb.me/search/"+search_query).json()["searchResults"]
     result = {}
     for anime in anime_json:
-        print(search_query.split(), anime["title"], [x in anime["title"] for x in search_query.split()])
-        # if all([x.lower() in anime["title"].lower() for x in search_query.lower().split()]):
-        if all([x in anime["title"] for x in search_query.split()]):
-            json_data = raw_to_json(Tweet.search(search_query.split())[0])
+        print(search_query.replace("&", " ").split(), anime["title"], [x in anime["title"] for x in search_query.replace("&", " ").split()])
+        if all([x in anime["title"] for x in search_query.replace("&", " ").split()]):
+            json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[0])
             result[anime["title"]] = json_data
-            json_data = raw_to_json(Tweet.search(search_query.split())[1])
+            json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[1])
             result[anime["title"]+"_or"] = json_data
 
     return jsonify(result)
@@ -90,9 +89,9 @@ def hashtag_subresources(id, resource):
 @app.route("/api/hashtags/search/<string:search_query>/")
 def search_hashtags(search_query):
     result = {}
-    json_data = raw_to_json(Hashtag.search(search_query.split())[0])
+    json_data = raw_to_json(Hashtag.search(search_query.replace("&", " ").split())[0])
     result[search_query] = json_data
-    json_data = raw_to_json(Hashtag.search(search_query.split())[1])
+    json_data = raw_to_json(Hashtag.search(search_query.replace("&", " ").split())[1])
     result[search_query+"_or"] = json_data
     return jsonify(result)
 
@@ -124,7 +123,7 @@ def location_subresources(id, resource):
 
 @app.route("/api/search/<string:search_query>/")
 def search(search_query):
-    search_query_strings = search_query.split()
+    search_query_strings = search_query.replace("&", " ").split()
     json_data = {
         "tweets" : raw_to_json(Tweet.search(search_query_strings)[0]),
         "tweets_or": raw_to_json(Tweet.search(search_query_strings)[1]),
@@ -132,6 +131,19 @@ def search(search_query):
         "hashtags_or": raw_to_json(Hashtag.search(search_query_strings)[1])
     }
     return jsonify(json_data)
+
+@app.route('/unit-tests/')
+def run_unit_tests():
+    from datetime import datetime
+    import subprocess
+    bashCommand = "coverage3 run --branch " + os.path.join(basedir, 'tests.py')
+    s = subprocess.Popen(bashCommand.split(), \
+      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
+    bashCommand = "coverage3 report -m"
+    s += subprocess.Popen(bashCommand.split(), \
+      stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
+    output = s.decode("utf-8")
+    return ("You ran the tests on: " + datetime.now().strftime("%I:%M%p on %B %d, %Y") + " GMT\n" + output)
 
 # Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})

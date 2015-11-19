@@ -42,6 +42,6 @@ IDB2.log:
 	git log > IDB2.log
 
 tweetcity-test.tmp: tests.py
-	python3-coverage run    --branch tests.py >  tweetcity-test.tmp 2>&1
-	python3-coverage report -m                      >> tweetcity-test.tmp
+	coverage3 run    --branch tests.py >  tweetcity-test.tmp 2>&1
+	coverage3 report -m                      >> tweetcity-test.tmp
 	cat tweetcity-test.tmp

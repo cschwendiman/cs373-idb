@@ -157,7 +157,7 @@ class Location(db.Model):
     country = Column(String(80))
 
     hashtags = relationship("Hashtag", secondary=hashtag_location_table, backref="cities")
-    tweets = relationship("Tweet", backref="cities")
+    tweets = relationship("Tweet", backref="city")
 
     def __init__(self, city, state, country):
         self.city = city

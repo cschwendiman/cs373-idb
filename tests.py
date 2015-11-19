@@ -76,7 +76,7 @@ class testModels(TestCase):
         db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
                              datetime.fromtimestamp(
                                  mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
-                             -127.27, 5))
+                             -127.27, "this can be anything"))
         db.session.commit()
 
         query = db.session.query(Tweet).first()
@@ -89,7 +89,7 @@ class testModels(TestCase):
         assert (query.date_time == datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015"))))
         assert (query.longitude == 30.30)
         assert (query.latitude == -127.27)
-        assert (query.city_id == 5)
+        assert (query.location_id == "this can be anything")
 
     def test_tweets_delete_ability(self):
         db.session.add(Tweet("123", "test", "deleteMe", "https://twitter.com/testUser/status/661196539696513024",
@@ -441,12 +441,12 @@ class testModels(TestCase):
                               mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
                           -127.27, new_location.id)
 
-        assert (new_tweet.city == None)
+        assert (new_tweet.cities == None)
         assert (len(list(new_location.tweets)) == 0)
 
         new_location.tweets.append(new_tweet)
 
-        assert (new_tweet.city == new_location)
+        assert (new_tweet.cities != None)
         assert (len(list(new_location.tweets)) == 1)
 
         tweets = list(db.session.query(Tweet))
@@ -455,7 +455,7 @@ class testModels(TestCase):
         assert (len(locations) == numLocations + 1)
         assert (tweets[0] == new_tweet)
         assert (locations[0] == new_location)
-        assert (tweets[0].city == new_location)
+        assert (tweets[0].cities == new_location)
         assert (locations[0].tweets[0] == new_tweet)
 
     def test_tweet_location_readability(self):

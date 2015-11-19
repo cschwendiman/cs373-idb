@@ -32,7 +32,7 @@ var mapWrapper = {
             content: links
         });
         var marker = new google.maps.Marker({
-            position: {lat: tweet.longitude, lng: tweet.latitude},
+            position: {lat: tweet.latitude, lng: tweet.longitude},
             map: this.map,
             title: "Hashtags"
         });
@@ -72,7 +72,7 @@ var mapWrapper = {
         });
 
         var marker = new google.maps.Marker({
-            position: {lat: tweet.longitude, lng: tweet.latitude},
+            position: {lat: tweet.latitude, lng: tweet.longitude},
             map: this.map,
             title: "Tweet " + tweet.id
         });

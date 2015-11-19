@@ -20,7 +20,7 @@ angular.module('controllers', [])
     })
     .controller('AboutController', function () {
     })
-    .controller('TweetsController', function($scope, tweets) {
+    .controller('TweetsController', function ($scope, tweets) {
         tweets.length = 30;
         $scope.$tweets = tweets;
         mapWrapper.addTweets(tweets);
@@ -37,13 +37,13 @@ angular.module('controllers', [])
                 {align: 'left'});
         });
 
-        Location.get({id: tweet.city_id}, function(city) {
+        Location.get({id: tweet.city_id}, function (city) {
             $scope.$tweet.location = city;
         });
 
         $scope.$tweet.hashtags = hashtags;
     })
-    .controller('HashtagsController', function($scope, $q, hashtags, Hashtag) {
+    .controller('HashtagsController', function ($scope, $q, hashtags, Hashtag) {
         hashtags.length = 40;
         $scope.$hashtags = hashtags;
 
@@ -51,13 +51,13 @@ angular.module('controllers', [])
         var promises = [];
         for (var i = 0; i < hashtags.length; i++) {
             var hashtag = $scope.$hashtags[i];
-            var future_tweets = Hashtag.tweets({id: hashtag.id}, function(data) {
-                if(data.length > 10) {
+            var future_tweets = Hashtag.tweets({id: hashtag.id}, function (data) {
+                if (data.length > 10) {
                     data.length = 10;
                 }
                 for (var i = 0; i < data.length; i++) {
                     var tweet = data[i];
-                    if (! tweets[tweet.id]) {
+                    if (!tweets[tweet.id]) {
                         tweets[tweet.id] = tweet;
                         tweets[tweet.id].hashtags = [];
                     }
@@ -66,7 +66,7 @@ angular.module('controllers', [])
             });
             promises.push(future_tweets.$promise);
         }
-        $q.all(promises).then(function() {
+        $q.all(promises).then(function () {
             mapWrapper.addHashtags(tweets);
         })
     })
@@ -90,12 +90,12 @@ angular.module('controllers', [])
         $scope.$hashtag.locations = locations;
 
     })
-    .controller('LocationsController', function($scope, locations) {
+    .controller('LocationsController', function ($scope, locations) {
         $scope.$locations = locations;
         mapWrapper.clearMarkers();
         var gc = new google.maps.Geocoder();
         for (var i = 0; i < locations.length; i++) {
-            (function(location){
+            (function (location) {
                 var address = location.city + ", " + location.state + ", " + location.country;
                 gc.geocode({address: address}, function (r, s) {
                     mapWrapper.addLocation(location, r[0].geometry.location);
@@ -121,8 +121,8 @@ angular.module('controllers', [])
                     tweet_ids[i],
                     document.getElementById('tweet-container'),
                     {align: 'left'});
-                }
-            });
+            }
+        });
 
         hashtags.length = 10;
         $scope.$location.hashtags = hashtags;

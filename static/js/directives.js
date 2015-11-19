@@ -1,16 +1,16 @@
 angular.module('directives', [])
-    .directive('showTable', function() {
+    .directive('showTable', function () {
         return {
             restrict: 'A',
             scope: false,
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 scope.tableOn = false;
-                element.bind('click', function() {
-                    scope.$apply(function() {
+                element.bind('click', function () {
+                    scope.$apply(function () {
                         scope.tableOn = (attrs.showTable === "on");
                     });
                 });
-                scope.$watch('tableOn', function(newValue, oldValue) {
+                scope.$watch('tableOn', function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         element.toggleClass("active");
                     }

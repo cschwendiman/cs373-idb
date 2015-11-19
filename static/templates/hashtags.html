@@ -3,20 +3,20 @@
     <button type="button" class="btn btn-lg btn-default" show-table="on">Table</button>
 </div>
 <div class="panel panel-default" id="content" ng-show="tableOn">
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Text</th>
-        <th>Details</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="hashtag in $hashtags">
-        <td>{{hashtag.id}}</td>
-        <td>#{{hashtag.text}}</td>
-        <td><a class="btn btn-default" href="/hashtags/{{hashtag.id}}">Details</a></td>
-    </tr>
-    </tbody>
-</table>
-    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Text</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="hashtag in $hashtags">
+            <td>{{hashtag.id}}</td>
+            <td>#{{hashtag.text}}</td>
+            <td><a class="btn btn-default" href="/hashtags/{{hashtag.id}}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

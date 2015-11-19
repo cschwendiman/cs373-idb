@@ -1,33 +1,33 @@
 {
-"locations": {
-  "1": {
-    "id": 1,
-    "city": "Austin",
-    "state": "TX",
-    "country": "US",
-    "tweets": [
-      2,
-      3
-    ],
-    "hashtags": [
-      1,
-      2,
-      3
-    ]
-  },
-  "2": {
-    "id": 2,
-    "city": "Round Rock",
-    "state": "TX",
-    "country": "US",
-    "tweets": [
-      1,
-      4
-    ],
-    "hashtags": [
-      2,
-      3
-    ]
+  "locations": {
+    "1": {
+      "id": 1,
+      "city": "Austin",
+      "state": "TX",
+      "country": "US",
+      "tweets": [
+        2,
+        3
+      ],
+      "hashtags": [
+        1,
+        2,
+        3
+      ]
+    },
+    "2": {
+      "id": 2,
+      "city": "Round Rock",
+      "state": "TX",
+      "country": "US",
+      "tweets": [
+        1,
+        4
+      ],
+      "hashtags": [
+        2,
+        3
+      ]
+    }
   }
-}
 }

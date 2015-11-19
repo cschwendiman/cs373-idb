@@ -1,242 +1,380 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module models</title>
-<meta charset="utf-8">
-</head><body bgcolor="#f0f0f8">
+<html>
+<head><title>Python: module models</title>
+    <meta charset="utf-8">
+</head>
+<body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>models</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/et/Desktop/cs373-idb/models.py">/home/et/Desktop/cs373-idb/models.py</a></font></td></tr></table>
-    <p></p>
+    <tr bgcolor="#7799ee">
+        <td valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>models</strong></big></big></font>
+        </td
+                >
+        <td align=right valign=bottom
+                ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a
+                href="file:/home/et/Desktop/cs373-idb/models.py">/home/et/Desktop/cs373-idb/models.py</a></font></td>
+    </tr>
+</table>
+<p></p>
+
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ee77aa">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl>
-<dt><font face="helvetica, arial">sqlalchemy.ext.declarative.api.Base(<a href="__builtin__.html#object">__builtin__.object</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="models.html#Hashtag">Hashtag</a>
-</font></dt><dt><font face="helvetica, arial"><a href="models.html#Location">Location</a>
-</font></dt><dt><font face="helvetica, arial"><a href="models.html#Tweet">Tweet</a>
-</font></dt></dl>
-</dd>
-</dl>
- <p>
+    <tr bgcolor="#ee77aa">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <dl>
+                <dt><font face="helvetica, arial">sqlalchemy.ext.declarative.api.Base(<a href="__builtin__.html#object">__builtin__.object</a>)
+                </font></dt>
+                <dd>
+                    <dl>
+                        <dt><font face="helvetica, arial"><a href="models.html#Hashtag">Hashtag</a>
+                        </font></dt>
+                        <dt><font face="helvetica, arial"><a href="models.html#Location">Location</a>
+                        </font></dt>
+                        <dt><font face="helvetica, arial"><a href="models.html#Tweet">Tweet</a>
+                        </font></dt>
+                    </dl>
+                </dd>
+            </dl>
+            <p>
+            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                <tr bgcolor="#ffc8d8">
+                    <td colspan=3 valign=bottom>&nbsp;<br>
+                        <font color="#000000" face="helvetica, arial"><a name="Hashtag">class
+                            <strong>Hashtag</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td>
+                </tr>
+
+                <tr bgcolor="#ffc8d8">
+                    <td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+                    <td colspan=2><tt><a href="#Hashtag">Hashtag</a>&nbsp;class.<br>
+                        Attributes:&nbsp;id,&nbsp;text,&nbsp;url.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        <a href="#Hashtag">Hashtag</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;both&nbsp;<a
+                                href="#Tweet">Tweet</a>&nbsp;and&nbsp;<a href="#Location">Location</a>.<br>&nbsp;</tt>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td width="100%">
+                        <dl>
+                            <dt>Method resolution order:</dt>
+                            <dd><a href="models.html#Hashtag">Hashtag</a></dd>
+                            <dd>sqlalchemy.ext.declarative.api.Base</dd>
+                            <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+                        </dl>
+                        <hr>
+                        Methods defined here:<br>
+                        <dl>
+                            <dt><a name="Hashtag-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt>
+                            <dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+                                &nbsp;<br>
+                                Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+                                values&nbsp;in&nbsp;``kwargs``.<br>
+                                &nbsp;<br>
+                                Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+                                attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+                                for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt><a name="Hashtag-__repr__"><strong>__repr__</strong></a>(self)</dt>
+                        </dl>
+
+                        <hr>
+                        Data descriptors defined here:<br>
+                        <dl>
+                            <dt><strong>id</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>text</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>tweets</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>url</strong></dt>
+                        </dl>
+                        <hr>
+                        Data and other attributes defined here:<br>
+                        <dl>
+                            <dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a462396d0; Hashtag&gt;
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__table__</strong> = Table('hashtag', MetaData(bind=None),
+                                Column('id...String(length=80), table=&lt;hashtag&gt;), schema=None)
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__tablename__</strong> = 'hashtag'
+                        </dl>
+
+                        <hr>
+                        Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>__dict__</strong></dt>
+                            <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+                        </dl>
+                        <dl>
+                            <dt><strong>__weakref__</strong></dt>
+                            <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt>
+                            </dd>
+                        </dl>
+                        <hr>
+                        Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>metadata</strong> = MetaData(bind=None)
+                        </dl>
+
+                    </td>
+                </tr>
+            </table>
+            <p>
+            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                <tr bgcolor="#ffc8d8">
+                    <td colspan=3 valign=bottom>&nbsp;<br>
+                        <font color="#000000" face="helvetica, arial"><a name="Location">class <strong>Location</strong></a>(sqlalchemy.ext.declarative.api.Base)</font>
+                    </td>
+                </tr>
+
+                <tr bgcolor="#ffc8d8">
+                    <td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+                    <td colspan=2><tt><a href="#Location">Location</a>&nbsp;class.<br>
+                        Attributes:&nbsp;id,&nbsp;city,&nbsp;state,&nbsp;country.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        <a href="#Location">Location</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;<a
+                                href="#Hashtag">Hashtag</a>.<br>
+                        Also&nbsp;has&nbsp;a&nbsp;one-to-many&nbsp;relationship&nbsp;with&nbsp;<a
+                                href="#Tweet">Tweet</a>&nbsp;(one&nbsp;<a href="#Location">Location</a>&nbsp;to&nbsp;many&nbsp;Tweets).<br>&nbsp;
+                    </tt></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td width="100%">
+                        <dl>
+                            <dt>Method resolution order:</dt>
+                            <dd><a href="models.html#Location">Location</a></dd>
+                            <dd>sqlalchemy.ext.declarative.api.Base</dd>
+                            <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+                        </dl>
+                        <hr>
+                        Methods defined here:<br>
+                        <dl>
+                            <dt><a name="Location-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt>
+                            <dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+                                &nbsp;<br>
+                                Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+                                values&nbsp;in&nbsp;``kwargs``.<br>
+                                &nbsp;<br>
+                                Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+                                attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+                                for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt><a name="Location-__repr__"><strong>__repr__</strong></a>(self)</dt>
+                        </dl>
+
+                        <hr>
+                        Data descriptors defined here:<br>
+                        <dl>
+                            <dt><strong>city</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>country</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>hashtags</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>id</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>state</strong></dt>
+                        </dl>
+                        <hr>
+                        Data and other attributes defined here:<br>
+                        <dl>
+                            <dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a46239b50; Location&gt;
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__table__</strong> = Table('city', MetaData(bind=None), Column('id', ...',
+                                String(length=80), table=&lt;city&gt;), schema=None)
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__tablename__</strong> = 'city'
+                        </dl>
+
+                        <hr>
+                        Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>__dict__</strong></dt>
+                            <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+                        </dl>
+                        <dl>
+                            <dt><strong>__weakref__</strong></dt>
+                            <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt>
+                            </dd>
+                        </dl>
+                        <hr>
+                        Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>metadata</strong> = MetaData(bind=None)
+                        </dl>
+
+                    </td>
+                </tr>
+            </table>
+            <p>
+            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                <tr bgcolor="#ffc8d8">
+                    <td colspan=3 valign=bottom>&nbsp;<br>
+                        <font color="#000000" face="helvetica, arial"><a name="Tweet">class <strong>Tweet</strong></a>(sqlalchemy.ext.declarative.api.Base)</font>
+                    </td>
+                </tr>
+
+                <tr bgcolor="#ffc8d8">
+                    <td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+                    <td colspan=2><tt><a href="#Tweet">Tweet</a>&nbsp;class.<br>
+                        Attributes:&nbsp;id,&nbsp;twitter_tweet_id,&nbsp;text,&nbsp;user,&nbsp;url,&nbsp;date_time,&nbsp;latitude,&nbsp;longitude,&nbsp;location_id.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        twitter_tweet_id&nbsp;is&nbsp;the&nbsp;id&nbsp;given&nbsp;by&nbsp;Twitter&nbsp;for&nbsp;a&nbsp;tweet.&nbsp;id&nbsp;is&nbsp;the&nbsp;id&nbsp;for&nbsp;the&nbsp;tweet&nbsp;in&nbsp;our&nbsp;database.<br>
+                        location_id&nbsp;is&nbsp;the&nbsp;id&nbsp;(foreign&nbsp;key)&nbsp;of&nbsp;the&nbsp;<a
+                                href="#Location">Location</a>&nbsp;where&nbsp;the&nbsp;tweet&nbsp;was&nbsp;tweeted.&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        <a href="#Tweet">Tweet</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;<a
+                                href="#Hashtag">Hashtag</a>.<br>
+                        Also&nbsp;has&nbsp;a&nbsp;one-to-many&nbsp;relationship&nbsp;with&nbsp;<a href="#Location">Location</a>&nbsp;(one&nbsp;<a
+                                href="#Location">Location</a>&nbsp;to&nbsp;many&nbsp;Tweets).<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        The&nbsp;relationship&nbsp;with&nbsp;<a href="#Location">Location</a>&nbsp;includes&nbsp;a&nbsp;backref&nbsp;so&nbsp;that&nbsp;Locations&nbsp;have&nbsp;access&nbsp;to&nbsp;tweets<br>
+                        associated&nbsp;with&nbsp;them.<br>&nbsp;</tt></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td width="100%">
+                        <dl>
+                            <dt>Method resolution order:</dt>
+                            <dd><a href="models.html#Tweet">Tweet</a></dd>
+                            <dd>sqlalchemy.ext.declarative.api.Base</dd>
+                            <dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+                        </dl>
+                        <hr>
+                        Methods defined here:<br>
+                        <dl>
+                            <dt><a name="Tweet-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt>
+                            <dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+                                &nbsp;<br>
+                                Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+                                values&nbsp;in&nbsp;``kwargs``.<br>
+                                &nbsp;<br>
+                                Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+                                attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+                                for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt><a name="Tweet-__repr__"><strong>__repr__</strong></a>(self)</dt>
+                        </dl>
+
+                        <hr>
+                        Data descriptors defined here:<br>
+                        <dl>
+                            <dt><strong>date_time</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>id</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>latitude</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>location</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>location_id</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>longitude</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>text</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>twitter_tweet_id</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>url</strong></dt>
+                        </dl>
+                        <dl>
+                            <dt><strong>user</strong></dt>
+                        </dl>
+                        <hr>
+                        Data and other attributes defined here:<br>
+                        <dl>
+                            <dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a462390d0; Tweet&gt;
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__table__</strong> = Table('tweet', MetaData(bind=None),
+                                Column('id',...nKey('location.id'), table=&lt;tweet&gt;), schema=None)
+                        </dl>
+
+                        <dl>
+                            <dt><strong>__tablename__</strong> = 'tweet'
+                        </dl>
+
+                        <hr>
+                        Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>__dict__</strong></dt>
+                            <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+                        </dl>
+                        <dl>
+                            <dt><strong>__weakref__</strong></dt>
+                            <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt>
+                            </dd>
+                        </dl>
+                        <hr>
+                        Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
+                        <dl>
+                            <dt><strong>metadata</strong> = MetaData(bind=None)
+                        </dl>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Hashtag">class <strong>Hashtag</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Hashtag">Hashtag</a>&nbsp;class.<br>
-Attributes:&nbsp;id,&nbsp;text,&nbsp;url.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-<a href="#Hashtag">Hashtag</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;both&nbsp;<a href="#Tweet">Tweet</a>&nbsp;and&nbsp;<a href="#Location">Location</a>.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="models.html#Hashtag">Hashtag</a></dd>
-<dd>sqlalchemy.ext.declarative.api.Base</dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="Hashtag-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+    <tr bgcolor="#55aa55">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td>
+    </tr>
 
-<dl><dt><a name="Hashtag-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>id</strong></dt>
-</dl>
-<dl><dt><strong>text</strong></dt>
-</dl>
-<dl><dt><strong>tweets</strong></dt>
-</dl>
-<dl><dt><strong>url</strong></dt>
-</dl>
-<hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a462396d0; Hashtag&gt;</dl>
-
-<dl><dt><strong>__table__</strong> = Table('hashtag', MetaData(bind=None), Column('id...String(length=80), table=&lt;hashtag&gt;), schema=None)</dl>
-
-<dl><dt><strong>__tablename__</strong> = 'hashtag'</dl>
-
-<hr>
-Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Location">class <strong>Location</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Location">Location</a>&nbsp;class.<br>
-Attributes:&nbsp;id,&nbsp;city,&nbsp;state,&nbsp;country.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-<a href="#Location">Location</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;<a href="#Hashtag">Hashtag</a>.<br>
-Also&nbsp;has&nbsp;a&nbsp;one-to-many&nbsp;relationship&nbsp;with&nbsp;<a href="#Tweet">Tweet</a>&nbsp;(one&nbsp;<a href="#Location">Location</a>&nbsp;to&nbsp;many&nbsp;Tweets).<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="models.html#Location">Location</a></dd>
-<dd>sqlalchemy.ext.declarative.api.Base</dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="Location-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
-
-<dl><dt><a name="Location-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>city</strong></dt>
-</dl>
-<dl><dt><strong>country</strong></dt>
-</dl>
-<dl><dt><strong>hashtags</strong></dt>
-</dl>
-<dl><dt><strong>id</strong></dt>
-</dl>
-<dl><dt><strong>state</strong></dt>
-</dl>
-<hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a46239b50; Location&gt;</dl>
-
-<dl><dt><strong>__table__</strong> = Table('city', MetaData(bind=None), Column('id', ...', String(length=80), table=&lt;city&gt;), schema=None)</dl>
-
-<dl><dt><strong>__tablename__</strong> = 'city'</dl>
-
-<hr>
-Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="Tweet">class <strong>Tweet</strong></a>(sqlalchemy.ext.declarative.api.Base)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Tweet">Tweet</a>&nbsp;class.<br>
-Attributes:&nbsp;id,&nbsp;twitter_tweet_id,&nbsp;text,&nbsp;user,&nbsp;url,&nbsp;date_time,&nbsp;latitude,&nbsp;longitude,&nbsp;location_id.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-twitter_tweet_id&nbsp;is&nbsp;the&nbsp;id&nbsp;given&nbsp;by&nbsp;Twitter&nbsp;for&nbsp;a&nbsp;tweet.&nbsp;id&nbsp;is&nbsp;the&nbsp;id&nbsp;for&nbsp;the&nbsp;tweet&nbsp;in&nbsp;our&nbsp;database.<br>
-location_id&nbsp;is&nbsp;the&nbsp;id&nbsp;(foreign&nbsp;key)&nbsp;of&nbsp;the&nbsp;<a href="#Location">Location</a>&nbsp;where&nbsp;the&nbsp;tweet&nbsp;was&nbsp;tweeted.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-<a href="#Tweet">Tweet</a>&nbsp;has&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;<a href="#Hashtag">Hashtag</a>.<br>
-Also&nbsp;has&nbsp;a&nbsp;one-to-many&nbsp;relationship&nbsp;with&nbsp;<a href="#Location">Location</a>&nbsp;(one&nbsp;<a href="#Location">Location</a>&nbsp;to&nbsp;many&nbsp;Tweets).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-The&nbsp;relationship&nbsp;with&nbsp;<a href="#Location">Location</a>&nbsp;includes&nbsp;a&nbsp;backref&nbsp;so&nbsp;that&nbsp;Locations&nbsp;have&nbsp;access&nbsp;to&nbsp;tweets<br>
-associated&nbsp;with&nbsp;them.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="models.html#Tweet">Tweet</a></dd>
-<dd>sqlalchemy.ext.declarative.api.Base</dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="Tweet-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
-&nbsp;<br>
-Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
-values&nbsp;in&nbsp;``kwargs``.<br>
-&nbsp;<br>
-Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
-attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
-for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
-
-<dl><dt><a name="Tweet-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>date_time</strong></dt>
-</dl>
-<dl><dt><strong>id</strong></dt>
-</dl>
-<dl><dt><strong>latitude</strong></dt>
-</dl>
-<dl><dt><strong>location</strong></dt>
-</dl>
-<dl><dt><strong>location_id</strong></dt>
-</dl>
-<dl><dt><strong>longitude</strong></dt>
-</dl>
-<dl><dt><strong>text</strong></dt>
-</dl>
-<dl><dt><strong>twitter_tweet_id</strong></dt>
-</dl>
-<dl><dt><strong>url</strong></dt>
-</dl>
-<dl><dt><strong>user</strong></dt>
-</dl>
-<hr>
-Data and other attributes defined here:<br>
-<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x7f9a462390d0; Tweet&gt;</dl>
-
-<dl><dt><strong>__table__</strong> = Table('tweet', MetaData(bind=None), Column('id',...nKey('location.id'), table=&lt;tweet&gt;), schema=None)</dl>
-
-<dl><dt><strong>__tablename__</strong> = 'tweet'</dl>
-
-<hr>
-Data descriptors inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from sqlalchemy.ext.declarative.api.Base:<br>
-<dl><dt><strong>metadata</strong> = MetaData(bind=None)</dl>
-
-</td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#55aa55">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>hashtag_location_table</strong> = Table('hashtag_location', MetaData(bind=None), C...ion.id'), table=&lt;hashtag_location&gt;), schema=None)<br>
-<strong>hashtag_tweet_table</strong> = Table('hashtag_tweet', MetaData(bind=None), Colu...('tweet.d'), table=&lt;hashtag_tweet&gt;), schema=None)</td></tr></table>
-</body></html>
+    <tr>
+        <td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%"><strong>hashtag_location_table</strong> = Table('hashtag_location', MetaData(bind=None),
+            C...ion.id'), table=&lt;hashtag_location&gt;), schema=None)<br>
+            <strong>hashtag_tweet_table</strong> = Table('hashtag_tweet', MetaData(bind=None), Colu...('tweet.d'),
+            table=&lt;hashtag_tweet&gt;), schema=None)
+        </td>
+    </tr>
+</table>
+</body>
+</html>

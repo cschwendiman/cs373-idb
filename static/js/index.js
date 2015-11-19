@@ -6,9 +6,15 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/main.html',
                 controller: 'MainController',
                 resolve: {
-                    tweets: function (Tweet) {return Tweet.query().$promise;},
-                    hashtags: function (Hashtag) {return Hashtag.query().$promise;},
-                    locations: function (Location) {return Location.query().$promise;}
+                    tweets: function (Tweet) {
+                        return Tweet.query().$promise;
+                    },
+                    hashtags: function (Hashtag) {
+                        return Hashtag.query().$promise;
+                    },
+                    locations: function (Location) {
+                        return Location.query().$promise;
+                    }
                 }
             })
             .when('/about', {
@@ -21,7 +27,9 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/hashtags.html',
                 controller: 'HashtagsController',
                 resolve: {
-                    hashtags: function (Hashtag) {return Hashtag.query().$promise;}
+                    hashtags: function (Hashtag) {
+                        return Hashtag.query().$promise;
+                    }
                 }
             })
             .when('/hashtags/:id', {
@@ -29,9 +37,15 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/hashtag.html',
                 controller: 'HashtagController',
                 resolve: {
-                    hashtag: function (Hashtag, $route) {return Hashtag.get({id: $route.current.params.id}).$promise;},
-                    locations: function (Hashtag, $route) {return Hashtag.locations({id: $route.current.params.id}).$promise;},
-                    tweets: function (Hashtag, $route) {return Hashtag.tweets({id: $route.current.params.id}).$promise;}
+                    hashtag: function (Hashtag, $route) {
+                        return Hashtag.get({id: $route.current.params.id}).$promise;
+                    },
+                    locations: function (Hashtag, $route) {
+                        return Hashtag.locations({id: $route.current.params.id}).$promise;
+                    },
+                    tweets: function (Hashtag, $route) {
+                        return Hashtag.tweets({id: $route.current.params.id}).$promise;
+                    }
                 }
             })
             .when('/locations', {
@@ -39,7 +53,9 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/locations.html',
                 controller: 'LocationsController',
                 resolve: {
-                    locations: function (Location) {return Location.query().$promise;}
+                    locations: function (Location) {
+                        return Location.query().$promise;
+                    }
                 }
             })
             .when('/locations/:id', {
@@ -47,9 +63,15 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/location.html',
                 controller: 'LocationController',
                 resolve: {
-                    location: function (Location, $route) {return Location.get({id: $route.current.params.id}).$promise;},
-                    hashtags: function (Location, $route) {return Location.hashtags({id: $route.current.params.id}).$promise;},
-                    tweets: function (Location, $route) {return Location.tweets({id: $route.current.params.id}).$promise;}
+                    location: function (Location, $route) {
+                        return Location.get({id: $route.current.params.id}).$promise;
+                    },
+                    hashtags: function (Location, $route) {
+                        return Location.hashtags({id: $route.current.params.id}).$promise;
+                    },
+                    tweets: function (Location, $route) {
+                        return Location.tweets({id: $route.current.params.id}).$promise;
+                    }
                 }
             })
             .when('/tweets', {
@@ -57,7 +79,9 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/tweets.html',
                 controller: 'TweetsController',
                 resolve: {
-                    tweets: function (Tweet) {return Tweet.query().$promise;}
+                    tweets: function (Tweet) {
+                        return Tweet.query().$promise;
+                    }
                 }
             })
             .when('/tweets/:id', {
@@ -65,9 +89,18 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/tweet.html',
                 controller: 'TweetController',
                 resolve: {
-                    tweet: function (Tweet, $route) {return Tweet.get({id: $route.current.params.id}).$promise;},
-                    hashtags: function (Tweet, $route) {return Tweet.hashtags({id: $route.current.params.id}).$promise;}
+                    tweet: function (Tweet, $route) {
+                        return Tweet.get({id: $route.current.params.id}).$promise;
+                    },
+                    hashtags: function (Tweet, $route) {
+                        return Tweet.hashtags({id: $route.current.params.id}).$promise;
+                    }
                 }
+            })
+            .when('/search', {
+                title: "Search Results",
+                templateUrl: '/static/templates/search.html',
+                controller: 'SearchController'
             })
             .otherwise({redirectTo: '/'});
         $locationProvider.html5Mode(true);

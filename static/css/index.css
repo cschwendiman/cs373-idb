@@ -19,6 +19,14 @@ body {
     margin-top: -13px;
 }
 
+#navbar li a {
+    color: #ffffff;
+}
+
+#navbar li a:focus, #navbar li a:hover {
+    color: #bebebe;
+}
+
 #map-wrapper {
     position: fixed;
     top: 0;

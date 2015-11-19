@@ -3,7 +3,7 @@ import time
 from time import mktime
 from datetime import datetime
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker 
+from sqlalchemy.orm import sessionmaker
 
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -17,12 +17,13 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import requests
 
 from models import *
-#from __init__ import unittests
-#unittests()
+
+
+# from __init__ import unittests
+# unittests()
 
 class testModels(TestCase):
-
-    #setup the database
+    # setup the database
     def setUp(self):
         app = Flask("tests", static_url_path='/static')
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -36,15 +37,18 @@ class testModels(TestCase):
         db.session.remove()
         db.drop_all()
 
-    #-------------
+    # -------------
     # Tweets_model
-    #-------------
+    # -------------
 
     def test_tweets_writability(self):
         tweets = Tweet.query.all()
         startSize = len(tweets)
 
-        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                             datetime.fromtimestamp(
+                                 mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                             -127.27, 5))
         db.session.commit()
         tweets = Tweet.query.all()
 
@@ -53,20 +57,26 @@ class testModels(TestCase):
         self.assertEqual(startSize + 1, endSize)
 
     def test_tweets_readability(self):
-        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                             datetime.fromtimestamp(
+                                 mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                             -127.27, 5))
         db.session.commit()
 
         query = Tweet.query.all()
         found = False
 
         for x in query:
-            if(x.text == "test"):
+            if (x.text == "test"):
                 found = True
 
-        assert(found)
+        assert (found)
 
     def test_tweets_attribute_readability(self):
-        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
+        db.session.add(Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                             datetime.fromtimestamp(
+                                 mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                             -127.27, 5))
         db.session.commit()
 
         query = db.session.query(Tweet).first()
@@ -82,29 +92,31 @@ class testModels(TestCase):
         assert (query.city_id == 5)
 
     def test_tweets_delete_ability(self):
-        db.session.add(Tweet("123", "test", "deleteMe", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5))
+        db.session.add(Tweet("123", "test", "deleteMe", "https://twitter.com/testUser/status/661196539696513024",
+                             datetime.fromtimestamp(
+                                 mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                             -127.27, 5))
         db.session.commit()
 
         query = db.session.query(Tweet).filter(Tweet.user == "deleteMe").first()
 
-        assert(query != None)
+        assert (query != None)
 
         db.session.delete(query)
         db.session.commit()
 
         toRemove = db.session.query(Tweet).filter(Tweet.user == "deleteMe").first()
-        assert(toRemove == None)
+        assert (toRemove == None)
 
-
-    #---------------
+    # ---------------
     # Hashtags_model
-    #---------------
+    # ---------------
 
     def test_hashtags_writability(self):
         hashtags = Hashtag.query.all()
         startSize = len(hashtags)
 
-        db.session.add(Hashtag(text = "test", url = "www.foo.com"))
+        db.session.add(Hashtag(text="test", url="www.foo.com"))
         db.session.commit()
         hashtags = Hashtag.query.all()
 
@@ -113,20 +125,20 @@ class testModels(TestCase):
         self.assertEqual(startSize + 1, endSize)
 
     def test_hashtags_readability(self):
-        db.session.add(Hashtag(text = "test", url = "www.foo.com"))
+        db.session.add(Hashtag(text="test", url="www.foo.com"))
         db.session.commit()
 
         hashtags = Hashtag.query.all()
         found = False
 
         for x in hashtags:
-            if(x.text == "test"):
+            if (x.text == "test"):
                 found = True
 
-        assert(found)
+        assert (found)
 
     def test_hashtags_attribute_readability(self):
-        db.session.add(Hashtag(text = "test123", url = "www.foo.com"))
+        db.session.add(Hashtag(text="test123", url="www.foo.com"))
         db.session.commit()
 
         query = db.session.query(Hashtag).filter(Hashtag.text == "test123").first()
@@ -134,30 +146,29 @@ class testModels(TestCase):
         assert (query is not None)
         assert (query.url == "www.foo.com")
 
-
     def test_hashtags_delete_ability(self):
-        db.session.add(Hashtag(text = "test123", url = "www.deleteme.com"))
+        db.session.add(Hashtag(text="test123", url="www.deleteme.com"))
         db.session.commit()
 
         query = db.session.query(Hashtag).filter(Hashtag.url == "www.deleteme.com").first()
 
-        assert(query != None)
+        assert (query != None)
 
         db.session.delete(query);
         db.session.commit()
 
         toRemove = db.session.query(Hashtag).filter(Hashtag.url == "www.deleteme.com").first()
-        assert(toRemove == None)
+        assert (toRemove == None)
 
-    #----------------
+    # ----------------
     # Locations_model
-    #----------------
-    
+    # ----------------
+
     def test_locations_writability(self):
         locations = Location.query.all()
         startSize = len(locations)
 
-        db.session.add(Location(city = "Austin", state = "TX", country = "USA" ))
+        db.session.add(Location(city="Austin", state="TX", country="USA"))
         db.session.commit()
         locations = Location.query.all()
 
@@ -166,20 +177,20 @@ class testModels(TestCase):
         self.assertEqual(startSize + 1, endSize)
 
     def test_locations_readability(self):
-        db.session.add(Location(city = "Austin", state = "TX", country = "USA"))
+        db.session.add(Location(city="Austin", state="TX", country="USA"))
         db.session.commit()
 
         locations = Location.query.all()
         found = False
 
         for x in locations:
-            if(x.city == "Austin"):
+            if (x.city == "Austin"):
                 found = True
 
-        assert(found)
+        assert (found)
 
     def test_locations_attribute_readability(self):
-        db.session.add(Location(city = "Austin", state = "TX", country = "USA"))
+        db.session.add(Location(city="Austin", state="TX", country="USA"))
         db.session.commit()
 
         query = db.session.query(Location).filter(Location.city == "Austin").first()
@@ -189,22 +200,22 @@ class testModels(TestCase):
         assert (query.country == "USA")
 
     def test_locations_delete_ability(self):
-        db.session.add(Location(city = "Austin", state = "TX", country = "USA"))
+        db.session.add(Location(city="Austin", state="TX", country="USA"))
         db.session.commit()
 
         query = db.session.query(Location).filter(Location.city == "Austin").first()
 
-        assert(query != None)
+        assert (query != None)
 
         db.session.delete(query)
         db.session.commit()
 
         toRemove = db.session.query(Location).filter(Location.city == "Austin").first()
-        assert(toRemove == None)
+        assert (toRemove == None)
 
-    #--------------------
+    # --------------------
     # hashtag_tweet_table
-    #--------------------
+    # --------------------
 
     def test_hashtag_tweet_writability(self):
         tweets = Tweet.query.all()
@@ -213,28 +224,36 @@ class testModels(TestCase):
         numTweets = len(tweets)
         numHashtags = len(hashtags)
 
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
-        new_hashtag = Hashtag(text = "test", url = "www.foo.com")
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, 5)
+        new_hashtag = Hashtag(text="test", url="www.foo.com")
 
         new_hashtag.tweets.append(new_tweet)
 
         db.session.add(new_hashtag)
         db.session.commit()
 
-        assert (db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtags[0] == new_hashtag)
-        assert(len(db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtags) == numHashtags + 1)
-        assert(db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets[0] == new_tweet)
-        assert(len(db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets) == numTweets + 1)
+        assert (db.session.query(Tweet).filter_by(
+            url="https://twitter.com/testUser/status/661196539696513024").first().hashtags[0] == new_hashtag)
+        assert (len(db.session.query(Tweet).filter_by(
+            url="https://twitter.com/testUser/status/661196539696513024").first().hashtags) == numHashtags + 1)
+        assert (db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets[0] == new_tweet)
+        assert (len(db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets) == numTweets + 1)
 
         tweets = Tweet.query.all()
         hashtags = Hashtag.query.all()
 
-        assert(len(tweets) == numTweets + 1)
-        assert(len(hashtags) == numHashtags + 1)
+        assert (len(tweets) == numTweets + 1)
+        assert (len(hashtags) == numHashtags + 1)
 
     def test_hashtag_tweet_readability(self):
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
-        new_hashtag = Hashtag(text = "test", url = "www.foo.com")
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, 5)
+        new_hashtag = Hashtag(text="test", url="www.foo.com")
         new_hashtag.tweets.append(new_tweet)
 
         db.session.add(new_hashtag)
@@ -245,34 +264,38 @@ class testModels(TestCase):
         hashtag_tweets = db.session.query(Hashtag).filter_by(url="www.foo.com").first().tweets
 
         for x in hashtag_tweets:
-            if(x.id == new_tweet.id):
+            if (x.id == new_tweet.id):
                 found = True
 
-        assert(found)
+        assert (found)
 
         found = False
 
-        tweet_hashtags = db.session.query(Tweet).filter_by(url="https://twitter.com/testUser/status/661196539696513024").first().hashtags
+        tweet_hashtags = db.session.query(Tweet).filter_by(
+            url="https://twitter.com/testUser/status/661196539696513024").first().hashtags
 
         hashtags = Hashtag.query.all()
         tweets = Tweet.query.all()
 
         for x in tweet_hashtags:
-            if(x.id == new_hashtag.id):
+            if (x.id == new_hashtag.id):
                 found = True
-                assert(hashtags[0].text == "test")
-                assert(hashtags[0].url == "www.foo.com")
-                assert(tweets[0].text == "test")
-                assert(tweets[0].user == "testUser")
-                assert(tweets[0].url == "https://twitter.com/testUser/status/661196539696513024")
-                assert(tweets[0].longitude == 30.30)
-                assert(tweets[0].latitude == -127.27)
+                assert (hashtags[0].text == "test")
+                assert (hashtags[0].url == "www.foo.com")
+                assert (tweets[0].text == "test")
+                assert (tweets[0].user == "testUser")
+                assert (tweets[0].url == "https://twitter.com/testUser/status/661196539696513024")
+                assert (tweets[0].longitude == 30.30)
+                assert (tweets[0].latitude == -127.27)
 
-        assert(found)
+        assert (found)
 
     def test_hashtag_tweet_delete_ability(self):
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
-        new_hashtag = Hashtag(text = "test", url = "www.foo.com")
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, 5)
+        new_hashtag = Hashtag(text="test", url="www.foo.com")
         new_hashtag.tweets.append(new_tweet)
 
         db.session.add(new_hashtag)
@@ -281,25 +304,28 @@ class testModels(TestCase):
         hashtags = Hashtag.query.all()
         tweets = Tweet.query.all()
 
-        assert(len(tweets) == 1)
-        assert(len(hashtags) == 1)
+        assert (len(tweets) == 1)
+        assert (len(hashtags) == 1)
 
         db.session.delete(tweets[0])
         db.session.commit()
 
         hashtags = Hashtag.query.all()
         tweets = Location.query.all()
-        assert(len(tweets) == 0)
-        assert(len(hashtags) == 1)
+        assert (len(tweets) == 0)
+        assert (len(hashtags) == 1)
 
         db.session.delete(hashtags[0])
         db.session.commit()
 
         hashtags = Hashtag.query.all()
-        assert(len(hashtags) == 0)
+        assert (len(hashtags) == 0)
 
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))) ,30.30, -127.27, 5)
-        new_hashtag = Hashtag(text = "test", url = "www.foo.com")
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, 5)
+        new_hashtag = Hashtag(text="test", url="www.foo.com")
         new_hashtag.tweets.append(new_tweet)
 
         db.session.add(new_hashtag)
@@ -313,8 +339,8 @@ class testModels(TestCase):
         hashtags = Hashtag.query.all()
         tweets = Tweet.query.all()
 
-        assert(len(tweets) == 1)
-        assert(len(hashtags) == 0)
+        assert (len(tweets) == 1)
+        assert (len(hashtags) == 0)
 
     # ----------------------
     # hashtag_location_table
@@ -328,22 +354,22 @@ class testModels(TestCase):
         new_hashtag = Hashtag(text="thisisatest", url="www.foo.com")
         new_location = Location(city="Austin", state="TX", country="USA")
 
-        assert(len(new_location.hashtags) == 0)
+        assert (len(new_location.hashtags) == 0)
 
         new_location.hashtags.append(new_hashtag)
 
-        assert(len(new_location.hashtags) == 1)
+        assert (len(new_location.hashtags) == 1)
 
         db.session.add(new_location)
 
         hashtags = Hashtag.query.all()
         locations = Location.query.all()
-        assert(len(hashtags) == numHashtags + 1)
-        assert(len(locations) == numLocations + 1)
-        assert(hashtags[0] == new_hashtag)
-        assert(locations[0] == new_location)
-        assert(hashtags[0].cities[0] == new_location)
-        assert(locations[0].hashtags[0] == new_hashtag)
+        assert (len(hashtags) == numHashtags + 1)
+        assert (len(locations) == numLocations + 1)
+        assert (hashtags[0] == new_hashtag)
+        assert (locations[0] == new_location)
+        assert (hashtags[0].cities[0] == new_location)
+        assert (locations[0].hashtags[0] == new_hashtag)
 
     def test_hashtag_location_readability(self):
         new_hashtag = Hashtag(text="thisisatest", url="www.foo.com")
@@ -354,11 +380,11 @@ class testModels(TestCase):
         hashtags = Hashtag.query.all()
         locations = Location.query.all()
 
-        assert(hashtags[0].text == "thisisatest")
-        assert(hashtags[0].url == "www.foo.com")
-        assert(locations[0].city == "Austin")
-        assert(locations[0].state == "TX")
-        assert(locations[0].country == "USA")
+        assert (hashtags[0].text == "thisisatest")
+        assert (hashtags[0].url == "www.foo.com")
+        assert (locations[0].city == "Austin")
+        assert (locations[0].state == "TX")
+        assert (locations[0].country == "USA")
 
     def test_hashtag_location_delete_ability(self):
         new_hashtag = Hashtag(text="thisisatest", url="www.foo.com")
@@ -368,20 +394,20 @@ class testModels(TestCase):
 
         hashtags = Hashtag.query.all()
         locations = Location.query.all()
-        assert(len(locations) == 1)
-        assert(len(hashtags) == 1)
+        assert (len(locations) == 1)
+        assert (len(hashtags) == 1)
 
         db.session.delete(locations[0])
 
         hashtags = Hashtag.query.all()
         locations = Location.query.all()
-        assert(len(locations) == 0)
-        assert(len(hashtags) == 1)
+        assert (len(locations) == 0)
+        assert (len(hashtags) == 1)
 
         db.session.delete(hashtags[0])
 
         hashtags = Hashtag.query.all()
-        assert(len(hashtags) == 0)
+        assert (len(hashtags) == 0)
 
         new_hashtag = Hashtag(text="thisisatest", url="www.foo.com")
         new_location = Location(city="Austin", state="TX", country="USA")
@@ -394,8 +420,8 @@ class testModels(TestCase):
 
         hashtags = Hashtag.query.all()
         locations = Location.query.all()
-        assert(len(locations) == 1)
-        assert(len(hashtags) == 0)
+        assert (len(locations) == 1)
+        assert (len(hashtags) == 0)
 
     # ----------------------------
     # tweet_location (one-to-many)
@@ -410,24 +436,27 @@ class testModels(TestCase):
         new_location = Location(city="Austin", state="TX", country="USA")
         db.session.add(new_location)
         new_location = list(db.session.query(Location))[0]
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30, -127.27, new_location.id)
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, new_location.id)
 
-        assert(new_tweet.city == None)
-        assert(len(list(new_location.tweets)) == 0)
+        assert (new_tweet.city == None)
+        assert (len(list(new_location.tweets)) == 0)
 
         new_location.tweets.append(new_tweet)
 
-        assert(new_tweet.city == new_location)
-        assert(len(list(new_location.tweets)) == 1)
+        assert (new_tweet.city == new_location)
+        assert (len(list(new_location.tweets)) == 1)
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
-        assert(len(tweets) == numTweets + 1)
-        assert(len(locations) == numLocations + 1)
-        assert(tweets[0] == new_tweet)
-        assert(locations[0] == new_location)
-        assert(tweets[0].city == new_location)
-        assert(locations[0].tweets[0] == new_tweet)
+        assert (len(tweets) == numTweets + 1)
+        assert (len(locations) == numLocations + 1)
+        assert (tweets[0] == new_tweet)
+        assert (locations[0] == new_location)
+        assert (tweets[0].city == new_location)
+        assert (locations[0].tweets[0] == new_tweet)
 
     def test_tweet_location_readability(self):
         tweets = list(db.session.query(Tweet))
@@ -438,23 +467,26 @@ class testModels(TestCase):
         new_location = Location(city="Austin", state="TX", country="USA")
         db.session.add(new_location)
         new_location = list(db.session.query(Location))[0]
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30, -127.27, new_location.id)
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, new_location.id)
 
         new_location.tweets.append(new_tweet)
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
 
-        assert(tweets[0].twitter_tweet_id == "123")
-        assert(tweets[0].text == "test")
-        assert(tweets[0].user == "testUser")
-        assert(tweets[0].url == "https://twitter.com/testUser/status/661196539696513024")
-        assert(tweets[0].longitude == 30.30)
-        assert(tweets[0].latitude == -127.27)
-        assert(tweets[0].city_id == new_location.id)
-        assert(locations[0].city == "Austin")
-        assert(locations[0].state == "TX")
-        assert(locations[0].country == "USA")
+        assert (tweets[0].twitter_tweet_id == "123")
+        assert (tweets[0].text == "test")
+        assert (tweets[0].user == "testUser")
+        assert (tweets[0].url == "https://twitter.com/testUser/status/661196539696513024")
+        assert (tweets[0].longitude == 30.30)
+        assert (tweets[0].latitude == -127.27)
+        assert (tweets[0].city_id == new_location.id)
+        assert (locations[0].city == "Austin")
+        assert (locations[0].state == "TX")
+        assert (locations[0].country == "USA")
 
     def test_tweet_location_delete_ability(self):
         tweets = list(db.session.query(Tweet))
@@ -465,52 +497,59 @@ class testModels(TestCase):
         new_location = Location(city="Austin", state="TX", country="USA")
         db.session.add(new_location)
         new_location = list(db.session.query(Location))[0]
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30, -127.27, new_location.id)
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, new_location.id)
 
         new_location.tweets.append(new_tweet)
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
 
-        assert(len(tweets) == 1)
-        assert(len(locations) == 1)
+        assert (len(tweets) == 1)
+        assert (len(locations) == 1)
 
         db.session.delete(locations[0])
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
-        assert(len(locations) == 0)
-        assert(len(tweets) == 1)
+        assert (len(locations) == 0)
+        assert (len(tweets) == 1)
 
         db.session.delete(tweets[0])
 
         tweets = list(db.session.query(Tweet))
-        assert(len(tweets) == 0)
+        assert (len(tweets) == 0)
 
         new_location = Location(city="Austin", state="TX", country="USA")
         db.session.add(new_location)
         new_location = list(db.session.query(Location))[0]
-        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30, -127.27, new_location.id)
+        new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024",
+                          datetime.fromtimestamp(
+                              mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30,
+                          -127.27, new_location.id)
 
         new_location.tweets.append(new_tweet)
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
 
-        assert(len(tweets) == 1)
-        assert(len(locations) == 1)
+        assert (len(tweets) == 1)
+        assert (len(locations) == 1)
 
         db.session.delete(tweets[0])
 
         tweets = list(db.session.query(Tweet))
         locations = list(db.session.query(Location))
-        assert(len(locations) == 1)
-        assert(len(tweets) == 0)
+        assert (len(locations) == 1)
+        assert (len(tweets) == 0)
 
         db.session.delete(locations[0])
 
         locations = list(db.session.query(Location))
-        assert(len(locations) == 0)
+        assert (len(locations) == 0)
+
 
     # ---------
     # API Tests

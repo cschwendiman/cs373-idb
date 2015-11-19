@@ -122,7 +122,7 @@ def search(search_query):
 def run_unit_tests():
     from datetime import datetime
     import subprocess
-    bashCommand = "coverage3 run --branch tests.py"
+    bashCommand = "coverage3 run --branch " + os.path.join(basedir, 'tests.py')
     s = subprocess.Popen(bashCommand.split(), \
       stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
     bashCommand = "coverage report -m"

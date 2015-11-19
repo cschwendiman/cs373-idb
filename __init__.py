@@ -43,8 +43,12 @@ def tweet_subresources(id, resource):
 
 @app.route("/api/tweets/search/<string:search_query>/")
 def search_tweets(search_query):
-    json_data = raw_to_json(Tweet.search(search_query.split("&")))
-    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    result = {}
+    json_data = raw_to_json(Tweet.search(search_query.split())[0])
+    result[search_query] = json_data
+    json_data = raw_to_json(Tweet.search(search_query.split())[1])
+    result[search_query+"_or"] = json_data
+    return jsonify(result)
 
 @app.route("/api/anime/search/<string:search_query>/")
 def search_anime_tweet(search_query):
@@ -52,9 +56,13 @@ def search_anime_tweet(search_query):
     anime_json = requests.get("http://animedb.me/search/"+search_query).json()["searchResults"]
     result = {}
     for anime in anime_json:
-        if anime["and/or"] == "and" and all([x.lower() in anime["title"].lower() for x in search_query.lower().split()]):
+        print(search_query.split(), anime["title"], [x in anime["title"] for x in search_query.split()])
+        # if all([x.lower() in anime["title"].lower() for x in search_query.lower().split()]):
+        if all([x in anime["title"] for x in search_query.split()]):
             json_data = raw_to_json(Tweet.search(search_query.split())[0])
             result[anime["title"]] = json_data
+            json_data = raw_to_json(Tweet.search(search_query.split())[1])
+            result[anime["title"]+"_or"] = json_data
 
     return jsonify(result)
 
@@ -81,8 +89,12 @@ def hashtag_subresources(id, resource):
 
 @app.route("/api/hashtags/search/<string:search_query>/")
 def search_hashtags(search_query):
-    json_data = raw_to_json(Hashtag.search(search_query.split("&")))
-    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    result = {}
+    json_data = raw_to_json(Hashtag.search(search_query.split())[0])
+    result[search_query] = json_data
+    json_data = raw_to_json(Hashtag.search(search_query.split())[1])
+    result[search_query+"_or"] = json_data
+    return jsonify(result)
 
 @app.route("/api/locations/")
 @app.route("/api/locations/pages/<int:page>/")
@@ -112,12 +124,14 @@ def location_subresources(id, resource):
 
 @app.route("/api/search/<string:search_query>/")
 def search(search_query):
-    search_query_strings = search_query.split("&")
+    search_query_strings = search_query.split()
     json_data = {
-        "tweets" : raw_to_json(Tweet.search(search_query_strings)),
-        "hashtags" : raw_to_json(Hashtag.search(search_query_strings))
+        "tweets" : raw_to_json(Tweet.search(search_query_strings)[0]),
+        "tweets_or": raw_to_json(Tweet.search(search_query_strings)[1]),
+        "hashtags" : raw_to_json(Hashtag.search(search_query_strings)[0]),
+        "hashtags_or": raw_to_json(Hashtag.search(search_query_strings)[1])
     }
-    return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    return jsonify(json_data)
 
 # Funnel all other requests to angular
 @app.route('/', defaults={'path': ''})

@@ -17,9 +17,18 @@
             <dt>Tweets</dt>
             <dd>
                 <ul class="list-unstyled">
-                    <li ng-repeat="tweet in $hashtag.tweets">
-                        <a href="/tweets/{{tweet.id}}">{{tweet.text}}</a>
-                    </li>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Text</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                    <tr ng-repeat="tweet in $hashtag.tweets">
+                        <td><a href="/tweets/{{tweet.id}}">{{tweet.text}}</a></td>
+                    </tr>
+                    </tbody>
+                    </table>
                 </ul>
             </dd>
         </dl>

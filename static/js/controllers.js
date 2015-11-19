@@ -18,7 +18,16 @@ angular.module('controllers', [])
         });
         mapWrapper.clearMarkers();
     })
-    .controller('AboutController', function () {
+    .controller('AboutController', function ($http) {
+        var runtestsbtn = $('#run-tests');
+        runtestsbtn.bind('click', function() {
+            $('#test-results').remove();
+            $http.get("/unit-tests/")
+                .success(function(response) {
+                    runtestsbtn.after("<pre id='test-results'>" + response + "</pre>");
+                });
+
+        })
     })
     .controller('TweetsController', function ($scope, tweets) {
         tweets.length = 30;

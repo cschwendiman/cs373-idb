@@ -58,3 +58,7 @@ body {
 .panel-body {
     padding-bottom: 0;
 }
+
+#run-tests {
+    margin-bottom: 15px;
+}

@@ -118,7 +118,7 @@ def search(search_query):
     }
     return json.dumps(json_data, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-@app.route('/unit-tests')
+@app.route('/unit-tests/')
 def run_unit_tests():
     from datetime import datetime
     import subprocess

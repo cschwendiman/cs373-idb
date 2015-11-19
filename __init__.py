@@ -53,7 +53,7 @@ def search_anime_tweet(search_query):
     result = {}
     for anime in anime_json:
         if anime["and/or"] == "and" and all([x.lower() in anime["title"].lower() for x in search_query.lower().split()]):
-            json_data = raw_to_json(Tweet.search(search_query.split())[:1])
+            json_data = raw_to_json(Tweet.search(search_query.split())[0])
             result[anime["title"]] = json_data
 
     return jsonify(result)
@@ -127,14 +127,13 @@ def index(path):
 
 def raw_to_json(*raw_query):
     json_data = []
-    for raw_data_sets in raw_query:
-        for raw_data in raw_data_sets:
-            for data in raw_data:
-                data = data.__dict__
-                del data['_sa_instance_state']
-                if ('date_time' in data):
-                    data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
-                json_data.append(data)
+    for raw_data in raw_query:
+        for data in raw_data:
+            data = data.__dict__
+            del data['_sa_instance_state']
+            if ('date_time' in data):
+                data["date_time"] = data["date_time"].strftime("%Y-%m-%d %H:%M:%S")
+            json_data.append(data)
     return json_data
 
 if __name__ == "__main__":

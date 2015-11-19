@@ -412,12 +412,13 @@ class testModels(TestCase):
         new_location = list(db.session.query(Location))[0]
         new_tweet = Tweet("123", "test", "testUser", "https://twitter.com/testUser/status/661196539696513024", datetime.fromtimestamp(mktime(time.strptime("Mon Nov 02 15:01:54 2015", "%a %b %d %H:%M:%S %Y"))), 30.30, -127.27, new_location.id)
 
-        assert(new_tweet.city == None)
+        assert(new_tweet.city_id == None)
         assert(len(list(new_location.tweets)) == 0)
 
         new_location.tweets.append(new_tweet)
 
-        assert(new_tweet.city == new_location)
+        assert(new_tweet.city_id != None)
+        assert(new_tweet.city_id == new_location.id)
         assert(len(list(new_location.tweets)) == 1)
 
         tweets = list(db.session.query(Tweet))

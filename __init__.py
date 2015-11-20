@@ -8,13 +8,15 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-if os.environ.get('DATABASE_URL') is None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///' + os.path.join(basedir, 'idb.db') +
-                               '?check_same_thread=False')
-    app.debug = True
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+# if os.environ.get('DATABASE_URL') is None:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///' + os.path.join(basedir, 'idb.db') +
+#                                '?check_same_thread=False')
+#     app.debug = True
+# else:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
+app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///idb.db')
+app.debug = True
 db.init_app(app)
 db.app = app
 

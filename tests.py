@@ -4,14 +4,17 @@ from time import mktime
 from datetime import datetime
 from flask import Flask
 import requests
-from models import Tweet, Hashtag, Location, db
+from models import Tweet, Hashtag, Location
+from flask.ext.sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class testModels(TestCase):
     # setup the database
     def setUp(self):
         app = Flask("tests", static_url_path='/static')
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_idb.db'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test_idb.db'
         db.init_app(app)
         db.app = app
         db.configure_mappers()

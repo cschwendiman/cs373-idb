@@ -135,4 +135,14 @@ angular.module('controllers', [])
 
         hashtags.length = 10;
         $scope.$location.hashtags = hashtags;
+    })
+    .controller('SearchController', function ($scope, $location, $http) {
+        $http.get("/api/search/" + $location.search().q)
+            .success(function(response) {
+                $scope.$and_tweets = response.tweets;
+                $scope.$or_tweets = response.tweets_or;
+                $scope.$and_hashtags = response.hashtags;
+                $scope.$or_hashtags = response.hashtags_or;
+        });
+
     });

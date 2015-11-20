@@ -146,7 +146,7 @@ angular.module('controllers', [])
 
     })
     .controller('LocationsController', function ($scope, locations, Location) {
-        $scope.total = 1000;
+        $scope.total = 394;
         $scope.perPage = 50; // this should match however many results your API puts on one page
 
         $scope.pagination = {

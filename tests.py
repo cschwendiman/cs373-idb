@@ -12,7 +12,7 @@ class testModels(TestCase):
     def setUp(self):
         app = Flask("tests", static_url_path='/static')
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_idb' + datetime.now().strftime("%y%m%d-%H%M%S") + '.db'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_idb.db'
         db.init_app(app)
         db.app = app
         db.configure_mappers()

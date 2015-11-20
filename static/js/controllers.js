@@ -12,8 +12,9 @@ angular.module('controllers', [])
                     document.getElementById('recent-tweets'),
                     {align: 'left'});
             }
-            hashtags.length = 10;
+            hashtags.length = 15;
             $scope.$hashtags = hashtags;
+            locations.length = 15;
             $scope.$locations = locations;
         });
         mapWrapper.clearMarkers();
@@ -30,9 +31,8 @@ angular.module('controllers', [])
         })
     })
     .controller('TweetsController', function ($scope, tweets, Tweet) {
-        console.log(tweets);
-        $scope.totalTweets = 1000;
-        $scope.tweetsPerPage = 50; // this should match however many results your API puts on one page
+        $scope.total = 1000;
+        $scope.perPage = 50; // this should match however many results your API puts on one page
 
         $scope.pagination = {
             current: 1
@@ -65,8 +65,42 @@ angular.module('controllers', [])
         $scope.$tweet.hashtags = hashtags;
     })
     .controller('HashtagsController', function ($scope, $q, hashtags, Hashtag) {
-        hashtags.length = 40;
         $scope.$hashtags = hashtags;
+
+        $scope.total = 1000;
+        $scope.perPage = 50; // this should match however many results your API puts on one page
+
+        $scope.pagination = {
+            current: 1
+        };
+        $scope.pageChanged = function(newPage) {
+            Hashtag.query({page: newPage}, function(hashtags){
+                $scope.$hashtags = hashtags;
+
+                var tweets = {};
+                var promises = [];
+                for (var i = 0; i < hashtags.length; i++) {
+                    var hashtag = $scope.$hashtags[i];
+                    var future_tweets = Hashtag.tweets({id: hashtag.id}, function (data) {
+                        if (data.length > 10) {
+                            data.length = 10;
+                        }
+                        for (var i = 0; i < data.length; i++) {
+                            var tweet = data[i];
+                            if (!tweets[tweet.id]) {
+                                tweets[tweet.id] = tweet;
+                                tweets[tweet.id].hashtags = [];
+                            }
+                            tweets[tweet.id].hashtags.push(hashtag);
+                        }
+                    });
+                    promises.push(future_tweets.$promise);
+                }
+                $q.all(promises).then(function () {
+                    mapWrapper.addHashtags(tweets);
+                })
+            });
+        };
 
         var tweets = {};
         var promises = [];
@@ -111,7 +145,13 @@ angular.module('controllers', [])
         $scope.$hashtag.locations = locations;
 
     })
-    .controller('LocationsController', function ($scope, locations) {
+    .controller('LocationsController', function ($scope, locations, Location) {
+        $scope.total = 1000;
+        $scope.perPage = 50; // this should match however many results your API puts on one page
+
+        $scope.pagination = {
+            current: 1
+        };
         $scope.$locations = locations;
         mapWrapper.clearMarkers();
         var gc = new google.maps.Geocoder();
@@ -119,11 +159,28 @@ angular.module('controllers', [])
             (function (location) {
                 var address = location.city + ", " + location.state + ", " + location.country;
                 gc.geocode({address: address}, function (r, s) {
-                    mapWrapper.addLocation(location, r[0].geometry.location);
+                    if (r != null && r.length > 0) {
+                        mapWrapper.addLocation(location, r[0].geometry.location);
+                    }
                 });
             })(locations[i]);
         }
-
+        $scope.pageChanged = function(newPage) {
+            Location.query({page: newPage}, function(locations){
+                mapWrapper.clearMarkers();
+                for (var i = 0; i < locations.length; i++) {
+                    (function (location) {
+                        var address = location.city + ", " + location.state + ", " + location.country;
+                        gc.geocode({address: address}, function (r, s) {
+                            if (r != null && r.length > 0) {
+                                mapWrapper.addLocation(location, r[0].geometry.location);
+                            }
+                        });
+                    })(locations[i]);
+                }
+                $scope.$locations = locations;
+            });
+        };
     })
     .controller('LocationController', function ($scope, location, hashtags, tweets) {
         $scope.$location = location;

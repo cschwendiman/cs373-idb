@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr dir-paginate="tweet in $tweets | itemsPerPage: tweetsPerPage" total-items="totalTweets" current-page="pagination.current">
+        <tr dir-paginate="tweet in $tweets | itemsPerPage: perPage" total-items="total" current-page="pagination.current">
             <td>{{tweet.id}}</td>
             <td>@{{tweet.user}}</td>
             <td>{{tweet.text}}</td>

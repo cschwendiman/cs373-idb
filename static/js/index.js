@@ -7,13 +7,13 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 controller: 'MainController',
                 resolve: {
                     tweets: function (Tweet) {
-                        return Tweet.query().$promise;
+                        return Tweet.query({page: 1}).$promise;
                     },
                     hashtags: function (Hashtag) {
-                        return Hashtag.query().$promise;
+                        return Hashtag.query({page: 1}).$promise;
                     },
                     locations: function (Location) {
-                        return Location.query().$promise;
+                        return Location.query({page: 1}).$promise;
                     }
                 }
             })
@@ -28,7 +28,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 controller: 'HashtagsController',
                 resolve: {
                     hashtags: function (Hashtag) {
-                        return Hashtag.query().$promise;
+                        return Hashtag.query({page: 1}).$promise;
                     }
                 }
             })
@@ -54,7 +54,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 controller: 'LocationsController',
                 resolve: {
                     locations: function (Location) {
-                        return Location.query().$promise;
+                        return Location.query({page: 1}).$promise;
                     }
                 }
             })

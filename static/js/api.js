@@ -11,14 +11,14 @@ angular.module('api', [])
     })
     .factory('Hashtag', function ($resource) {
         return $resource('/api/hashtags/:id/', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/hashtags/'},
+            query: {method: 'GET', params: {}, isArray: true, url: '/api/hashtags/pages/:page/'},
             tweets: {method: 'GET', isArray: true, url: '/api/hashtags/:id/tweets/'},
             locations: {method: 'GET', isArray: true, url: '/api/hashtags/:id/cities/'}
         });
     })
     .factory('Location', function ($resource) {
         return $resource('/api/locations/:id/', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/locations/'},
+            query: {method: 'GET', params: {}, isArray: true, url: '/api/locations/pages/:page/'},
             tweets: {method: 'GET', isArray: true, url: '/api/locations/:id/tweets/'},
             hashtags: {method: 'GET', isArray: true, url: '/api/locations/:id/hashtags/'}
         });

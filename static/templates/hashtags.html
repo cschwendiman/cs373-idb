@@ -12,11 +12,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="hashtag in $hashtags">
+        <tr dir-paginate="hashtag in $hashtags | itemsPerPage: perPage" total-items="total" current-page="pagination.current">
             <td>{{hashtag.id}}</td>
             <td>#{{hashtag.text}}</td>
             <td><a class="btn btn-default" href="/hashtags/{{hashtag.id}}">Details</a></td>
         </tr>
         </tbody>
     </table>
+
+        <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>

@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="location in $locations">
+        <tr dir-paginate="location in $locations | itemsPerPage: perPage" total-items="total" current-page="pagination.current">
             <td>{{location.id}}</td>
             <td>{{location.city}}</td>
             <td>{{location.state}}</td>
@@ -23,4 +23,7 @@
         </tr>
         </tbody>
     </table>
+
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
 </div>

@@ -1,11 +1,12 @@
 <!-- Example row of columns -->
 <div class="row">
     <div class="col-md-4">
-        <h2>Popular Hashtags</h2>
-
-        <div class="panel panel-default" ng-repeat="hashtag in $hashtags">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Popular Hashtags</h2>
+            </div>
             <div class="panel-body">
-                <dl class="dl-horizontal">
+                <dl class="dl-horizontal" ng-repeat="hashtag in $hashtags">
                     <dt>ID</dt>
                     <dd>{{hashtag.id}}</dd>
                     <dt>Text</dt>
@@ -13,17 +14,18 @@
                     <dt></dt>
                     <dd><a class="btn btn-default" href="/hashtags/{{hashtag.id}}">Details</a></dd>
                 </dl>
+
+                <p><a class="btn btn-default" href="/hashtags" role="button">More Hashtags &raquo;</a></p>
             </div>
         </div>
-
-        <p><a class="btn btn-default" href="/hashtags" role="button">More Hashtags &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Busiest Locations</h2>
-
-        <div class="panel panel-default" ng-repeat="location in $locations">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Busiest Locations</h2>
+            </div>
             <div class="panel-body">
-                <dl class="dl-horizontal">
+                <dl class="dl-horizontal" ng-repeat="location in $locations">
                     <dt>ID</dt>
                     <dd>{{location.id}}</dd>
                     <dt>City</dt>
@@ -37,15 +39,18 @@
                         <a class="btn btn-default" href="/locations/{{location.id}}">Details</a>
                     </dd>
                 </dl>
+                <p><a class="btn btn-default" href="/locations" role="button">More locations &raquo;</a></p>
             </div>
         </div>
-        <p><a class="btn btn-default" href="/locations" role="button">More locations &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Recent Tweets</h2>
-
-        <div id="recent-tweets"></div>
-
-        <p><a class="btn btn-default" href="/tweets" role="button">More tweets &raquo;</a></p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Recent Tweets</h2>
+            </div>
+            <div class="panel-body">
+                <div id="recent-tweets"></div>
+                <p><a class="btn btn-default" href="/tweets" role="button">More tweets &raquo;</a></p>
+            </div>
+        </div>
     </div>
-</div>

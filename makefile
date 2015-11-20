@@ -2,7 +2,7 @@ FILES :=                     \
     .gitignore               \
     makefile                 \
     apiary.apib              \
-    IDB2.log                 \
+    IDB3.log                 \
     models.py                \
     model.html               \
     tests.py                 \
@@ -38,8 +38,8 @@ test: tweetcity-test.tmp
 model.html: models.py
 	pydoc -w models
 
-IDB2.log:
-	git log > IDB2.log
+IDB3.log:
+	git log > IDB3.log
 
 tweetcity-test.tmp: tests.py
 	coverage3 run    --branch tests.py >  tweetcity-test.tmp 2>&1

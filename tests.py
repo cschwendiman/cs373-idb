@@ -20,6 +20,13 @@ class testModels(TestCase):
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        app = Flask("tests", static_url_path='/static')
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
+        db.init_app(app)
+        db.app = app
+        db.configure_mappers()
+        db.create_all()
 
     # -------------
     # Tweets_model

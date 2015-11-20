@@ -148,6 +148,8 @@ def run_unit_tests():
     cov.stop()
     cov.report(file=w)
     output = w.getvalue()
+
+    db.app = app
     
     return ("You ran the tests on: " + datetime.now().strftime("%I:%M%p on %B %d, %Y") + " GMT\n" + output)
 

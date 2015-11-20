@@ -4,10 +4,8 @@ from time import mktime
 from datetime import datetime
 from flask import Flask
 import requests
-from models import Tweet, Hashtag, Location
+from models import Tweet, Hashtag, Location, db
 from flask.ext.sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
 
 class testModels(TestCase):
     # setup the database

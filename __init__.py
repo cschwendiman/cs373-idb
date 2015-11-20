@@ -141,7 +141,7 @@ def run_unit_tests():
     from tests import testModels
 
     w = StringIO()
-    cov = Coverage(omit=["/usr/*", "*/venv/*"])
+    cov = Coverage(omit=["/usr/*", "*/venv/*", "*-packages*"])
     cov.start()
     runner = unittest.TextTestRunner(stream=w)
     runner.run(unittest.makeSuite(testModels))

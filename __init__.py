@@ -57,7 +57,7 @@ def search_anime_tweet(search_query):
     result = {}
     for anime in anime_json:
         print(search_query.replace("&", " ").split(), anime["title"], [x in anime["title"] for x in search_query.replace("&", " ").split()])
-        if all([x in anime["title"] for x in search_query.replace("&", " ").split()]):
+        if all([x in anime["title"].lower() for x in search_query.replace("&", " ").split()]):
             json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[0])
             result[anime["title"]] = json_data
             json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[1])

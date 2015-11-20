@@ -551,7 +551,7 @@ class testModels(TestCase):
         data = requests.get("http://tweetcity.me/api/tweets/5")
         assert(data.status_code == 200)
         data = data.json()
-        assert(len(data) == 10)
+        assert(len(data) == 9)
         assert(data["id"] == 5)
 
     def test_hashtags_api_1(self):

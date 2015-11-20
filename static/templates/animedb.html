@@ -1,0 +1,57 @@
+  <div class="form-group">
+    <input ng-model="anime_q" type="text" class="form-control" placeholder="Search for tweets by Anime...">
+    <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
+  </div>
+<div ng-repeat="anime in $animes">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>And Results in Tweets for {{anime.title}}</h4>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Text</th>
+            <th>Coordinates</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tweet in anime.tweets">
+            <td>{{tweet.id}}</td>
+            <td>@{{tweet.user}}</td>
+            <td>{{tweet.text}}</td>
+            <td>{{tweet.longitude}}, {{tweet.latitude}}</td>
+            <td><a class="btn btn-default" href="/tweets/{{tweet.id}}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Or Results in Tweets for {{anime.title}}</h4>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Text</th>
+            <th>Coordinates</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tweet in anime.tweets_or">
+            <td>{{tweet.id}}</td>
+            <td>@{{tweet.user}}</td>
+            <td>{{tweet.text}}</td>
+            <td>{{tweet.longitude}}, {{tweet.latitude}}</td>
+            <td><a class="btn btn-default" href="/tweets/{{tweet.id}}">Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>

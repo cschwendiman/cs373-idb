@@ -1,4 +1,4 @@
-angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'directives'])
+angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'directives', 'angularUtils.directives.dirPagination'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -80,7 +80,7 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 controller: 'TweetsController',
                 resolve: {
                     tweets: function (Tweet) {
-                        return Tweet.query().$promise;
+                        return Tweet.query({page: 1}).$promise;
                     }
                 }
             })

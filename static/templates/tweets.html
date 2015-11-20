@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="tweet in $tweets">
+        <tr dir-paginate="tweet in $tweets | itemsPerPage: tweetsPerPage" total-items="totalTweets" current-page="pagination.current">
             <td>{{tweet.id}}</td>
             <td>@{{tweet.user}}</td>
             <td>{{tweet.text}}</td>
@@ -23,4 +23,7 @@
         </tr>
         </tbody>
     </table>
+
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
 </div>

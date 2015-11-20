@@ -51,6 +51,10 @@ body {
     pointer-events: auto;
 }
 
+#content .pagination {
+    margin: 20px;
+}
+
 .bio dd + dt {
     margin-top: 10px;
 }

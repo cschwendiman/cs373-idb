@@ -5,7 +5,7 @@ angular.module('api', [])
     }])
     .factory('Tweet', function ($resource) {
         return $resource('/api/tweets/:id/', {}, {
-            query: {method: 'GET', params: {}, isArray: true, url: '/api/tweets/'},
+            query: {method: 'GET', params: {}, isArray: true, url: '/api/tweets/pages/:page/'},
             hashtags: {method: 'GET', isArray: true, url: '/api/tweets/:id/hashtags/'}
         });
     })

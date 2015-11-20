@@ -29,9 +29,21 @@ angular.module('controllers', [])
 
         })
     })
-    .controller('TweetsController', function ($scope, tweets) {
-        tweets.length = 30;
+    .controller('TweetsController', function ($scope, tweets, Tweet) {
+        console.log(tweets);
+        $scope.totalTweets = 1000;
+        $scope.tweetsPerPage = 50; // this should match however many results your API puts on one page
+
+        $scope.pagination = {
+            current: 1
+        };
         $scope.$tweets = tweets;
+        $scope.pageChanged = function(newPage) {
+            Tweet.query({page: newPage}, function(tweets){
+                $scope.$tweets = tweets;
+                mapWrapper.addTweets(tweets);
+            });
+        };
         mapWrapper.addTweets(tweets);
     })
     .controller('TweetController', function ($scope, tweet, hashtags, Location) {

@@ -11,10 +11,7 @@ from sqlalchemy import exists
 import os
 import re, string
 
-# db.session.query(Tweet).delete()
-# db.session.query(Hashtag).delete()
-# db.session.query(Location).delete()
-
+# setting up tables and models
 app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///idb.db'
@@ -27,10 +24,12 @@ db.create_all()
 # Senpai notice me!
 # http://docs.sqlalchemy.org/en/latest/orm/tutorial.html#building-a-many-to-many-relationship
 
+# cache the processed data to avoid collision
 hashed = {}
 cities = {}
 tweet_ids = {}
 
+# scan throught our private repo searching for data
 json_list = []
 for stuff in os.listdir("../cs373-tweetCity/"):
     if stuff.endswith(".json") and stuff.startswith("new"):
@@ -39,10 +38,12 @@ for stuff in os.listdir("../cs373-tweetCity/"):
 for path in json_list:
     tweets = json.load(open(path))
 
+# grab one tweet at a time
     for tweet_id, info in tweets.items():
         if tweet_id not in tweet_ids:
             tweet_ids[tweet_id] = tweet_id
             
+            # first process the place info, sanitize weird user input and null input
             info["place"] = re.sub('[\s+]', '', info["place"])
             locale = info["place"].split(",")
             city, state, country = "Not applicable", "Not applicable", "United States"
@@ -59,18 +60,24 @@ for path in json_list:
                 else:
                     city, state = locale[0], locale[1]
 
+            # first, put in location object in db
             if city not in cities:
                 cities[city] = Location(city, state, country)
                 db.session.add(cities[city])
 
+            # second, put tweet object in db
             data = Tweet(tweet_id, info["text"], info["name"], "https://twitter.com/statuses/"+tweet_id,\
             datetime.fromtimestamp(mktime(time.strptime(info["datetime"].replace("+0000", ""), "%a %b %d %H:%M:%S %Y"))), \
             info["geo"]["coordinates"][1], info["geo"]["coordinates"][0], info["location_id"])
 
+            # third, link location with tweet
             cities[city].tweets.append(data)
             db.session.add(data)
             cur_tweet = data    
 
+            # forth, put hashtag object in db
+            # link location with hastag
+            # link hastag with tweet
             for hashy in info["hashtags"]:
                 if hashy not in hashed:
                     data = Hashtag(hashy, "https://twitter.com/hashtag/"+hashy)

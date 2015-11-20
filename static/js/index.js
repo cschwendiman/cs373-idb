@@ -102,6 +102,11 @@ angular.module('tweetcity', ['ngRoute', 'ngResource', 'api', 'controllers', 'dir
                 templateUrl: '/static/templates/search.html',
                 controller: 'SearchController'
             })
+            .when('/animedb', {
+                title: "AnimeDB Search",
+                templateUrl: '/static/templates/animedb.html',
+                controller: 'AnimeDBController'
+            })
             .otherwise({redirectTo: '/'});
         $locationProvider.html5Mode(true);
     })

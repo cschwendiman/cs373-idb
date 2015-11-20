@@ -54,16 +54,18 @@ def search_tweets(search_query):
 def search_anime_tweet(search_query):
     import requests
     anime_json = requests.get("http://animedb.me/search/"+search_query).json()["searchResults"]
-    result = {}
+    result = []
     for anime in anime_json:
-        print(search_query.replace("&", " ").split(), anime["title"], [x in anime["title"] for x in search_query.replace("&", " ").split()])
+        anime_result = {"title" : anime["title"], "id" : anime["id"]}
         if all([x in anime["title"].lower() for x in search_query.replace("&", " ").split()]):
             json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[0])
-            result[anime["title"]] = json_data
+            anime_result['tweets'] = json_data
             json_data = raw_to_json(Tweet.search(search_query.replace("&", " ").split())[1])
-            result[anime["title"]+"_or"] = json_data
+            anime_result['tweets_or'] = json_data
+        if "tweets" in anime_result or "tweets_or" in anime_result:
+            result.append(anime_result);
+    return json.dumps(result, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-    return jsonify(result)
 
 @app.route("/api/hashtags/")
 @app.route("/api/hashtags/pages/<int:page>/")

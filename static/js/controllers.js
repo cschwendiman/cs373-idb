@@ -214,4 +214,13 @@ angular.module('controllers', [])
                 $scope.$or_hashtags = response.hashtags_or;
         });
 
+    })
+    .controller('AnimeDBController', function ($scope, $location, $http) {
+        $scope.search = function() {
+            console.log("SEARCH");
+            $http.get("/api/anime/search/" + $scope.anime_q)
+                .success(function(response) {
+                    $scope.$animes = response;
+            });
+        }
     });
